@@ -34,13 +34,18 @@ public class UILinker : MonoBehaviour
         m_highscoreLabel = m_root.Q<Label>("HighscoreLabel");
         m_currentScoreLabel = m_root.Q<Label>("CurrentScoreLabel");
         m_nextHintButton = m_root.Q<Button>("NextHintButton");
+    }
 
+    private void Start()
+    {
         InitializeButton();
     }
 
     public void InitializeButton()
     {
-        m_nextHintButton.clicked += () => { m_controller.HandleWrongAnswer(); };
+        m_nextHintButton.clicked += m_controller.HandleWrongAnswer;
+        SetupIcons.InitializeDragDrop(m_root);
+        SetupIcons.InitializeIcons(m_root, m_controller.GetAllQuestions());
     }
 
     public void SetHint(string hintText)

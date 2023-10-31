@@ -12,9 +12,11 @@ public class Game : MonoBehaviour
     private string m_currentHint;
     private int m_hintIndex = 0;
 
+    public List<Question> Questions { get => m_questions; set => m_questions = value; }
+
     public void InitializeGame()
     {
-        m_currentQuestion = m_questions[m_questionIndex];
+        m_currentQuestion = Questions[m_questionIndex];
         m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
     }
 
@@ -42,7 +44,7 @@ public class Game : MonoBehaviour
 
     public void NextQuestion()
     {
-        m_currentQuestion = m_questions[++m_questionIndex];
+        m_currentQuestion = Questions[++m_questionIndex];
 
         m_hintIndex = 0;
         m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];

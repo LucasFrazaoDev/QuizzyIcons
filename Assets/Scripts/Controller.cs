@@ -42,4 +42,9 @@ public class Controller : MonoBehaviour
         m_uiLinker.SetHintNumber(m_game.GetCurrentHintNum());
         m_uiLinker.SetQuestionNumber(m_game.GetCurrentQuestionNum());
     }
+
+    public List<Question> GetAllQuestions()
+    {
+        return m_game.Questions;
+    }
 }
