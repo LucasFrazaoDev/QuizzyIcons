@@ -225,6 +225,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1266933825}
   - component: {fileID: 1266933824}
+  - component: {fileID: 1266933828}
+  - component: {fileID: 1266933827}
   - component: {fileID: 1266933826}
   m_Layer: 5
   m_Name: UIDocument
@@ -276,6 +278,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35fb79905ab139489de1f422efd228f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1266933827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266933823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11df8ed2716efe48835d067342b2446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1266933828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266933823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0180e86ad4bd24698151c3f4b8629a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_questions:
+  - {fileID: 11400000, guid: dc87d18eba8f79f498379f46766f273d, type: 2}
+  - {fileID: 11400000, guid: 8c4f9d5bd6338d44ab5fd75e53c649f4, type: 2}
+  - {fileID: 11400000, guid: fbc34b96e5bb34c469c7b376b010120e, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

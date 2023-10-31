@@ -7,14 +7,15 @@
         </ui:VisualElement>
         <ui:VisualElement name="MiddleContainer" style="flex-grow: 0; flex-basis: 20%; align-items: center; justify-content: center; background-color: rgba(115, 219, 214, 0.49);">
             <ui:VisualElement style="flex-grow: 0; flex-direction: column; align-items: center; justify-content: center;">
-                <ui:Label tabindex="-1" text="Question 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuestionCounter" style="font-size: 80px; -unity-font-style: normal; -unity-font-definition: resource(&apos;fonts/AlfaSlabOne-Regular SDF&apos;);" />
-                <ui:Label tabindex="-1" text="Your answer is correct!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AnswerIndicator" style="font-size: 40px; -unity-font-definition: resource(&apos;fonts/Bungee-Regular SDF&apos;); -unity-font-style: bold; color: rgb(29, 132, 0);" />
+                <ui:Label tabindex="-1" text="Question 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuestionNumberLabel" style="font-size: 80px; -unity-font-style: normal; -unity-font-definition: resource(&apos;fonts/AlfaSlabOne-Regular SDF&apos;);" />
+                <ui:Label tabindex="-1" text="Your answer is correct!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AnswerIndicatorLabel" style="font-size: 40px; -unity-font-definition: resource(&apos;fonts/Bungee-Regular SDF&apos;); -unity-font-style: bold; color: rgb(29, 132, 0);" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="LowerContainer" style="flex-grow: 1; flex-direction: row;">
             <ui:VisualElement name="IconsContainer" style="flex-grow: 1; flex-basis: 100%; flex-direction: column; align-items: center; justify-content: center; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;">
-                <ui:VisualElement name="Scores" style="flex-grow: 0; width: 70%;">
-                    <ui:Label tabindex="-1" text="Score: 123" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 30px;" />
+                <ui:VisualElement name="Scores" style="flex-grow: 0; width: 70%; flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Score: 123" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CurrentScoreLabel" style="font-size: 30px;" />
+                    <ui:Label tabindex="-1" text="Highscore: 999" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HighscoreLabel" style="font-size: 30px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="IconBoard" style="flex-grow: 0; width: 70%; height: 70%; border-left-color: rgb(108, 108, 108); border-right-color: rgb(108, 108, 108); border-top-color: rgb(108, 108, 108); border-bottom-color: rgb(108, 108, 108); border-top-width: 15px; border-right-width: 15px; border-bottom-width: 15px; border-left-width: 15px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;">
                     <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; position: absolute; top: 46px; left: 48px;" />
@@ -32,14 +33,14 @@
             <ui:VisualElement name="AnswerContainer" style="flex-grow: 1; flex-basis: 100%; align-items: center; justify-content: center;">
                 <ui:VisualElement name="AnswerBoard" style="flex-grow: 0; width: 70%; height: 70%;">
                     <ui:VisualElement name="TimerBar" style="flex-grow: 0; flex-basis: 10%;">
-                        <ui:Label tabindex="-1" text="30 seconds" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CounterLabel" style="font-size: 35px; color: rgb(255, 0, 0); -unity-font-style: bold;" />
+                        <ui:Label tabindex="-1" text="30 seconds" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimerLabel" style="font-size: 35px; color: rgb(255, 0, 0); -unity-font-style: bold;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="HintBar" style="flex-grow: 0; flex-basis: 10%; flex-direction: row; justify-content: flex-start; align-items: center;">
-                        <ui:Label tabindex="-1" text="Hint 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HintNumber" style="font-size: 35px; -unity-text-align: middle-left; flex-grow: 1;" />
+                        <ui:Label tabindex="-1" text="Hint 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HintNumberLabel" style="font-size: 35px; -unity-text-align: middle-left; flex-grow: 1;" />
                         <ui:Button text="Next hint" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NextHintButton" style="background-color: rgb(0, 0, 0); font-size: 25px; padding-top: 16px; padding-bottom: 16px; padding-right: 14px; padding-left: 14px; color: rgb(255, 255, 255);" />
                     </ui:VisualElement>
                     <ui:VisualElement name="QuestionText" style="flex-grow: 0; flex-basis: 30%;">
-                        <ui:Label tabindex="-1" text="Opa Gangnam Style!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hint" style="font-size: 40px; -unity-font-definition: resource(&apos;fonts/AlumniSansPinstripe-Regular SDF&apos;); -unity-font-style: bold;" />
+                        <ui:Label tabindex="-1" text="Opa Gangnam Style!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HintLabel" style="font-size: 40px; -unity-font-definition: resource(&apos;fonts/Aboreto-Regular SDF&apos;); -unity-font-style: bold;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="DropContainer" style="flex-grow: 1; flex-basis: 50%; align-items: center; justify-content: space-around; border-left-color: rgb(108, 108, 108); border-right-color: rgb(108, 108, 108); border-top-color: rgb(108, 108, 108); border-bottom-color: rgb(108, 108, 108); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;">
                         <ui:VisualElement name="DropBox" style="flex-grow: 0; width: 30%; height: 60%; background-color: rgb(255, 0, 0); border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;" />

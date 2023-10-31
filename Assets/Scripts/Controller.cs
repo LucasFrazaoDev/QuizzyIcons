@@ -5,6 +5,18 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
     private Game m_game;
+    private UILinker m_uiLinker;
+
+    private void Awake()
+    {
+        m_game = GetComponent<Game>();
+        m_uiLinker = GetComponent<UILinker>();
+    }
+
+    private void Start()
+    {
+        Initialize();
+    }
 
     public void Initialize()
     {
@@ -26,6 +38,8 @@ public class Controller : MonoBehaviour
 
     public void UpdateUI()
     {
-        
+        m_uiLinker.SetHint(m_game.GetCurrentHint());
+        m_uiLinker.SetHintNumber(m_game.GetCurrentHintNum());
+        m_uiLinker.SetQuestionNumber(m_game.GetCurrentQuestionNum());
     }
 }
