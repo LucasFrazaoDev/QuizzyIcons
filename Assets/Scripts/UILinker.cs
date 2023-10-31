@@ -44,7 +44,7 @@ public class UILinker : MonoBehaviour
     public void InitializeButton()
     {
         m_nextHintButton.clicked += m_controller.HandleWrongAnswer;
-        SetupIcons.InitializeDragDrop(m_root);
+        SetupIcons.InitializeDragDrop(m_root, m_controller);
         SetupIcons.InitializeIcons(m_root, m_controller.GetAllQuestions());
     }
 

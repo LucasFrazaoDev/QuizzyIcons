@@ -6,11 +6,11 @@ using UnityEngine.UIElements;
 
 public class SetupIcons
 {
-    public static void InitializeDragDrop(VisualElement root)
+    public static void InitializeDragDrop(VisualElement root, Controller controller)
     {
         root.Query<VisualElement>("IconsBoard")
             .Children<VisualElement>()
-            .ForEach(child => { child.AddManipulator(new IconDragger(root)); });
+            .ForEach(child => { child.AddManipulator(new IconDragger(root, controller)); });
     }
 
     public static void InitializeIcons(VisualElement root, List<Question> questions)
