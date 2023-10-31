@@ -7,6 +7,22 @@ public class Controller : MonoBehaviour
     private Game m_game;
     private UILinker m_uiLinker;
 
+    private int m_currentCounter;
+    public int CurrentCounter
+    {
+        get { return m_currentCounter; }
+        set
+        {
+            if (value == 0)
+            {
+                HandleWrongAnswer();
+                return;
+            }
+            m_uiLinker.SetTimer(value.ToString());
+            m_currentCounter = value;
+        }
+    }
+
     private void Awake()
     {
         m_game = GetComponent<Game>();
@@ -22,18 +38,23 @@ public class Controller : MonoBehaviour
     {
         m_game.InitializeGame();
         UpdateUI();
+
+        ResetCounter();
+        StartCoroutine(UpdateCounter());
     }
 
     public void HandleWrongAnswer()
     {
         m_game.HandleWrongtAnswer();
         UpdateUI();
+        ResetCounter();
     }
 
     public void HandleCorrectAnswer()
     {
         m_game.HandleCorrectAnswer();
         UpdateUI();
+        ResetCounter();
     }
 
     public void CheckAnswer(string answer)
@@ -44,6 +65,8 @@ public class Controller : MonoBehaviour
             HandleCorrectAnswer();
         else
             HandleWrongAnswer();
+
+        m_uiLinker.GiveAnswerFeedback(answerCorrect);
     }
 
     public void UpdateUI()
@@ -56,5 +79,17 @@ public class Controller : MonoBehaviour
     public List<Question> GetAllQuestions()
     {
         return m_game.Questions;
+    }
+
+    private void ResetCounter()
+    {
+        CurrentCounter = 30;
+    }
+
+    private IEnumerator UpdateCounter()
+    {
+        yield return new WaitForSeconds(1f);
+        CurrentCounter--;
+        StartCoroutine(UpdateCounter());
     }
 }

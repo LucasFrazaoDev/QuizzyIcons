@@ -48,6 +48,33 @@ public class UILinker : MonoBehaviour
         SetupIcons.InitializeIcons(m_root, m_controller.GetAllQuestions());
     }
 
+    public void GiveAnswerFeedback(bool correct)
+    {
+        m_answerIndicator.style.visibility = Visibility.Visible;
+        m_answerIndicator.text = correct ? "Your answer was correct!" : "Your answer was wrong!";
+
+        StyleColor colorCorrect = new StyleColor(new Color32(0, 132, 19, 255));
+        StyleColor colorWrong = new StyleColor(new Color32(132, 0, 19, 255));
+        m_answerIndicator.style.color = correct ? colorCorrect : colorWrong;
+
+        StartCoroutine(CleanUpQuestion());
+    }
+
+    IEnumerator CleanUpQuestion()
+    {
+        yield return new WaitForSeconds(3f);
+        m_answerIndicator.style.visibility = Visibility.Hidden;
+
+        VisualElement dropZone = m_root.Q<VisualElement>("DropBox");
+        if (dropZone.childCount > 0)
+            dropZone.RemoveAt(0);
+    }
+
+    public void SetTimer(string seconds)
+    {
+        m_timeLabel.text = "Time remaining: " + seconds + " seconds";
+    }
+
     public void SetHint(string hintText)
     {
         m_hintLabel.text = hintText;
