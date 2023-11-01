@@ -6,8 +6,11 @@ public class Controller : MonoBehaviour
 {
     private Game m_game;
     private UILinker m_uiLinker;
-
     private int m_currentCounter;
+
+    public delegate void AnswerAction(bool wasCorrect);
+    public static event AnswerAction OnQuestionAnswered;
+
     public int CurrentCounter
     {
         get { return m_currentCounter; }
@@ -48,6 +51,7 @@ public class Controller : MonoBehaviour
         m_game.HandleWrongtAnswer();
         UpdateUI();
         ResetCounter();
+        OnQuestionAnswered?.Invoke(false);
     }
 
     public void HandleCorrectAnswer()
@@ -55,6 +59,7 @@ public class Controller : MonoBehaviour
         m_game.HandleCorrectAnswer();
         UpdateUI();
         ResetCounter();
+        OnQuestionAnswered?.Invoke(true);
     }
 
     public void CheckAnswer(string answer)
@@ -83,7 +88,7 @@ public class Controller : MonoBehaviour
 
     private void ResetCounter()
     {
-        CurrentCounter = 30;
+        CurrentCounter = 20;
     }
 
     private IEnumerator UpdateCounter()

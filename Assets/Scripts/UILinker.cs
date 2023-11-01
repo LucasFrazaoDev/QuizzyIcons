@@ -62,7 +62,7 @@ public class UILinker : MonoBehaviour
 
     IEnumerator CleanUpQuestion()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         m_answerIndicator.style.visibility = Visibility.Hidden;
 
         VisualElement dropZone = m_root.Q<VisualElement>("DropBox");
