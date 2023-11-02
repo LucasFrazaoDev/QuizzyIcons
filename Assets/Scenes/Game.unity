@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b558413c9779104492b2c5c83f7b62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_uiManager: {fileID: 1266933826}
   m_backgroundMusicClip: {fileID: 8300000, guid: 326efce2496987849862976ef45225d1, type: 3}
   m_correctAnswerClip: {fileID: 8300000, guid: c2f55503a9d12e2469ca66b6b147669d, type: 3}
   m_incorrectAnswerClip: {fileID: 8300000, guid: 22cc6d245d9434949b8e2ec24404cc45, type: 3}

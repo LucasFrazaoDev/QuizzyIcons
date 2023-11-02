@@ -1,0 +1,211 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+public class UIManager : MonoBehaviour
+{
+    public delegate void SliderChangeHandler(float value);
+    public event SliderChangeHandler OnMusicSliderChanged;
+    public event SliderChangeHandler OnSFXSliderChanged;
+
+    private Controller m_controller;
+
+    private VisualElement m_root;
+    private VisualElement m_settingsPanel;
+    private VisualElement m_pausePanel;
+
+    private Label m_hintLabel;
+    private Label m_hintNumberLabel;
+    private Label m_questionNumLabel;
+    private Label m_timeLabel;
+    private Label m_answerIndicator;
+    private Label m_highscoreLabel;
+    private Label m_currentScoreLabel;
+
+    private Button m_openPausePanelButton;
+    private Button m_closePausePanelButton;
+    private Button m_openSettingsPanelButton;
+    private Button m_closeSettingsPanelButton;
+    private Button m_nextHintButton;
+
+    private Slider m_musicVolumeSlider;
+    private Slider m_sfxVolumeSlider;
+
+    private void Awake()
+    {
+        m_root = GetComponent<UIDocument>().rootVisualElement;
+        m_controller = GetComponent<Controller>();
+    }
+
+    private void OnEnable()
+    {
+        GetVisualElementsReference();
+        GetLabelsReference();
+        GetButtonsReference();
+        GetSlidersReference();
+    }
+
+    private void Start()
+    {
+        InitializeButtons();
+        InitializeSliders();
+    }
+
+    private void OnDisable()
+    {
+        m_nextHintButton.clicked -= m_controller.HandleWrongAnswer;
+
+        m_openPausePanelButton.clicked -= TogglePausePanel;
+        m_closePausePanelButton.clicked -= TogglePausePanel;
+
+        m_openSettingsPanelButton.clicked -= ToggleSettingsPanel;
+        m_closeSettingsPanelButton.clicked -= ToggleSettingsPanel;
+
+        m_musicVolumeSlider.UnregisterValueChangedCallback(MusicSliderCallback);
+        m_sfxVolumeSlider.UnregisterValueChangedCallback(SfxSliderCallback);
+    }
+
+    #region GetReferences
+    private void GetVisualElementsReference()
+    {
+        m_settingsPanel = m_root.Q("SettingsPanel");
+        m_pausePanel = m_root.Q("PausePanel");
+    }
+
+    private void GetLabelsReference()
+    {
+        m_hintLabel = m_root.Q<Label>("HintLabel");
+        m_hintNumberLabel = m_root.Q<Label>("HintNumberLabel");
+        m_questionNumLabel = m_root.Q<Label>("QuestionNumberLabel");
+        m_timeLabel = m_root.Q<Label>("TimerLabel");
+        m_answerIndicator = m_root.Q<Label>("AnswerIndicatorLabel");
+        m_highscoreLabel = m_root.Q<Label>("HighscoreLabel");
+        m_currentScoreLabel = m_root.Q<Label>("CurrentScoreLabel");
+    }
+
+    private void GetButtonsReference()
+    {
+        m_openPausePanelButton = m_root.Q<Button>("PauseButton");
+        m_closePausePanelButton = m_root.Q<Button>("ClosePausePanelButton");
+        m_openSettingsPanelButton = m_root.Q<Button>("OpenSettingsPanelButton");
+        m_closeSettingsPanelButton = m_root.Q<Button>("CloseSettingsPanelButton");
+        m_nextHintButton = m_root.Q<Button>("NextHintButton");
+    }
+
+    private void GetSlidersReference()
+    {
+        m_musicVolumeSlider = m_root.Q<Slider>("MusicVolumeSlider");
+        m_sfxVolumeSlider = m_root.Q<Slider>("SFXVolumeSlider");
+    }
+    #endregion
+
+    #region ButtonsMethods
+    public void InitializeButtons()
+    {
+        /*
+            TODO
+            Criar um método especifico pro botão, assim deixando um tempo fixo de 20 segundos 
+            para cada questão
+         */
+        m_nextHintButton.clicked += m_controller.HandleWrongAnswer;
+        SetupIcons.InitializeDragDrop(m_root, m_controller);
+        SetupIcons.InitializeIcons(m_root, m_controller.GetAllQuestions());
+
+        m_openPausePanelButton.clicked += TogglePausePanel;
+        m_closePausePanelButton.clicked += TogglePausePanel;
+
+        m_openSettingsPanelButton.clicked += ToggleSettingsPanel;
+        m_closeSettingsPanelButton.clicked += ToggleSettingsPanel;
+    }
+
+    private void TogglePausePanel()
+    {
+        if (m_pausePanel.style.display == DisplayStyle.Flex)
+        {
+            m_pausePanel.style.display = DisplayStyle.None;
+            m_pausePanel.parent.style.display = DisplayStyle.None;
+        }
+        else
+        {
+            m_pausePanel.parent.style.display = DisplayStyle.Flex;
+            m_pausePanel.style.display = DisplayStyle.Flex;
+        }
+    }
+
+    private void ToggleSettingsPanel()
+    {
+        if (m_settingsPanel.style.display == DisplayStyle.Flex)
+        {
+            m_settingsPanel.style.display = DisplayStyle.None;
+            m_settingsPanel.parent.style.display = DisplayStyle.None;
+        }
+        else
+        {
+            m_settingsPanel.parent.style.display = DisplayStyle.Flex;
+            m_settingsPanel.style.display = DisplayStyle.Flex;
+        }
+    }
+    #endregion
+
+    #region SlidersMethods
+    private void InitializeSliders()
+    {
+        m_musicVolumeSlider.RegisterValueChangedCallback(MusicSliderCallback);
+        m_sfxVolumeSlider.RegisterValueChangedCallback(SfxSliderCallback);
+    }
+
+    private void MusicSliderCallback(ChangeEvent<float> e)
+    {
+        OnMusicSliderChanged?.Invoke(e.newValue);
+    }
+
+    private void SfxSliderCallback(ChangeEvent<float> e)
+    {
+        OnSFXSliderChanged?.Invoke(e.newValue);
+    }
+    #endregion
+
+    public void GiveAnswerFeedback(bool correct)
+    {
+        m_answerIndicator.style.visibility = Visibility.Visible;
+        m_answerIndicator.text = correct ? "Your answer was correct!" : "Your answer was wrong!";
+
+        StyleColor colorCorrect = new StyleColor(new Color32(0, 132, 19, 255));
+        StyleColor colorWrong = new StyleColor(new Color32(132, 0, 19, 255));
+        m_answerIndicator.style.color = correct ? colorCorrect : colorWrong;
+
+        StartCoroutine(CleanUpQuestion());
+    }
+
+    private IEnumerator CleanUpQuestion()
+    {
+        yield return new WaitForSeconds(2f);
+        m_answerIndicator.style.visibility = Visibility.Hidden;
+
+        VisualElement dropZone = m_root.Q<VisualElement>("DropBox");
+        if (dropZone.childCount > 0)
+            dropZone.RemoveAt(0);
+    }
+
+    public void SetTimer(string seconds)
+    {
+        m_timeLabel.text = "Time remaining: " + seconds + " seconds";
+    }
+
+    public void SetHint(string hintText)
+    {
+        m_hintLabel.text = hintText;
+    }
+
+    public void SetHintNumber(int hintNumber)
+    {
+        m_hintNumberLabel.text = "Hint " + hintNumber.ToString() + ": ";
+    }
+
+    public void SetQuestionNumber(int questionNum)
+    {
+        m_questionNumLabel.text = "Question " + questionNum.ToString();
+    }
+}

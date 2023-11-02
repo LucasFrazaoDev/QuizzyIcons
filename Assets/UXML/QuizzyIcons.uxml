@@ -1,9 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="MainContainer" style="flex-grow: 1; background-image: resource(&apos;img/background&apos;); display: flex;">
+    <Style src="project://database/Assets/StyleSheets/QuizzyIconsStyle.uss?fileID=7433441132597879392&amp;guid=fae709b44f6e0a640822e113c4f82d00&amp;type=3#QuizzyIconsStyle" />
+    <ui:VisualElement name="MainContainer" style="flex-grow: 1; background-image: resource(&apos;img/background&apos;); display: flex; opacity: 1;">
         <ui:VisualElement name="UpperContainer" style="flex-grow: 0; flex-basis: 20%; flex-direction: row; align-items: center; justify-content: space-between;">
-            <ui:VisualElement name="SeparatorLeft" style="flex-grow: 0; width: 25%; height: 10px; background-color: rgb(0, 58, 255);" />
+            <ui:VisualElement name="SeparatorLeft" style="flex-grow: 0; width: 25%; height: 10px; background-color: rgb(109, 129, 197);" />
             <ui:Label tabindex="-1" text="Quizzy Icons" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="font-size: 108px; -unity-font-definition: resource(&apos;fonts/Aboreto-Regular SDF&apos;);" />
-            <ui:VisualElement name="SeparatorRight" style="flex-grow: 0; width: 25%; height: 10px; background-color: rgb(0, 25, 255);" />
+            <ui:VisualElement name="SeparatorRight" style="flex-grow: 0; width: 25%; height: 10px; background-color: rgb(109, 129, 197);" />
+            <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OpenSettingsPanelButton" style="align-self: flex-start; position: absolute; top: 25px; left: 1600px; font-size: 30px;" />
+            <ui:Button text="Pause" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PauseButton" style="align-self: flex-start; position: absolute; top: 25px; left: 1780px; flex-grow: 0; font-size: 30px;" />
         </ui:VisualElement>
         <ui:VisualElement name="MiddleContainer" style="flex-grow: 0; flex-basis: 20%; align-items: center; justify-content: center; background-color: rgba(115, 219, 214, 0.49);">
             <ui:VisualElement style="flex-grow: 0; flex-direction: column; align-items: center; justify-content: center;">
@@ -51,4 +54,19 @@
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="DragArea" style="flex-grow: 1; position: absolute; background-color: rgba(0, 0, 0, 0); display: none; width: 100%; height: 100%;" />
+    <ui:VisualElement name="PanelsContainer" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.59); align-items: center; justify-content: center; display: none;">
+        <ui:VisualElement name="SettingsPanel" class="panelBackground" style="flex-grow: 0; display: none; align-items: center; justify-content: space-around;">
+            <ui:Button text="X" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CloseSettingsPanelButton" style="position: absolute; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; font-size: 36px; color: rgb(255, 4, 4); -unity-font-style: bold; top: 5px; left: 1278px;" />
+            <ui:Slider picking-mode="Ignore" label="Music" value="42" high-value="1" name="MusicVolumeSlider" style="width: 80%; height: 5%; font-size: 36px; -unity-text-align: middle-left;" />
+            <ui:Slider picking-mode="Ignore" label="SFX" value="42" high-value="1" name="SFXVolumeSlider" style="width: 80%; height: 5%; font-size: 36px; -unity-text-align: middle-left; white-space: normal;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="PausePanel" class="panelBackground" style="display: none; align-items: center; justify-content: space-around; width: 60%;">
+            <ui:Label tabindex="-1" text="PAUSE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PauseLabel" style="font-size: 96px; white-space: normal;" />
+            <ui:VisualElement name="ButtonsContainer" style="flex-grow: 0; flex-direction: row; align-items: center; justify-content: space-around; width: 50%; height: 40%;">
+                <ui:Button text="Restart" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RestartGameButton" style="font-size: 48px;" />
+                <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuitGameButton" style="font-size: 48px;" />
+            </ui:VisualElement>
+            <ui:Button text="X" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ClosePausePanelButton" style="position: absolute; top: 0; left: 1073px; background-color: rgba(188, 188, 188, 0); font-size: 60px; align-self: center; justify-content: center; align-items: center; -unity-font-style: bold; color: rgb(255, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>

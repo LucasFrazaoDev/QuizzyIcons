@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    [SerializeField] private UIManager m_uiManager;
+
     [SerializeField] private AudioClip m_backgroundMusicClip;
     [SerializeField] private AudioClip m_correctAnswerClip;
     [SerializeField] private AudioClip m_incorrectAnswerClip;
@@ -23,6 +25,18 @@ public class SoundManager : MonoBehaviour
         m_musicSource.Play();
 
         Controller.OnQuestionAnswered += PlayAnswerSound;
+        m_uiManager.OnMusicSliderChanged += ChangeMusicVolume;
+        m_uiManager.OnSFXSliderChanged += ChangeSFXVolume;
+    }
+
+    private void ChangeMusicVolume(float volume)
+    {
+        m_musicSource.volume = volume;
+    }
+
+    private void ChangeSFXVolume(float volume)
+    {
+        m_sfxSource.volume = volume;
     }
 
     private void PlayAnswerSound(bool wasCorrect)
@@ -34,5 +48,7 @@ public class SoundManager : MonoBehaviour
     private void OnDestroy()
     {
         Controller.OnQuestionAnswered -= PlayAnswerSound;
+        m_uiManager.OnMusicSliderChanged -= ChangeMusicVolume;
+        m_uiManager.OnSFXSliderChanged -= ChangeSFXVolume;
     }
 }

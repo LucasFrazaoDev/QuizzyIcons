@@ -5,7 +5,7 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
     private Game m_game;
-    private UILinker m_uiLinker;
+    private UIManager m_uiLinker;
     private int m_currentCounter;
 
     public delegate void AnswerAction(bool wasCorrect);
@@ -29,7 +29,7 @@ public class Controller : MonoBehaviour
     private void Awake()
     {
         m_game = GetComponent<Game>();
-        m_uiLinker = GetComponent<UILinker>();
+        m_uiLinker = GetComponent<UIManager>();
     }
 
     private void Start()

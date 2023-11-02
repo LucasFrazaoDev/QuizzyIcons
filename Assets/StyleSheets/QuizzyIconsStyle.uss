@@ -1,0 +1,12 @@
+.panelBackground {
+    flex-grow: 0;
+    display: flex;
+    width: 70%;
+    height: 60%;
+    background-color: rgba(168, 165, 137, 0);
+    background-image: resource('img/background');
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
