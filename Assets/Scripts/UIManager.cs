@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
 
     private Controller m_controller;
 
+    // UI elements (Visual elements)
     private VisualElement m_root;
     private VisualElement m_settingsPanel;
     private VisualElement m_pausePanel;
@@ -21,8 +22,8 @@ public class UIManager : MonoBehaviour
     private Label m_questionNumLabel;
     private Label m_timeLabel;
     private Label m_answerIndicator;
-    private Label m_highscoreLabel;
-    private Label m_currentScoreLabel;
+    //private Label m_highscoreLabel;
+    //private Label m_currentScoreLabel;
 
     private Button m_openPausePanelButton;
     private Button m_closePausePanelButton;
@@ -32,6 +33,26 @@ public class UIManager : MonoBehaviour
 
     private Slider m_musicVolumeSlider;
     private Slider m_sfxVolumeSlider;
+
+    // UI elements names (string)
+    private const string M_SETTINGS_PANEL_NAME = "SettingsPanel";
+    private const string M_PAUSE_PANEL_NAME = "PausePanel";
+
+    private const string M_HINT_LABEL_NAME = "HintLabel";
+    private const string M_HINT_NUMBER_LABEL_NAME = "HintNumberLabel";
+    private const string M_QUESTION_NUMBER_LABEL_NAME = "QuestionNumberLabel";
+    private const string M_TIME_LABEL_NAME = "TimerLabel";
+    private const string M_ANSWER_INDICATOR_NAME = "AnswerIndicatorLabel";
+
+    private const string M_OPEN_PAUSE_PANEL_BUTTON_NAME = "PauseButton";
+    private const string M_CLOSE_PAUSE_PANEL_BUTTON_NAME = "ClosePausePanelButton";
+    private const string M_OPEN_SETTINGS_PANEL_BUTTON_NAME = "OpenSettingsPanelButton";
+    private const string M_CLOSE_SETTINGS_PANEL_BUTTON_NAME = "CloseSettingsPanelButton";
+    private const string M_NEXT_HINT_BUTTON_NAME = "NextHintButton";
+
+    private const string M_MUSIC_VOLUME_SLIDER_NAME = "MusicVolumeSlider";
+    private const string M_SFX_VOLUME_SLIDER_NAME = "SFXVolumeSlider";
+
 
     private void Awake()
     {
@@ -70,34 +91,36 @@ public class UIManager : MonoBehaviour
     #region GetReferences
     private void GetVisualElementsReference()
     {
-        m_settingsPanel = m_root.Q("SettingsPanel");
-        m_pausePanel = m_root.Q("PausePanel");
+        m_settingsPanel = m_root.Q(M_SETTINGS_PANEL_NAME);
+        m_pausePanel = m_root.Q(M_PAUSE_PANEL_NAME);
     }
 
     private void GetLabelsReference()
     {
-        m_hintLabel = m_root.Q<Label>("HintLabel");
-        m_hintNumberLabel = m_root.Q<Label>("HintNumberLabel");
-        m_questionNumLabel = m_root.Q<Label>("QuestionNumberLabel");
-        m_timeLabel = m_root.Q<Label>("TimerLabel");
-        m_answerIndicator = m_root.Q<Label>("AnswerIndicatorLabel");
-        m_highscoreLabel = m_root.Q<Label>("HighscoreLabel");
-        m_currentScoreLabel = m_root.Q<Label>("CurrentScoreLabel");
+        m_hintLabel = m_root.Q<Label>(M_HINT_LABEL_NAME);
+        m_hintNumberLabel = m_root.Q<Label>(M_HINT_NUMBER_LABEL_NAME);
+        m_questionNumLabel = m_root.Q<Label>(M_QUESTION_NUMBER_LABEL_NAME);
+        m_timeLabel = m_root.Q<Label>(M_TIME_LABEL_NAME);
+        m_answerIndicator = m_root.Q<Label>(M_ANSWER_INDICATOR_NAME);
+        //m_highscoreLabel = m_root.Q<Label>("HighscoreLabel");
+        //m_currentScoreLabel = m_root.Q<Label>("CurrentScoreLabel");
     }
 
     private void GetButtonsReference()
     {
-        m_openPausePanelButton = m_root.Q<Button>("PauseButton");
-        m_closePausePanelButton = m_root.Q<Button>("ClosePausePanelButton");
-        m_openSettingsPanelButton = m_root.Q<Button>("OpenSettingsPanelButton");
-        m_closeSettingsPanelButton = m_root.Q<Button>("CloseSettingsPanelButton");
-        m_nextHintButton = m_root.Q<Button>("NextHintButton");
+        m_openPausePanelButton = m_root.Q<Button>(M_OPEN_PAUSE_PANEL_BUTTON_NAME);
+        m_closePausePanelButton = m_root.Q<Button>(M_CLOSE_PAUSE_PANEL_BUTTON_NAME);
+
+        m_openSettingsPanelButton = m_root.Q<Button>(M_OPEN_SETTINGS_PANEL_BUTTON_NAME);
+        m_closeSettingsPanelButton = m_root.Q<Button>(M_CLOSE_SETTINGS_PANEL_BUTTON_NAME);
+
+        m_nextHintButton = m_root.Q<Button>(M_NEXT_HINT_BUTTON_NAME);
     }
 
     private void GetSlidersReference()
     {
-        m_musicVolumeSlider = m_root.Q<Slider>("MusicVolumeSlider");
-        m_sfxVolumeSlider = m_root.Q<Slider>("SFXVolumeSlider");
+        m_musicVolumeSlider = m_root.Q<Slider>(M_MUSIC_VOLUME_SLIDER_NAME);
+        m_sfxVolumeSlider = m_root.Q<Slider>(M_SFX_VOLUME_SLIDER_NAME);
     }
     #endregion
 
