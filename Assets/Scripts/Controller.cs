@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
     private Game m_game;
-    private UIManager m_uiLinker;
+    private UIManager m_uiManager;
     private int m_currentCounter;
 
     public delegate void AnswerAction(bool wasCorrect);
@@ -21,7 +22,7 @@ public class Controller : MonoBehaviour
                 HandleWrongAnswer();
                 return;
             }
-            m_uiLinker.SetTimer(value.ToString());
+            m_uiManager.SetTimer(value.ToString());
             m_currentCounter = value;
         }
     }
@@ -29,7 +30,7 @@ public class Controller : MonoBehaviour
     private void Awake()
     {
         m_game = GetComponent<Game>();
-        m_uiLinker = GetComponent<UIManager>();
+        m_uiManager = GetComponent<UIManager>();
     }
 
     private void Start()
@@ -37,10 +38,16 @@ public class Controller : MonoBehaviour
         Initialize();
     }
 
+    private void OnDisable()
+    {
+        CancelButtonsSignature();
+    }
+
     public void Initialize()
     {
         m_game.InitializeGame();
         UpdateUI();
+        ButtonsSignature();
 
         ResetCounter();
         StartCoroutine(UpdateCounter());
@@ -71,14 +78,14 @@ public class Controller : MonoBehaviour
         else
             HandleWrongAnswer();
 
-        m_uiLinker.GiveAnswerFeedback(answerCorrect);
+        m_uiManager.GiveAnswerFeedback(answerCorrect);
     }
 
     public void UpdateUI()
     {
-        m_uiLinker.SetHint(m_game.GetCurrentHint());
-        m_uiLinker.SetHintNumber(m_game.GetCurrentHintNum());
-        m_uiLinker.SetQuestionNumber(m_game.GetCurrentQuestionNum());
+        m_uiManager.SetHint(m_game.GetCurrentHint());
+        m_uiManager.SetHintNumber(m_game.GetCurrentHintNum());
+        m_uiManager.SetQuestionNumber(m_game.GetCurrentQuestionNum());
     }
 
     public List<Question> GetAllQuestions()
@@ -96,5 +103,20 @@ public class Controller : MonoBehaviour
         yield return new WaitForSeconds(1f);
         CurrentCounter--;
         StartCoroutine(UpdateCounter());
+    }
+
+    private void ButtonsSignature()
+    {
+        m_uiManager.OnRestartGameButtonClicked += RestartGame;
+    }
+
+    private void CancelButtonsSignature()
+    {
+        m_uiManager.OnRestartGameButtonClicked -= RestartGame;
+    }
+
+    private void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -2,13 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
+    // Sliders events
     public delegate void SliderChangeHandler(float value);
     public event SliderChangeHandler OnMusicSliderChanged;
     public event SliderChangeHandler OnSFXSliderChanged;
+
+    // Buttons events
+    public delegate void RestartGameButtonHandler();
+    public event RestartGameButtonHandler OnRestartGameButtonClicked;
 
     private Controller m_controller;
 
@@ -29,6 +35,7 @@ public class UIManager : MonoBehaviour
     private Button m_closePausePanelButton;
     private Button m_openSettingsPanelButton;
     private Button m_closeSettingsPanelButton;
+    private Button m_restartGameButton;
     private Button m_nextHintButton;
 
     private Slider m_musicVolumeSlider;
@@ -49,6 +56,7 @@ public class UIManager : MonoBehaviour
     private const string M_OPEN_SETTINGS_PANEL_BUTTON_NAME = "OpenSettingsPanelButton";
     private const string M_CLOSE_SETTINGS_PANEL_BUTTON_NAME = "CloseSettingsPanelButton";
     private const string M_NEXT_HINT_BUTTON_NAME = "NextHintButton";
+    private const string M_RESTART_GAME_BUTTON_NAME = "RestartGameButton";
 
     private const string M_MUSIC_VOLUME_SLIDER_NAME = "MusicVolumeSlider";
     private const string M_SFX_VOLUME_SLIDER_NAME = "SFXVolumeSlider";
@@ -84,6 +92,8 @@ public class UIManager : MonoBehaviour
         m_openSettingsPanelButton.clicked -= ToggleSettingsPanel;
         m_closeSettingsPanelButton.clicked -= ToggleSettingsPanel;
 
+        m_restartGameButton.clicked -= HandleRestartGameButton;
+
         m_musicVolumeSlider.UnregisterValueChangedCallback(MusicSliderCallback);
         m_sfxVolumeSlider.UnregisterValueChangedCallback(SfxSliderCallback);
     }
@@ -114,6 +124,8 @@ public class UIManager : MonoBehaviour
         m_openSettingsPanelButton = m_root.Q<Button>(M_OPEN_SETTINGS_PANEL_BUTTON_NAME);
         m_closeSettingsPanelButton = m_root.Q<Button>(M_CLOSE_SETTINGS_PANEL_BUTTON_NAME);
 
+        m_restartGameButton = m_root.Q<Button>(M_RESTART_GAME_BUTTON_NAME);
+
         m_nextHintButton = m_root.Q<Button>(M_NEXT_HINT_BUTTON_NAME);
     }
 
@@ -141,6 +153,8 @@ public class UIManager : MonoBehaviour
 
         m_openSettingsPanelButton.clicked += ToggleSettingsPanel;
         m_closeSettingsPanelButton.clicked += ToggleSettingsPanel;
+
+        m_restartGameButton.clicked += HandleRestartGameButton;
     }
 
     private void TogglePausePanel()
@@ -169,6 +183,11 @@ public class UIManager : MonoBehaviour
             m_settingsPanel.parent.style.display = DisplayStyle.Flex;
             m_settingsPanel.style.display = DisplayStyle.Flex;
         }
+    }
+
+    private void HandleRestartGameButton()
+    {
+        OnRestartGameButtonClicked?.Invoke();
     }
     #endregion
 
