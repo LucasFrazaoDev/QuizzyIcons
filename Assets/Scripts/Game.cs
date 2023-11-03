@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -9,8 +8,8 @@ public class Game : MonoBehaviour
 
     private Question m_currentQuestion;
     private int m_questionIndex = 0;
-    private string m_currentHint;
     private int m_hintIndex = 0;
+    private string m_currentHint;
 
     private int m_currentScore = 0;
     private int m_highScore = 0;
@@ -56,7 +55,7 @@ public class Game : MonoBehaviour
     public void NextQuestion()
     {
         m_currentQuestion = Questions[++m_questionIndex];
-
+        
         m_hintIndex = 0;
         m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
     }
