@@ -12,6 +12,14 @@ public class Game : MonoBehaviour
     private string m_currentHint;
     private int m_hintIndex = 0;
 
+    private int m_currentScore = 0;
+    private int m_highScore = 0;
+
+    private int m_lowPenaltyScore = -2;
+    private int m_penaltyScore = -5;
+    private int m_successScore = 10;
+
+
     public List<Question> Questions { get => m_questions; set => m_questions = value; }
 
     public void InitializeGame()
@@ -27,6 +35,7 @@ public class Game : MonoBehaviour
 
     public void HandleCorrectAnswer()
     {
+        SetCurrentScore(m_successScore);
         NextQuestion();
     }
 
@@ -34,10 +43,12 @@ public class Game : MonoBehaviour
     {
         if (m_hintIndex < 2)
         {
+            SetCurrentScore(m_lowPenaltyScore);
             m_currentHint = m_currentQuestion.GetHints()[++m_hintIndex];
         }
         else
         {
+            SetCurrentScore(m_penaltyScore);
             NextQuestion();
         }
     }
@@ -57,4 +68,13 @@ public class Game : MonoBehaviour
     public string GetCurrentHint() { return m_currentHint; }
 
     public int GetCurrentHintNum() { return m_hintIndex + 1; }
+
+    public int GetCurrentScore() { return m_currentScore; }
+
+    //public int GetHighScore() { }
+
+    private void SetCurrentScore(int score)
+    {
+        m_currentScore += score;
+    }
 }

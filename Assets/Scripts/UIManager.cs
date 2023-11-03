@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     // Buttons events
     public delegate void RestartGameButtonHandler();
     public event RestartGameButtonHandler OnRestartGameButtonClicked;
+
     public delegate void QuitGameButtonHandler();
     public event QuitGameButtonHandler OnQuitGameButtonClicked;
 
@@ -29,8 +30,8 @@ public class UIManager : MonoBehaviour
     private Label m_questionNumLabel;
     private Label m_timeLabel;
     private Label m_answerIndicator;
+    private Label m_currentScoreLabel;
     //private Label m_highscoreLabel;
-    //private Label m_currentScoreLabel;
 
     private Button m_openPausePanelButton;
     private Button m_closePausePanelButton;
@@ -87,7 +88,7 @@ public class UIManager : MonoBehaviour
 
     private void OnDisable()
     {
-        m_nextHintButton.clicked -= m_controller.HandleWrongAnswer;
+        m_nextHintButton.clicked -= m_controller.NextHint;
 
         m_openPausePanelButton.clicked -= TogglePausePanel;
         m_closePausePanelButton.clicked -= TogglePausePanel;
@@ -115,8 +116,8 @@ public class UIManager : MonoBehaviour
         m_questionNumLabel = m_root.Q<Label>(M_QUESTION_NUMBER_LABEL_NAME);
         m_timeLabel = m_root.Q<Label>(M_TIME_LABEL_NAME);
         m_answerIndicator = m_root.Q<Label>(M_ANSWER_INDICATOR_NAME);
+        m_currentScoreLabel = m_root.Q<Label>("CurrentScoreLabel");
         //m_highscoreLabel = m_root.Q<Label>("HighscoreLabel");
-        //m_currentScoreLabel = m_root.Q<Label>("CurrentScoreLabel");
     }
 
     private void GetButtonsReference()
@@ -148,7 +149,7 @@ public class UIManager : MonoBehaviour
             Criar um método especifico pro botão, assim deixando um tempo fixo de 20 segundos 
             para cada questão
          */
-        m_nextHintButton.clicked += m_controller.HandleWrongAnswer;
+        m_nextHintButton.clicked += m_controller.NextHint;
         SetupIcons.InitializeDragDrop(m_root, m_controller);
         SetupIcons.InitializeIcons(m_root, m_controller.GetAllQuestions());
 
@@ -168,11 +169,13 @@ public class UIManager : MonoBehaviour
         {
             m_pausePanel.style.display = DisplayStyle.None;
             m_pausePanel.parent.style.display = DisplayStyle.None;
+            m_controller.IsGamePaused(false);
         }
         else
         {
             m_pausePanel.parent.style.display = DisplayStyle.Flex;
             m_pausePanel.style.display = DisplayStyle.Flex;
+            m_controller.IsGamePaused(true);
         }
     }
 
@@ -259,5 +262,10 @@ public class UIManager : MonoBehaviour
     public void SetQuestionNumber(int questionNum)
     {
         m_questionNumLabel.text = "Question " + questionNum.ToString();
+    }
+
+    public void SetCurrentScore(int currentScore)
+    {
+        m_currentScoreLabel.text = "Score: " + currentScore.ToString();
     }
 }

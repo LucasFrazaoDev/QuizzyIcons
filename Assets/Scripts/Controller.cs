@@ -36,6 +36,7 @@ public class Controller : MonoBehaviour
     private void Start()
     {
         Initialize();
+        IsGamePaused(false);
     }
 
     private void OnDisable()
@@ -51,6 +52,13 @@ public class Controller : MonoBehaviour
 
         ResetCounter();
         StartCoroutine(UpdateCounter());
+    }
+
+    public void NextHint()
+    {
+        m_game.HandleWrongtAnswer();
+        UpdateUI();
+        OnQuestionAnswered?.Invoke(false);
     }
 
     public void HandleWrongAnswer()
@@ -86,6 +94,7 @@ public class Controller : MonoBehaviour
         m_uiManager.SetHint(m_game.GetCurrentHint());
         m_uiManager.SetHintNumber(m_game.GetCurrentHintNum());
         m_uiManager.SetQuestionNumber(m_game.GetCurrentQuestionNum());
+        m_uiManager.SetCurrentScore(m_game.GetCurrentScore());
     }
 
     public List<Question> GetAllQuestions()
@@ -115,6 +124,11 @@ public class Controller : MonoBehaviour
     {
         m_uiManager.OnRestartGameButtonClicked -= RestartGame;
         m_uiManager.OnQuitGameButtonClicked -= QuitGame;
+    }
+
+    public void IsGamePaused(bool isPaused)
+    {
+        Time.timeScale = isPaused ? 0f : 1f;
     }
 
     private void RestartGame()
