@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
@@ -15,6 +14,8 @@ public class UIManager : MonoBehaviour
     // Buttons events
     public delegate void RestartGameButtonHandler();
     public event RestartGameButtonHandler OnRestartGameButtonClicked;
+    public delegate void QuitGameButtonHandler();
+    public event QuitGameButtonHandler OnQuitGameButtonClicked;
 
     private Controller m_controller;
 
@@ -37,6 +38,7 @@ public class UIManager : MonoBehaviour
     private Button m_closeSettingsPanelButton;
     private Button m_restartGameButton;
     private Button m_nextHintButton;
+    private Button m_quitGameButton;
 
     private Slider m_musicVolumeSlider;
     private Slider m_sfxVolumeSlider;
@@ -57,6 +59,7 @@ public class UIManager : MonoBehaviour
     private const string M_CLOSE_SETTINGS_PANEL_BUTTON_NAME = "CloseSettingsPanelButton";
     private const string M_NEXT_HINT_BUTTON_NAME = "NextHintButton";
     private const string M_RESTART_GAME_BUTTON_NAME = "RestartGameButton";
+    private const string M_QUIT_GAME_BUTTON_NAME = "QuitGameButton";
 
     private const string M_MUSIC_VOLUME_SLIDER_NAME = "MusicVolumeSlider";
     private const string M_SFX_VOLUME_SLIDER_NAME = "SFXVolumeSlider";
@@ -125,6 +128,7 @@ public class UIManager : MonoBehaviour
         m_closeSettingsPanelButton = m_root.Q<Button>(M_CLOSE_SETTINGS_PANEL_BUTTON_NAME);
 
         m_restartGameButton = m_root.Q<Button>(M_RESTART_GAME_BUTTON_NAME);
+        m_quitGameButton = m_root.Q<Button>(M_QUIT_GAME_BUTTON_NAME);
 
         m_nextHintButton = m_root.Q<Button>(M_NEXT_HINT_BUTTON_NAME);
     }
@@ -155,6 +159,7 @@ public class UIManager : MonoBehaviour
         m_closeSettingsPanelButton.clicked += ToggleSettingsPanel;
 
         m_restartGameButton.clicked += HandleRestartGameButton;
+        m_quitGameButton.clicked += HandleQuitGameButton;
     }
 
     private void TogglePausePanel()
@@ -188,6 +193,11 @@ public class UIManager : MonoBehaviour
     private void HandleRestartGameButton()
     {
         OnRestartGameButtonClicked?.Invoke();
+    }
+
+    private void HandleQuitGameButton()
+    {
+        OnQuitGameButtonClicked?.Invoke();
     }
     #endregion
 

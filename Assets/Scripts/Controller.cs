@@ -108,15 +108,22 @@ public class Controller : MonoBehaviour
     private void ButtonsSignature()
     {
         m_uiManager.OnRestartGameButtonClicked += RestartGame;
+        m_uiManager.OnQuitGameButtonClicked += QuitGame;
     }
 
     private void CancelButtonsSignature()
     {
         m_uiManager.OnRestartGameButtonClicked -= RestartGame;
+        m_uiManager.OnQuitGameButtonClicked -= QuitGame;
     }
 
     private void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void QuitGame()
+    {
+        Application.Quit();
     }
 }
