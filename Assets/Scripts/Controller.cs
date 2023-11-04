@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class Controller : MonoBehaviour
 {
     private Game m_game;
     private UIManager m_uiManager;
+    private SaveManager m_saveManager;
     private int m_currentCounter;
 
     public delegate void AnswerAction(bool wasCorrect);
@@ -31,17 +33,39 @@ public class Controller : MonoBehaviour
     {
         m_game = GetComponent<Game>();
         m_uiManager = GetComponent<UIManager>();
+        m_saveManager = GetComponent<SaveManager>();
     }
+
+    private void OnEnable()
+    {
+        m_game.FinishedAllQuestion += AllQuestionsFinished;
+    }
+
+    
 
     private void Start()
     {
         Initialize();
         IsGamePaused(false);
+        LoadHighScore();
     }
 
     private void OnDisable()
     {
         CancelButtonsSignature();
+        m_game.FinishedAllQuestion -= AllQuestionsFinished;
+    }
+
+    private void AllQuestionsFinished(int score)
+    {
+        m_uiManager.AllQuestionsAnswered();
+        m_saveManager.SaveHighScore(score);
+    }
+
+    private void LoadHighScore()
+    {
+        int highScore = m_saveManager.LoadHighScore();
+        m_uiManager.SetHighScore(highScore);
     }
 
     public void Initialize()

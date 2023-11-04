@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    public delegate void AllQuestionsAnswered(int score);
+    public event AllQuestionsAnswered FinishedAllQuestion;
+
     [SerializeField] private List<Question> m_questions = new List<Question>();
 
     private Question m_currentQuestion;
@@ -12,7 +16,7 @@ public class Game : MonoBehaviour
     private string m_currentHint;
 
     private int m_currentScore = 0;
-    private int m_highScore = 0;
+    //private int m_highScore = 0;
 
     private int m_lowPenaltyScore = -2;
     private int m_penaltyScore = -5;
@@ -54,11 +58,23 @@ public class Game : MonoBehaviour
 
     public void NextQuestion()
     {
-        m_currentQuestion = Questions[++m_questionIndex];
-        
-        m_hintIndex = 0;
-        m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
+        m_questionIndex++;
+
+        // Check if index is within the bounds of the list
+        if (m_questionIndex < Questions.Count)
+        {
+            m_currentQuestion = Questions[m_questionIndex];
+
+            m_hintIndex = 0;
+            m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
+        }
+        else
+        {
+            // Finished all the questions
+            FinishedAllQuestion?.Invoke(m_currentScore);
+        }
     }
+
 
     public Question GetCurrentQuestion() { return m_currentQuestion; }
 

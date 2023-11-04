@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     private VisualElement m_root;
     private VisualElement m_settingsPanel;
     private VisualElement m_pausePanel;
+    private VisualElement m_dropBox;
 
     private Label m_hintLabel;
     private Label m_hintNumberLabel;
@@ -31,7 +32,7 @@ public class UIManager : MonoBehaviour
     private Label m_timeLabel;
     private Label m_answerIndicator;
     private Label m_currentScoreLabel;
-    //private Label m_highscoreLabel;
+    private Label m_highScoreLabel;
 
     private Button m_openPausePanelButton;
     private Button m_closePausePanelButton;
@@ -47,12 +48,15 @@ public class UIManager : MonoBehaviour
     // UI elements names (string)
     private const string M_SETTINGS_PANEL_NAME = "SettingsPanel";
     private const string M_PAUSE_PANEL_NAME = "PausePanel";
+    private const string M_DROPBOX = "DropBox";
 
     private const string M_HINT_LABEL_NAME = "HintLabel";
     private const string M_HINT_NUMBER_LABEL_NAME = "HintNumberLabel";
     private const string M_QUESTION_NUMBER_LABEL_NAME = "QuestionNumberLabel";
     private const string M_TIME_LABEL_NAME = "TimerLabel";
     private const string M_ANSWER_INDICATOR_NAME = "AnswerIndicatorLabel";
+    private const string M_CURRENT_SCORE_LABEL_NAME = "CurrentScoreLabel";
+    private const string M_HIGHSCORE_LABEL_NAME = "HighScoreLabel";
 
     private const string M_OPEN_PAUSE_PANEL_BUTTON_NAME = "PauseButton";
     private const string M_CLOSE_PAUSE_PANEL_BUTTON_NAME = "ClosePausePanelButton";
@@ -84,6 +88,7 @@ public class UIManager : MonoBehaviour
     {
         InitializeButtons();
         InitializeSliders();
+        HideAnswerIndicator();
     }
 
     private void OnDisable()
@@ -107,6 +112,7 @@ public class UIManager : MonoBehaviour
     {
         m_settingsPanel = m_root.Q(M_SETTINGS_PANEL_NAME);
         m_pausePanel = m_root.Q(M_PAUSE_PANEL_NAME);
+        m_dropBox = m_root.Q<VisualElement>(M_DROPBOX);
     }
 
     private void GetLabelsReference()
@@ -116,8 +122,8 @@ public class UIManager : MonoBehaviour
         m_questionNumLabel = m_root.Q<Label>(M_QUESTION_NUMBER_LABEL_NAME);
         m_timeLabel = m_root.Q<Label>(M_TIME_LABEL_NAME);
         m_answerIndicator = m_root.Q<Label>(M_ANSWER_INDICATOR_NAME);
-        m_currentScoreLabel = m_root.Q<Label>("CurrentScoreLabel");
-        //m_highscoreLabel = m_root.Q<Label>("HighscoreLabel");
+        m_currentScoreLabel = m_root.Q<Label>(M_CURRENT_SCORE_LABEL_NAME);
+        m_highScoreLabel = m_root.Q<Label>(M_HIGHSCORE_LABEL_NAME);
     }
 
     private void GetButtonsReference()
@@ -222,6 +228,10 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
+    #region LabelsMethods
+    private void HideAnswerIndicator() => m_answerIndicator.style.visibility = Visibility.Hidden;
+    #endregion
+
     public void GiveAnswerFeedback(bool correct)
     {
         m_answerIndicator.style.visibility = Visibility.Visible;
@@ -239,9 +249,17 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         m_answerIndicator.style.visibility = Visibility.Hidden;
 
-        VisualElement dropZone = m_root.Q<VisualElement>("DropBox");
-        if (dropZone.childCount > 0)
-            dropZone.RemoveAt(0);
+        if (m_dropBox.childCount > 0)
+            m_dropBox.RemoveAt(0);
+    }
+
+    public void AllQuestionsAnswered()
+    {
+        m_pausePanel.parent.style.display = DisplayStyle.Flex;
+        m_pausePanel.style.display = DisplayStyle.Flex;
+        m_controller.IsGamePaused(true);
+
+        m_closePausePanelButton.style.display = DisplayStyle.None;
     }
 
     public void SetTimer(string seconds)
@@ -267,5 +285,10 @@ public class UIManager : MonoBehaviour
     public void SetCurrentScore(int currentScore)
     {
         m_currentScoreLabel.text = "Score: " + currentScore.ToString();
+    }
+
+    public void SetHighScore(int highScore)
+    {
+        m_highScoreLabel.text = "Highscore: " + highScore.ToString();
     }
 }
