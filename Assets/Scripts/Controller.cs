@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
-    private Game m_game;
+    [SerializeField] private SaveManager m_saveManager;
+    [SerializeField] private GameManager m_gameManager;
+
     private UIManager m_uiManager;
-    private SaveManager m_saveManager;
     private int m_currentCounter;
 
     public delegate void AnswerAction(bool wasCorrect);
@@ -31,14 +32,12 @@ public class Controller : MonoBehaviour
 
     private void Awake()
     {
-        m_game = GetComponent<Game>();
         m_uiManager = GetComponent<UIManager>();
-        m_saveManager = GetComponent<SaveManager>();
     }
 
     private void OnEnable()
     {
-        m_game.FinishedAllQuestion += AllQuestionsFinished;
+        m_gameManager.FinishedAllQuestion += AllQuestionsFinished;
     }
 
     
@@ -53,7 +52,7 @@ public class Controller : MonoBehaviour
     private void OnDisable()
     {
         CancelButtonsSignature();
-        m_game.FinishedAllQuestion -= AllQuestionsFinished;
+        m_gameManager.FinishedAllQuestion -= AllQuestionsFinished;
     }
 
     private void AllQuestionsFinished(int score)
@@ -70,7 +69,7 @@ public class Controller : MonoBehaviour
 
     public void Initialize()
     {
-        m_game.InitializeGame();
+        m_gameManager.InitializeGame();
         UpdateUI();
         ButtonsSignature();
 
@@ -80,14 +79,14 @@ public class Controller : MonoBehaviour
 
     public void NextHint()
     {
-        m_game.HandleWrongtAnswer();
-        UpdateUI();
+        m_gameManager.ShowNextHint();
+        UpdateUI(true);
         OnQuestionAnswered?.Invoke(false);
     }
 
     public void HandleWrongAnswer()
     {
-        m_game.HandleWrongtAnswer();
+        m_gameManager.HandleWrongtAnswer();
         UpdateUI();
         ResetCounter();
         OnQuestionAnswered?.Invoke(false);
@@ -95,7 +94,7 @@ public class Controller : MonoBehaviour
 
     public void HandleCorrectAnswer()
     {
-        m_game.HandleCorrectAnswer();
+        m_gameManager.HandleCorrectAnswer();
         UpdateUI();
         ResetCounter();
         OnQuestionAnswered?.Invoke(true);
@@ -103,7 +102,7 @@ public class Controller : MonoBehaviour
 
     public void CheckAnswer(string answer)
     {
-        bool answerCorrect = m_game.IsAnswerCorrect(answer);
+        bool answerCorrect = m_gameManager.IsAnswerCorrect(answer);
     
         if (answerCorrect)
             HandleCorrectAnswer();
@@ -113,17 +112,19 @@ public class Controller : MonoBehaviour
         m_uiManager.GiveAnswerFeedback(answerCorrect);
     }
 
-    public void UpdateUI()
+    public void UpdateUI(bool isNextHintButton = false)
     {
-        m_uiManager.SetHint(m_game.GetCurrentHint());
-        m_uiManager.SetHintNumber(m_game.GetCurrentHintNum());
-        m_uiManager.SetQuestionNumber(m_game.GetCurrentQuestionNum());
-        m_uiManager.SetCurrentScore(m_game.GetCurrentScore());
+        m_uiManager.SetHint(m_gameManager.GetCurrentHint());
+        m_uiManager.SetHintNumber(m_gameManager.GetCurrentHintNum());
+        m_uiManager.SetQuestionNumber(m_gameManager.GetCurrentQuestionNum());
+        m_uiManager.SetCurrentScore(m_gameManager.GetCurrentScore());
+
+        if (isNextHintButton) m_uiManager.ToogleOnOffHintButton();
     }
 
     public List<Question> GetAllQuestions()
     {
-        return m_game.Questions;
+        return m_gameManager.Questions;
     }
 
     private void ResetCounter()

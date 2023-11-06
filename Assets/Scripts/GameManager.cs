@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public delegate void AllQuestionsAnswered(int score);
     public event AllQuestionsAnswered FinishedAllQuestion;
@@ -20,7 +20,7 @@ public class Game : MonoBehaviour
 
     private int m_lowPenaltyScore = -2;
     private int m_penaltyScore = -5;
-    private int m_successScore = 10;
+    private int m_successScore = 15;
 
 
     public List<Question> Questions { get => m_questions; set => m_questions = value; }
@@ -44,16 +44,19 @@ public class Game : MonoBehaviour
 
     public void HandleWrongtAnswer()
     {
+        SetCurrentScore(m_penaltyScore);
+        NextQuestion();
+    }
+
+    public void ShowNextHint()
+    {
         if (m_hintIndex < 2)
         {
             SetCurrentScore(m_lowPenaltyScore);
             m_currentHint = m_currentQuestion.GetHints()[++m_hintIndex];
         }
         else
-        {
-            SetCurrentScore(m_penaltyScore);
             NextQuestion();
-        }
     }
 
     public void NextQuestion()

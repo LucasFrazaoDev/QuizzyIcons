@@ -253,6 +253,18 @@ public class UIManager : MonoBehaviour
             m_dropBox.RemoveAt(0);
     }
 
+    public void ToogleOnOffHintButton()
+    {
+        StartCoroutine(ShowHideHintButton());
+    }
+
+    private IEnumerator ShowHideHintButton()
+    {
+        m_nextHintButton.SetEnabled(false);
+        yield return new WaitForSeconds(1.5f);
+        m_nextHintButton.SetEnabled(true);
+    }
+
     public void AllQuestionsAnswered()
     {
         m_pausePanel.parent.style.display = DisplayStyle.Flex;
