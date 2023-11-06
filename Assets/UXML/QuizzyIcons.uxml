@@ -34,16 +34,17 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="AnswerContainer" style="flex-grow: 1; flex-basis: 100%; align-items: center; justify-content: center;">
-                <ui:VisualElement name="AnswerBoard" style="flex-grow: 0; width: 70%; height: 70%;">
-                    <ui:VisualElement name="TimerBar" style="flex-grow: 0; flex-basis: 10%;">
-                        <ui:Label tabindex="-1" text="30 seconds" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimerLabel" style="font-size: 35px; color: rgb(255, 0, 0); -unity-font-style: bold;" />
+                <ui:VisualElement name="AnswerBoard" style="flex-grow: 0; width: 75%; height: 75%;">
+                    <ui:VisualElement name="TimerBar" style="flex-grow: 0; flex-basis: 10%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; top: -10px;">
+                        <ui:Label tabindex="-1" text="30 seconds" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimerLabel" style="font-size: 38px; color: rgb(255, 0, 0); -unity-font-style: bold;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="HintBar" style="flex-grow: 0; flex-basis: 10%; flex-direction: row; justify-content: flex-start; align-items: center;">
+                    <ui:VisualElement name="HintBar" style="flex-grow: 0; flex-basis: 10%; flex-direction: row; justify-content: flex-start; align-items: center; margin-top: 0;">
                         <ui:Label tabindex="-1" text="Hint 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HintNumberLabel" style="font-size: 35px; -unity-text-align: middle-left; flex-grow: 1;" />
                         <ui:Button text="Next hint" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NextHintButton" style="background-color: rgb(0, 0, 0); font-size: 25px; padding-top: 16px; padding-bottom: 16px; padding-right: 14px; padding-left: 14px; color: rgb(255, 255, 255);" />
+                        <ui:Button text="Next question" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NextQuestionButton" style="background-color: rgb(0, 0, 0); font-size: 25px; padding-top: 16px; padding-bottom: 16px; padding-right: 14px; padding-left: 14px; color: rgb(255, 255, 255);" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="QuestionText" style="flex-grow: 0; flex-basis: 30%;">
-                        <ui:Label tabindex="-1" text="Opa Gangnam Style!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HintLabel" style="font-size: 40px; -unity-font-definition: resource(&apos;fonts/Aboreto-Regular SDF&apos;); -unity-font-style: bold; white-space: normal;" />
+                    <ui:VisualElement name="QuestionText" style="flex-grow: 0; flex-basis: 30%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;">
+                        <ui:Label tabindex="-1" text="Opa Gangnam Style!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HintLabel" style="font-size: 36px; -unity-font-definition: resource(&apos;fonts/Aboreto-Regular SDF&apos;); -unity-font-style: bold; white-space: normal; -unity-text-align: upper-left;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="DropContainer" style="flex-grow: 1; flex-basis: 50%; align-items: center; justify-content: space-around; border-left-color: rgb(108, 108, 108); border-right-color: rgb(108, 108, 108); border-top-color: rgb(108, 108, 108); border-bottom-color: rgb(108, 108, 108); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;">
                         <ui:VisualElement name="DropBox" style="flex-grow: 0; width: 30%; height: 60%; background-color: rgb(255, 0, 0); border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;" />

@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
     private Button m_closeSettingsPanelButton;
     private Button m_restartGameButton;
     private Button m_nextHintButton;
+    private Button m_nextQuestionButton;
     private Button m_quitGameButton;
 
     private Slider m_musicVolumeSlider;
@@ -63,6 +64,7 @@ public class UIManager : MonoBehaviour
     private const string M_OPEN_SETTINGS_PANEL_BUTTON_NAME = "OpenSettingsPanelButton";
     private const string M_CLOSE_SETTINGS_PANEL_BUTTON_NAME = "CloseSettingsPanelButton";
     private const string M_NEXT_HINT_BUTTON_NAME = "NextHintButton";
+    private const string M_NEXT_QUESTION_BUTTON_NAME = "NextQuestionButton";
     private const string M_RESTART_GAME_BUTTON_NAME = "RestartGameButton";
     private const string M_QUIT_GAME_BUTTON_NAME = "QuitGameButton";
 
@@ -138,6 +140,7 @@ public class UIManager : MonoBehaviour
         m_quitGameButton = m_root.Q<Button>(M_QUIT_GAME_BUTTON_NAME);
 
         m_nextHintButton = m_root.Q<Button>(M_NEXT_HINT_BUTTON_NAME);
+        m_nextQuestionButton = m_root.Q<Button>(M_NEXT_QUESTION_BUTTON_NAME);
     }
 
     private void GetSlidersReference()
@@ -156,6 +159,8 @@ public class UIManager : MonoBehaviour
             para cada questão
          */
         m_nextHintButton.clicked += m_controller.NextHint;
+        m_nextQuestionButton.clicked += m_controller.HandleWrongAnswer;
+
         SetupIcons.InitializeDragDrop(m_root, m_controller);
         SetupIcons.InitializeIcons(m_root, m_controller.GetAllQuestions());
 
@@ -253,16 +258,18 @@ public class UIManager : MonoBehaviour
             m_dropBox.RemoveAt(0);
     }
 
-    public void ToogleOnOffHintButton()
+    public void ToogleOnOffButtons()
     {
-        StartCoroutine(ShowHideHintButton());
+        StartCoroutine(DisableEnableButtons());
     }
 
-    private IEnumerator ShowHideHintButton()
+    private IEnumerator DisableEnableButtons()
     {
         m_nextHintButton.SetEnabled(false);
+        m_nextQuestionButton.SetEnabled(false);
         yield return new WaitForSeconds(1.5f);
         m_nextHintButton.SetEnabled(true);
+        m_nextQuestionButton.SetEnabled(true);
     }
 
     public void AllQuestionsAnswered()

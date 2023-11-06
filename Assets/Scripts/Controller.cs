@@ -87,7 +87,7 @@ public class Controller : MonoBehaviour
     public void HandleWrongAnswer()
     {
         m_gameManager.HandleWrongtAnswer();
-        UpdateUI();
+        UpdateUI(true);
         ResetCounter();
         OnQuestionAnswered?.Invoke(false);
     }
@@ -112,14 +112,14 @@ public class Controller : MonoBehaviour
         m_uiManager.GiveAnswerFeedback(answerCorrect);
     }
 
-    public void UpdateUI(bool isNextHintButton = false)
+    public void UpdateUI(bool isButtonClicked = false)
     {
         m_uiManager.SetHint(m_gameManager.GetCurrentHint());
         m_uiManager.SetHintNumber(m_gameManager.GetCurrentHintNum());
         m_uiManager.SetQuestionNumber(m_gameManager.GetCurrentQuestionNum());
         m_uiManager.SetCurrentScore(m_gameManager.GetCurrentScore());
 
-        if (isNextHintButton) m_uiManager.ToogleOnOffHintButton();
+        if (isButtonClicked) m_uiManager.ToogleOnOffButtons();
     }
 
     public List<Question> GetAllQuestions()
