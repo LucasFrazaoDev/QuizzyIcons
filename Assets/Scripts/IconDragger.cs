@@ -15,14 +15,17 @@ public class IconDragger : MouseManipulator
     private VisualElement m_iconContainer;
     private VisualElement m_dropZone;
 
+    private const string M_DRAG_AREA_NAME = "DragArea";
+    private const string M_DROP_BOX_NAME = "DropBox";
+
     private bool m_isActive;
 
     public IconDragger(VisualElement root, Controller controller)
     {
         m_controller = controller;
 
-        m_dragArea = root.Q("DragArea");
-        m_dropZone = root.Q("DropBox");
+        m_dragArea = root.Q(M_DRAG_AREA_NAME);
+        m_dropZone = root.Q(M_DROP_BOX_NAME);
 
         m_isActive = false;
     }
