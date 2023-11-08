@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     private Label m_answerIndicator;
     private Label m_currentScoreLabel;
     private Label m_highScoreLabel;
+    private Label m_pauseLabel;
 
     private Button m_openPausePanelButton;
     private Button m_closePausePanelButton;
@@ -58,6 +59,7 @@ public class UIManager : MonoBehaviour
     private const string M_ANSWER_INDICATOR_NAME = "AnswerIndicatorLabel";
     private const string M_CURRENT_SCORE_LABEL_NAME = "CurrentScoreLabel";
     private const string M_HIGHSCORE_LABEL_NAME = "HighScoreLabel";
+    private const string M_PAUSE_LABEL_NAME = "PauseLabel";
 
     private const string M_OPEN_PAUSE_PANEL_BUTTON_NAME = "PauseButton";
     private const string M_CLOSE_PAUSE_PANEL_BUTTON_NAME = "ClosePausePanelButton";
@@ -71,6 +73,7 @@ public class UIManager : MonoBehaviour
     private const string M_MUSIC_VOLUME_SLIDER_NAME = "MusicVolumeSlider";
     private const string M_SFX_VOLUME_SLIDER_NAME = "SFXVolumeSlider";
 
+    private const string M_GAME_FINISHED_TEXT = "GAME FINISHED!";
 
     private void Awake()
     {
@@ -126,6 +129,7 @@ public class UIManager : MonoBehaviour
         m_answerIndicator = m_root.Q<Label>(M_ANSWER_INDICATOR_NAME);
         m_currentScoreLabel = m_root.Q<Label>(M_CURRENT_SCORE_LABEL_NAME);
         m_highScoreLabel = m_root.Q<Label>(M_HIGHSCORE_LABEL_NAME);
+        m_pauseLabel = m_root.Q<Label>(M_PAUSE_LABEL_NAME);
     }
 
     private void GetButtonsReference()
@@ -274,11 +278,13 @@ public class UIManager : MonoBehaviour
 
     public void AllQuestionsAnswered()
     {
+        // Reusing the pause panel to show finish game
         m_pausePanel.parent.style.display = DisplayStyle.Flex;
         m_pausePanel.style.display = DisplayStyle.Flex;
         m_controller.IsGamePaused(true);
 
         m_closePausePanelButton.style.display = DisplayStyle.None;
+        m_pauseLabel.text = M_GAME_FINISHED_TEXT;
     }
 
     public void SetTimer(string seconds)

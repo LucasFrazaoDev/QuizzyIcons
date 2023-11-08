@@ -8,6 +8,8 @@ public class SaveManager : MonoBehaviour
 
     public void SaveHighScore(int score)
     {
+        if (LoadHighScore() <= score) return;
+
         PlayerPrefs.SetInt(M_HIGHSCORE, score);
         PlayerPrefs.Save();
     }
