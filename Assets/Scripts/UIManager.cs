@@ -157,11 +157,6 @@ public class UIManager : MonoBehaviour
     #region ButtonsMethods
     public void InitializeButtons()
     {
-        /*
-            TODO
-            Criar um método especifico pro botão, assim deixando um tempo fixo de 20 segundos 
-            para cada questão
-         */
         m_nextHintButton.clicked += m_controller.NextHint;
         m_nextQuestionButton.clicked += m_controller.HandleWrongAnswer;
 

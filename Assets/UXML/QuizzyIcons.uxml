@@ -27,11 +27,11 @@
                     <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 330px; left: 229px;" />
                     <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 302px; left: 513px;" />
                     <ui:VisualElement name="VisualElement" style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 208px; left: 501px;" />
-                    <ui:VisualElement class="CursorPointerButtons" style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 44px; left: 55px;" />
+                    <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 44px; left: 55px;" />
                     <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 74px; left: 503px;" />
                     <ui:VisualElement name="TestIcon" style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; left: 377px; top: 307px;" />
                     <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 248px; left: 113px;" />
-                    <ui:VisualElement class="CursorPointerButtons" style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 118px; left: 143px;" />
+                    <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 118px; left: 143px;" />
                     <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;img/arc&apos;); width: 64px; height: 64px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; position: absolute; top: 56px; left: 301px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
@@ -64,7 +64,7 @@
             <ui:Slider picking-mode="Ignore" label="Music" value="42" high-value="1" name="MusicVolumeSlider" style="width: 80%; height: 5%; font-size: 36px; -unity-text-align: middle-left; top: -150px;" />
             <ui:Slider picking-mode="Ignore" label="SFX" value="42" high-value="1" name="SFXVolumeSlider" style="width: 80%; height: 5%; font-size: 36px; -unity-text-align: middle-left; white-space: normal; top: -150px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="PausePanel" class="panelBackground" style="display: none; align-items: center; justify-content: space-around; width: 60%;">
+        <ui:VisualElement name="PausePanel" class="panelBackground" style="display: none; align-items: center; justify-content: space-around; width: 60%; translate: 0 0;">
             <ui:Button text="X" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ClosePausePanelButton" style="position: relative; top: -25px; left: 0; background-color: rgba(188, 188, 188, 0); font-size: 60px; align-self: flex-end; justify-content: center; align-items: center; -unity-font-style: bold; color: rgb(255, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; display: flex;" />
             <ui:Label tabindex="-1" text="PAUSE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PauseLabel" style="font-size: 96px; white-space: normal;" />
             <ui:VisualElement name="ButtonsContainer" style="flex-grow: 0; flex-direction: row; align-items: center; justify-content: space-around; width: 50%; height: 40%;">
