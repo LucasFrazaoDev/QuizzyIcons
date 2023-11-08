@@ -17,8 +17,10 @@ public class IconDragger : MouseManipulator
 
     private const string M_DRAG_AREA_NAME = "DragArea";
     private const string M_DROP_BOX_NAME = "DropBox";
+    private const string K_CURSOR_POINTER_CLASS_NAME = "CursorPointerButtons";
 
     private bool m_isActive;
+    private bool m_canRemoveIcon;
 
     public IconDragger(VisualElement root, Controller controller)
     {
@@ -28,6 +30,7 @@ public class IconDragger : MouseManipulator
         m_dropZone = root.Q(M_DROP_BOX_NAME);
 
         m_isActive = false;
+        m_canRemoveIcon = true;
     }
 
     protected override void RegisterCallbacksOnTarget()
@@ -46,6 +49,8 @@ public class IconDragger : MouseManipulator
 
     private void OnMouseDown(MouseDownEvent e)
     {
+        if (!m_canRemoveIcon) return;
+
         m_iconContainer = target.parent;
 
         // Mouse start position
@@ -90,6 +95,9 @@ public class IconDragger : MouseManipulator
 
             target.style.top = m_dropZone.contentRect.center.y - target.layout.height / 2;
             target.style.left = m_dropZone.contentRect.center.x - target.layout.width / 2;
+
+            m_canRemoveIcon = false;
+            target.RemoveFromClassList(K_CURSOR_POINTER_CLASS_NAME); 
 
             m_controller.CheckAnswer(((Question)target.userData).answer);
         }

@@ -10,3 +10,7 @@
     border-bottom-right-radius: 50px;
     border-bottom-left-radius: 50px;
 }
+
+.CursorPointerButtons {
+    cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/icons8-select-cursor-48.png?fileID=2800000&guid=249be4bb81e5505419092b3958242b69&type=3#icons8-select-cursor-48');
+}
