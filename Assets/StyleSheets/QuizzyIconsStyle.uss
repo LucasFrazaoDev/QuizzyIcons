@@ -2,6 +2,10 @@
     cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/icons8-select-cursor-48.png?fileID=2800000&guid=249be4bb81e5505419092b3958242b69&type=3#icons8-select-cursor-48');
 }
 
+.CursorPointerButtons:hover {
+    -unity-background-image-tint-color: rgb(192, 250, 157);
+}
+
 .SettingsPanel {
     flex-grow: 0;
     display: flex;
