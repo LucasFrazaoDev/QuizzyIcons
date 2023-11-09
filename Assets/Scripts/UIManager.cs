@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     private VisualElement m_settingsPanel;
     private VisualElement m_pausePanel;
     private VisualElement m_dropBox;
+    private VisualElement m_panelsContainer;
 
     private Label m_hintLabel;
     private Label m_hintNumberLabel;
@@ -50,6 +51,7 @@ public class UIManager : MonoBehaviour
     // UI elements names (string)
     private const string M_SETTINGS_PANEL_NAME = "SettingsPanel";
     private const string M_PAUSE_PANEL_NAME = "PausePanel";
+    private const string K_PANELS_CONTAINER_NAME = "PanelsContainer";
     private const string M_DROPBOX = "DropBox";
 
     private const string M_HINT_LABEL_NAME = "HintLabel";
@@ -118,6 +120,7 @@ public class UIManager : MonoBehaviour
         m_settingsPanel = m_root.Q(M_SETTINGS_PANEL_NAME);
         m_pausePanel = m_root.Q(M_PAUSE_PANEL_NAME);
         m_dropBox = m_root.Q<VisualElement>(M_DROPBOX);
+        m_panelsContainer = m_root.Q<VisualElement>(K_PANELS_CONTAINER_NAME);
     }
 
     private void GetLabelsReference()
@@ -157,11 +160,11 @@ public class UIManager : MonoBehaviour
     #region ButtonsMethods
     public void InitializeButtons()
     {
-        m_nextHintButton.clicked += m_controller.NextHint;
-        m_nextQuestionButton.clicked += m_controller.HandleWrongAnswer;
-
         SetupIcons.InitializeDragDrop(m_root, m_controller);
         SetupIcons.InitializeIcons(m_root, m_controller.GetAllQuestions());
+
+        m_nextHintButton.clicked += m_controller.NextHint;
+        m_nextQuestionButton.clicked += m_controller.HandleWrongAnswer;
 
         m_openPausePanelButton.clicked += TogglePausePanel;
         m_closePausePanelButton.clicked += TogglePausePanel;
@@ -175,32 +178,54 @@ public class UIManager : MonoBehaviour
 
     private void TogglePausePanel()
     {
-        if (m_pausePanel.style.display == DisplayStyle.Flex)
+        if (m_panelsContainer.style.display == DisplayStyle.Flex)
         {
-            m_pausePanel.style.display = DisplayStyle.None;
-            m_pausePanel.parent.style.display = DisplayStyle.None;
-            m_controller.IsGamePaused(false);
+            StartCoroutine(HidePanel(m_pausePanel));
+            ChangeGameState(false);
         }
         else
         {
-            m_pausePanel.parent.style.display = DisplayStyle.Flex;
-            m_pausePanel.style.display = DisplayStyle.Flex;
-            m_controller.IsGamePaused(true);
+            m_panelsContainer.style.display = DisplayStyle.Flex;
+            Invoke(nameof(ShowPausePanel), 0.05f);
+            ChangeGameState(true);
         }
     }
 
     private void ToggleSettingsPanel()
     {
-        if (m_settingsPanel.style.display == DisplayStyle.Flex)
+        if (m_panelsContainer.style.display == DisplayStyle.Flex)
         {
-            m_settingsPanel.style.display = DisplayStyle.None;
-            m_settingsPanel.parent.style.display = DisplayStyle.None;
+            StartCoroutine(HidePanel(m_settingsPanel));
+            ChangeGameState(false);
         }
         else
         {
-            m_settingsPanel.parent.style.display = DisplayStyle.Flex;
-            m_settingsPanel.style.display = DisplayStyle.Flex;
+            m_panelsContainer.style.display = DisplayStyle.Flex;
+            Invoke(nameof(ShowSettingsPanel), 0.05f);
+            ChangeGameState(true);
         }
+    }
+
+    private void ShowSettingsPanel()
+    {
+        m_settingsPanel.AddToClassList("ShowPanelTransition");
+    }
+    
+    private void ShowPausePanel()
+    {
+        m_pausePanel.AddToClassList("ShowPanelTransition");
+    }
+
+    private void ChangeGameState(bool isPaused)
+    {
+        m_controller.IsGamePaused(isPaused);
+    }
+
+    private IEnumerator HidePanel(VisualElement panel)
+    {
+        panel.RemoveFromClassList("ShowPanelTransition");
+        yield return new WaitForSeconds(0.25f);
+        panel.parent.style.display = DisplayStyle.None;
     }
 
     private void HandleRestartGameButton()

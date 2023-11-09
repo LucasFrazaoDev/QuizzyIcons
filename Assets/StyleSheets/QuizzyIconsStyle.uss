@@ -1,16 +1,49 @@
-.panelBackground {
-    flex-grow: 0;
-    display: flex;
-    width: 70%;
-    height: 60%;
-    background-color: rgba(168, 165, 137, 0);
-    background-image: resource('img/background');
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    border-bottom-left-radius: 50px;
-}
-
 .CursorPointerButtons {
     cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/icons8-select-cursor-48.png?fileID=2800000&guid=249be4bb81e5505419092b3958242b69&type=3#icons8-select-cursor-48');
+}
+
+.SettingsPanel {
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: auto;
+    translate: 0 150%;
+    background-image: resource('img/background');
+    width: 70%;
+    height: 60%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    position: absolute;
+}
+
+.PausePanel {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 50%;
+    translate: 0 150%;
+    height: 50%;
+    background-image: resource('img/background');
+    border-top-left-radius: 15px;
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    position: absolute;
+}
+
+.HidePanelTransition {
+    translate: 0 150%;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-back;
+    position: absolute;
+}
+
+.ShowPanelTransition {
+    transition-timing-function: ease-out-back;
+    translate: 0 0;
+    transition-duration: 0.25s;
+    position: absolute;
 }

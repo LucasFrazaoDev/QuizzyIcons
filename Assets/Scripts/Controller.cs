@@ -11,6 +11,7 @@ public class Controller : MonoBehaviour
 
     private UIManager m_uiManager;
     private int m_currentCounter;
+    private bool m_counterStopped;
 
     public delegate void AnswerAction(bool wasCorrect);
     public static event AnswerAction OnQuestionAnswered;
@@ -20,6 +21,8 @@ public class Controller : MonoBehaviour
         get { return m_currentCounter; }
         set
         {
+            if (m_counterStopped) return;
+
             if (value == 0)
             {
                 HandleWrongAnswer();
@@ -135,6 +138,7 @@ public class Controller : MonoBehaviour
     private IEnumerator UpdateCounter()
     {
         yield return new WaitForSeconds(1f);
+
         CurrentCounter--;
         StartCoroutine(UpdateCounter());
     }
@@ -153,7 +157,7 @@ public class Controller : MonoBehaviour
 
     public void IsGamePaused(bool isPaused)
     {
-        Time.timeScale = isPaused ? 0f : 1f;
+        m_counterStopped = isPaused;
     }
 
     private void RestartGame()
