@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -8,7 +6,7 @@ public class SaveManager : MonoBehaviour
 
     public void SaveHighScore(int score)
     {
-        if (LoadHighScore() <= score) return;
+        if (LoadHighScore() > score) return;
 
         PlayerPrefs.SetInt(M_HIGHSCORE, score);
         PlayerPrefs.Save();

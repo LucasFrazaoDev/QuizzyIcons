@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     private string m_currentHint;
 
     private int m_currentScore = 0;
-    //private int m_highScore = 0;
 
     private int m_lowPenaltyScore = -2;
     private int m_penaltyScore = -5;
@@ -75,6 +74,7 @@ public class GameManager : MonoBehaviour
         {
             // Finished all the questions
             FinishedAllQuestion?.Invoke(m_currentScore);
+            m_questionIndex = 9;
         }
     }
 
@@ -88,8 +88,6 @@ public class GameManager : MonoBehaviour
     public int GetCurrentHintNum() { return m_hintIndex + 1; }
 
     public int GetCurrentScore() { return m_currentScore; }
-
-    //public int GetHighScore() { }
 
     private void SetCurrentScore(int score)
     {

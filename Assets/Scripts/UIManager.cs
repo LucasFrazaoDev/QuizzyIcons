@@ -299,9 +299,9 @@ public class UIManager : MonoBehaviour
     public void AllQuestionsAnswered()
     {
         // Reusing the pause panel to show finish game
-        m_pausePanel.parent.style.display = DisplayStyle.Flex;
-        m_pausePanel.style.display = DisplayStyle.Flex;
-        m_controller.IsGamePaused(true);
+        m_panelsContainer.style.display = DisplayStyle.Flex;
+        Invoke(nameof(ShowPausePanel), 0.05f);
+        ChangeGameState(true);
 
         m_closePausePanelButton.style.display = DisplayStyle.None;
         m_pauseLabel.text = M_GAME_FINISHED_TEXT;
