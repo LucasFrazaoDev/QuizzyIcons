@@ -17,7 +17,7 @@ public class IconDragger : MouseManipulator
 
     private const string M_DRAG_AREA_NAME = "DragArea";
     private const string M_DROP_BOX_NAME = "DropBox";
-    private const string K_CURSOR_POINTER_CLASS_NAME = "CursorPointerButtons";
+    private const string K_CURSOR_POINTER_CLASS_NAME = "CursorPointerIcons";
 
     private bool m_isActive;
     private bool m_canRemoveIcon;

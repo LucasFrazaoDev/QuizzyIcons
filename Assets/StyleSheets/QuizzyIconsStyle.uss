@@ -1,9 +1,13 @@
 .CursorPointerButtons {
-    cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/icons8-select-cursor-48.png?fileID=2800000&guid=249be4bb81e5505419092b3958242b69&type=3#icons8-select-cursor-48');
+    cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/CursorRed.png?fileID=2800000&guid=a94a6bdb42066124ba34ac0a0ae1d0ef&type=3#CursorRed');
 }
 
 .CursorPointerButtons:hover {
     -unity-background-image-tint-color: rgb(192, 250, 157);
+}
+
+.CursorPointerIcons {
+    cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/CursorGreen.png?fileID=2800000&guid=0bd650ec33f18644b99ef481167abdc7&type=3#CursorGreen');
 }
 
 .SettingsPanel {

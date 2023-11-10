@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class SetupIcons
 {
     private const string K_ICONS_BOARD_NAME = "IconsBoard";
-    private const string K_CURSOR_POINTER_CLASS_NAME = "CursorPointerButtons";
+    private const string K_CURSOR_POINTER_CLASS_NAME = "CursorPointerIcons";
 
     public static void InitializeDragDrop(VisualElement root, Controller controller)
     {
