@@ -197,6 +197,7 @@ public class UIManager : MonoBehaviour
         {
             StartCoroutine(HidePanel(m_settingsPanel));
             ChangeGameState(false);
+            m_controller.SaveVolumeSettings(m_musicVolumeSlider.value, m_sfxVolumeSlider.value);
         }
         else
         {
@@ -244,6 +245,8 @@ public class UIManager : MonoBehaviour
     {
         m_musicVolumeSlider.RegisterValueChangedCallback(MusicSliderCallback);
         m_sfxVolumeSlider.RegisterValueChangedCallback(SfxSliderCallback);
+
+        //(float initialMusicVolume, float initialSfxVolume) = m_controller.
     }
 
     private void MusicSliderCallback(ChangeEvent<float> e)
@@ -335,5 +338,11 @@ public class UIManager : MonoBehaviour
     public void SetHighScore(int highScore)
     {
         m_highScoreLabel.text = "Highscore: " + highScore.ToString();
+    }
+
+    public void SetInitialVolume(float musicVolume, float sfxVolume)
+    {
+        m_musicVolumeSlider.value = musicVolume;
+        m_sfxVolumeSlider.value = sfxVolume;
     }
 }

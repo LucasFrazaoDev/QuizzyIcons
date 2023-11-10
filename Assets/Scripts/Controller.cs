@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
+    private UIManager m_uiManager;
+
     [SerializeField] private SaveManager m_saveManager;
     [SerializeField] private GameManager m_gameManager;
 
-    private UIManager m_uiManager;
     private int m_currentCounter;
     private bool m_counterStopped;
 
@@ -50,6 +51,7 @@ public class Controller : MonoBehaviour
         Initialize();
         IsGamePaused(false);
         LoadHighScore();
+        LoadVolumeSettings();
     }
 
     private void OnDisable()
@@ -68,6 +70,17 @@ public class Controller : MonoBehaviour
     {
         int highScore = m_saveManager.LoadHighScore();
         m_uiManager.SetHighScore(highScore);
+    }
+
+    public void SaveVolumeSettings(float musicVolume, float sfxVolume)
+    {
+        m_saveManager.SaveVolumesPreferences(musicVolume, sfxVolume);
+    }
+
+    public void LoadVolumeSettings()
+    {
+        (float musicVolume, float sfxVolume) = m_saveManager.LoadVolumePreferences();
+        m_uiManager.SetInitialVolume(musicVolume, sfxVolume);
     }
 
     public void Initialize()
