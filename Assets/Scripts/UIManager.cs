@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -299,7 +297,7 @@ public class UIManager : MonoBehaviour
         m_nextQuestionButton.SetEnabled(true);
     }
 
-    public void AllQuestionsAnswered()
+    public void AllQuestionsAnsweredFeedBack()
     {
         // Reusing the pause panel to show finish game
         m_panelsContainer.style.display = DisplayStyle.Flex;
@@ -340,7 +338,7 @@ public class UIManager : MonoBehaviour
         m_highScoreLabel.text = "Highscore: " + highScore.ToString();
     }
 
-    public void SetInitialVolume(float musicVolume, float sfxVolume)
+    public void SetInitialVolume(ref float musicVolume,ref float sfxVolume)
     {
         m_musicVolumeSlider.value = musicVolume;
         m_sfxVolumeSlider.value = sfxVolume;

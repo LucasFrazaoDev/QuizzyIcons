@@ -15,6 +15,6 @@ MonoBehaviour:
   answer: eifel
   displayAnswer: The Eifel Tower
   hints:
-  - Its was a present
-  - It's the iconic symbol of a large city
-  - It is mostly made out of steel
+  - Its was a present.
+  - It's the iconic symbol of a large city.
+  - It is mostly made out of steel.

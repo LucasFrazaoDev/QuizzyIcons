@@ -1,11 +1,16 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    [Header("References for others classes")]
     [SerializeField] private UIManager m_uiManager;
+    [SerializeField] private Controller m_controller;
 
+    [Header("Audio clips")]
     [SerializeField] private AudioClip m_backgroundMusicClip;
+    [SerializeField] private AudioClip m_finalMusicClip;
     [SerializeField] private AudioClip m_correctAnswerClip;
     [SerializeField] private AudioClip m_incorrectAnswerClip;
 
@@ -18,15 +23,19 @@ public class SoundManager : MonoBehaviour
         m_sfxSource = gameObject.AddComponent<AudioSource>();
     }
 
+    private void OnEnable()
+    {
+        m_controller.OnQuestionAnswered += PlayAnswerSound;
+        m_uiManager.OnMusicSliderChanged += ChangeMusicVolume;
+        m_uiManager.OnSFXSliderChanged += ChangeSFXVolume;
+        m_controller.OnPlayFinalMusic += ChangeBackgroundMusic;
+    }
+
     private void Start()
     {
         m_musicSource.clip = m_backgroundMusicClip;
         m_musicSource.loop = true;
         m_musicSource.Play();
-
-        Controller.OnQuestionAnswered += PlayAnswerSound;
-        m_uiManager.OnMusicSliderChanged += ChangeMusicVolume;
-        m_uiManager.OnSFXSliderChanged += ChangeSFXVolume;
     }
 
     private void ChangeMusicVolume(float volume)
@@ -45,10 +54,51 @@ public class SoundManager : MonoBehaviour
         m_sfxSource.PlayOneShot(clipToPlay);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        Controller.OnQuestionAnswered -= PlayAnswerSound;
+        m_controller.OnQuestionAnswered -= PlayAnswerSound;
         m_uiManager.OnMusicSliderChanged -= ChangeMusicVolume;
         m_uiManager.OnSFXSliderChanged -= ChangeSFXVolume;
+        m_controller.OnPlayFinalMusic -= ChangeBackgroundMusic;
     }
+
+    public void ChangeBackgroundMusic()
+    {
+        StartCoroutine(FadeMusic());
+    }
+
+    private IEnumerator FadeMusic()
+    {
+        // Total fade music duration = 0.2f
+        // Show panel transition = 0.25f
+
+        float duration = 0.1f;
+        float currentTime = 0;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            float t = currentTime / duration;
+            m_musicSource.volume = Mathf.Lerp(1, 0, t);
+            
+            yield return null;
+        }
+
+        m_musicSource.Stop();
+        m_musicSource.clip = m_finalMusicClip;
+        m_musicSource.Play();
+
+        currentTime = 0f;
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            float t = currentTime / duration;
+            m_musicSource.volume = Mathf.Lerp(0, 1, t);
+
+            yield return null;
+        }
+
+        m_musicSource.loop = false;
+    }
+
 }

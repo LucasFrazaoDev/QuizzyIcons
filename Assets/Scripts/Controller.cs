@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,11 +10,14 @@ public class Controller : MonoBehaviour
     [SerializeField] private SaveManager m_saveManager;
     [SerializeField] private GameManager m_gameManager;
 
-    private int m_currentCounter;
+    private int m_currentCounter = 30;
     private bool m_counterStopped;
 
     public delegate void AnswerAction(bool wasCorrect);
-    public static event AnswerAction OnQuestionAnswered;
+    public event AnswerAction OnQuestionAnswered;
+
+    public delegate void PlayFinalMusic();
+    public event PlayFinalMusic OnPlayFinalMusic;
 
     public int CurrentCounter
     {
@@ -62,7 +64,8 @@ public class Controller : MonoBehaviour
 
     private void AllQuestionsFinished(int score)
     {
-        m_uiManager.AllQuestionsAnswered();
+        m_uiManager.AllQuestionsAnsweredFeedBack();
+        OnPlayFinalMusic?.Invoke();
         m_saveManager.SaveHighScore(score);
     }
 
@@ -80,7 +83,7 @@ public class Controller : MonoBehaviour
     public void LoadVolumeSettings()
     {
         (float musicVolume, float sfxVolume) = m_saveManager.LoadVolumePreferences();
-        m_uiManager.SetInitialVolume(musicVolume, sfxVolume);
+        m_uiManager.SetInitialVolume(ref musicVolume, ref sfxVolume);
     }
 
     public void Initialize()
@@ -145,7 +148,7 @@ public class Controller : MonoBehaviour
 
     private void ResetCounter()
     {
-        CurrentCounter = 20;
+        CurrentCounter = 30;
     }
 
     private IEnumerator UpdateCounter()

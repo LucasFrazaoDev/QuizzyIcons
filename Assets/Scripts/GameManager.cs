@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -74,6 +72,7 @@ public class GameManager : MonoBehaviour
         {
             // Finished all the questions
             FinishedAllQuestion?.Invoke(m_currentScore);
+            // Display correct question number when game is finished
             m_questionIndex = 9;
         }
     }

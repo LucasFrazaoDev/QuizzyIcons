@@ -15,6 +15,6 @@ MonoBehaviour:
   answer: ford
   displayAnswer: A Ford Automobile
   hints:
-  - It is changed the speed of life
-  - It was a technical inovation
-  - It was invented in the US
+  - It is changed the speed of life.
+  - It was a technical inovation.
+  - It was invented in the US.
