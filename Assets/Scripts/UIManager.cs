@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     private Label m_currentScoreLabel;
     private Label m_highScoreLabel;
     private Label m_pauseLabel;
+    private Label m_scoreFeedbackLabel;
 
     private Button m_openPausePanelButton;
     private Button m_closePausePanelButton;
@@ -60,6 +61,7 @@ public class UIManager : MonoBehaviour
     private const string K_CURRENT_SCORE_LABEL_NAME = "CurrentScoreLabel";
     private const string K_HIGHSCORE_LABEL_NAME = "HighScoreLabel";
     private const string K_PAUSE_LABEL_NAME = "PauseLabel";
+    private const string K_SCORE_FEEDBACK_LABEL_NAME = "ScoreFeedbackLabel";
 
     private const string K_OPEN_PAUSE_PANEL_BUTTON_NAME = "PauseButton";
     private const string K_CLOSE_PAUSE_PANEL_BUTTON_NAME = "ClosePausePanelButton";
@@ -75,6 +77,7 @@ public class UIManager : MonoBehaviour
 
     private const string K_GAME_FINISHED_TEXT = "GAME FINISHED!";
     private const string K_CLASS_TO_SHOW_PANEL_NAME = "ShowPanelTransition";
+    private const string K_CLASS_TO_SCORE_FEEDBACK_NAME = "RiseUpScoreFeedback";
 
     private void Awake()
     {
@@ -132,6 +135,7 @@ public class UIManager : MonoBehaviour
         m_currentScoreLabel = m_root.Q<Label>(K_CURRENT_SCORE_LABEL_NAME);
         m_highScoreLabel = m_root.Q<Label>(K_HIGHSCORE_LABEL_NAME);
         m_pauseLabel = m_root.Q<Label>(K_PAUSE_LABEL_NAME);
+        m_scoreFeedbackLabel = m_root.Q<Label>(K_SCORE_FEEDBACK_LABEL_NAME);
     }
 
     private void GetButtonsReference()
@@ -268,6 +272,30 @@ public class UIManager : MonoBehaviour
 
     #region LabelsMethods
     private void HideAnswerIndicator() => m_answerIndicator.style.visibility = Visibility.Hidden;
+
+    public void ShowPointsScored(int scoreToShow)
+    {
+        /*
+        TODO
+            1 - Fix the bug when active a transition after a element is display.Flex
+            2 - Add the color variation according to wrong/right answer
+         */
+        Debug.Log(scoreToShow);
+        m_scoreFeedbackLabel.text = scoreToShow.ToString();
+        m_scoreFeedbackLabel.style.display = DisplayStyle.Flex;
+
+
+        float duration = 0.3f;
+        float currentTime = 0f;
+
+        while (currentTime <= duration)
+            currentTime += Time.deltaTime;
+
+        m_scoreFeedbackLabel.AddToClassList(K_CLASS_TO_SCORE_FEEDBACK_NAME);
+
+        //m_scoreFeedbackLabel.style.display = DisplayStyle.None;
+        //m_scoreFeedbackLabel.RemoveFromClassList(K_CLASS_TO_SCORE_FEEDBACK_NAME);
+    }
     #endregion
 
     public void GiveAnswerFeedback(bool correct)

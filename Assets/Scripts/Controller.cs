@@ -42,7 +42,10 @@ public class Controller : MonoBehaviour
 
     private void OnEnable()
     {
+        ButtonsSignature();
+
         m_gameManager.OnAllQuestionFinished += AllQuestionsFinished;
+        m_gameManager.OnVisualFeedbackScore += ScoredPointsToShow;
     }
 
     private void Start()
@@ -56,7 +59,9 @@ public class Controller : MonoBehaviour
     private void OnDisable()
     {
         CancelButtonsSignature();
+
         m_gameManager.OnAllQuestionFinished -= AllQuestionsFinished;
+        m_gameManager.OnVisualFeedbackScore -= ScoredPointsToShow;
     }
 
     private void AllQuestionsFinished(int score)
@@ -64,6 +69,11 @@ public class Controller : MonoBehaviour
         m_uiManager.AllQuestionsAnsweredFeedBack();
         OnPlayFinalMusic?.Invoke();
         m_saveManager.SaveHighScore(score);
+    }
+
+    private void ScoredPointsToShow(int scoreToShow)
+    {
+        m_uiManager.ShowPointsScored(scoreToShow);
     }
 
     private void LoadHighScore()
@@ -87,7 +97,6 @@ public class Controller : MonoBehaviour
     {
         m_gameManager.InitializeGame();
         UpdateUI();
-        ButtonsSignature();
 
         ResetCounter();
         StartCoroutine(UpdateCounter());

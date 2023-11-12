@@ -77,3 +77,11 @@
     top: 10px;
     cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/CursorRed.png?fileID=2800000&guid=a94a6bdb42066124ba34ac0a0ae1d0ef&type=3#CursorRed');
 }
+
+.RiseUpScoreFeedback {
+    position: absolute;
+    translate: 0 -60px;
+    transition-duration: 1s;
+    transition-timing-function: ease-out-elastic;
+    opacity: 0;
+}
