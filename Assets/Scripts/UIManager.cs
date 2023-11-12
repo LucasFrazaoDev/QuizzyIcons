@@ -47,33 +47,34 @@ public class UIManager : MonoBehaviour
     private Slider m_sfxVolumeSlider;
 
     // UI elements names (string)
-    private const string M_SETTINGS_PANEL_NAME = "SettingsPanel";
-    private const string M_PAUSE_PANEL_NAME = "PausePanel";
+    private const string K_SETTINGS_PANEL_NAME = "SettingsPanel";
+    private const string K_PAUSE_PANEL_NAME = "PausePanel";
     private const string K_PANELS_CONTAINER_NAME = "PanelsContainer";
-    private const string M_DROPBOX = "DropBox";
+    private const string K_DROPBOX = "DropBox";
 
-    private const string M_HINT_LABEL_NAME = "HintLabel";
-    private const string M_HINT_NUMBER_LABEL_NAME = "HintNumberLabel";
-    private const string M_QUESTION_NUMBER_LABEL_NAME = "QuestionNumberLabel";
-    private const string M_TIME_LABEL_NAME = "TimerLabel";
-    private const string M_ANSWER_INDICATOR_NAME = "AnswerIndicatorLabel";
-    private const string M_CURRENT_SCORE_LABEL_NAME = "CurrentScoreLabel";
-    private const string M_HIGHSCORE_LABEL_NAME = "HighScoreLabel";
-    private const string M_PAUSE_LABEL_NAME = "PauseLabel";
+    private const string K_HINT_LABEL_NAME = "HintLabel";
+    private const string K_HINT_NUMBER_LABEL_NAME = "HintNumberLabel";
+    private const string K_QUESTION_NUMBER_LABEL_NAME = "QuestionNumberLabel";
+    private const string K_TIME_LABEL_NAME = "TimerLabel";
+    private const string K_ANSWER_INDICATOR_NAME = "AnswerIndicatorLabel";
+    private const string K_CURRENT_SCORE_LABEL_NAME = "CurrentScoreLabel";
+    private const string K_HIGHSCORE_LABEL_NAME = "HighScoreLabel";
+    private const string K_PAUSE_LABEL_NAME = "PauseLabel";
 
-    private const string M_OPEN_PAUSE_PANEL_BUTTON_NAME = "PauseButton";
-    private const string M_CLOSE_PAUSE_PANEL_BUTTON_NAME = "ClosePausePanelButton";
-    private const string M_OPEN_SETTINGS_PANEL_BUTTON_NAME = "OpenSettingsPanelButton";
-    private const string M_CLOSE_SETTINGS_PANEL_BUTTON_NAME = "CloseSettingsPanelButton";
-    private const string M_NEXT_HINT_BUTTON_NAME = "NextHintButton";
-    private const string M_NEXT_QUESTION_BUTTON_NAME = "NextQuestionButton";
-    private const string M_RESTART_GAME_BUTTON_NAME = "RestartGameButton";
-    private const string M_QUIT_GAME_BUTTON_NAME = "QuitGameButton";
+    private const string K_OPEN_PAUSE_PANEL_BUTTON_NAME = "PauseButton";
+    private const string K_CLOSE_PAUSE_PANEL_BUTTON_NAME = "ClosePausePanelButton";
+    private const string K_OPEN_SETTINGS_PANEL_BUTTON_NAME = "OpenSettingsPanelButton";
+    private const string K_CLOSE_SETTINGS_PANEL_BUTTON_NAME = "CloseSettingsPanelButton";
+    private const string K_NEXT_HINT_BUTTON_NAME = "NextHintButton";
+    private const string K_NEXT_QUESTION_BUTTON_NAME = "NextQuestionButton";
+    private const string K_RESTART_GAME_BUTTON_NAME = "RestartGameButton";
+    private const string K_QUIT_GAME_BUTTON_NAME = "QuitGameButton";
 
-    private const string M_MUSIC_VOLUME_SLIDER_NAME = "MusicVolumeSlider";
-    private const string M_SFX_VOLUME_SLIDER_NAME = "SFXVolumeSlider";
+    private const string K_MUSIC_VOLUME_SLIDER_NAME = "MusicVolumeSlider";
+    private const string K_SFX_VOLUME_SLIDER_NAME = "SFXVolumeSlider";
 
-    private const string M_GAME_FINISHED_TEXT = "GAME FINISHED!";
+    private const string K_GAME_FINISHED_TEXT = "GAME FINISHED!";
+    private const string K_CLASS_TO_SHOW_PANEL_NAME = "ShowPanelTransition";
 
     private void Awake()
     {
@@ -115,43 +116,49 @@ public class UIManager : MonoBehaviour
     #region GetReferences
     private void GetVisualElementsReference()
     {
-        m_settingsPanel = m_root.Q(M_SETTINGS_PANEL_NAME);
-        m_pausePanel = m_root.Q(M_PAUSE_PANEL_NAME);
-        m_dropBox = m_root.Q<VisualElement>(M_DROPBOX);
+        m_settingsPanel = m_root.Q(K_SETTINGS_PANEL_NAME);
+        m_pausePanel = m_root.Q(K_PAUSE_PANEL_NAME);
+        m_dropBox = m_root.Q<VisualElement>(K_DROPBOX);
         m_panelsContainer = m_root.Q<VisualElement>(K_PANELS_CONTAINER_NAME);
     }
 
     private void GetLabelsReference()
     {
-        m_hintLabel = m_root.Q<Label>(M_HINT_LABEL_NAME);
-        m_hintNumberLabel = m_root.Q<Label>(M_HINT_NUMBER_LABEL_NAME);
-        m_questionNumLabel = m_root.Q<Label>(M_QUESTION_NUMBER_LABEL_NAME);
-        m_timeLabel = m_root.Q<Label>(M_TIME_LABEL_NAME);
-        m_answerIndicator = m_root.Q<Label>(M_ANSWER_INDICATOR_NAME);
-        m_currentScoreLabel = m_root.Q<Label>(M_CURRENT_SCORE_LABEL_NAME);
-        m_highScoreLabel = m_root.Q<Label>(M_HIGHSCORE_LABEL_NAME);
-        m_pauseLabel = m_root.Q<Label>(M_PAUSE_LABEL_NAME);
+        m_hintLabel = m_root.Q<Label>(K_HINT_LABEL_NAME);
+        m_hintNumberLabel = m_root.Q<Label>(K_HINT_NUMBER_LABEL_NAME);
+        m_questionNumLabel = m_root.Q<Label>(K_QUESTION_NUMBER_LABEL_NAME);
+        m_timeLabel = m_root.Q<Label>(K_TIME_LABEL_NAME);
+        m_answerIndicator = m_root.Q<Label>(K_ANSWER_INDICATOR_NAME);
+        m_currentScoreLabel = m_root.Q<Label>(K_CURRENT_SCORE_LABEL_NAME);
+        m_highScoreLabel = m_root.Q<Label>(K_HIGHSCORE_LABEL_NAME);
+        m_pauseLabel = m_root.Q<Label>(K_PAUSE_LABEL_NAME);
     }
 
     private void GetButtonsReference()
     {
-        m_openPausePanelButton = m_root.Q<Button>(M_OPEN_PAUSE_PANEL_BUTTON_NAME);
-        m_closePausePanelButton = m_root.Q<Button>(M_CLOSE_PAUSE_PANEL_BUTTON_NAME);
+        m_openPausePanelButton = m_root.Q<Button>(K_OPEN_PAUSE_PANEL_BUTTON_NAME);
+        m_closePausePanelButton = m_root.Q<Button>(K_CLOSE_PAUSE_PANEL_BUTTON_NAME);
 
-        m_openSettingsPanelButton = m_root.Q<Button>(M_OPEN_SETTINGS_PANEL_BUTTON_NAME);
-        m_closeSettingsPanelButton = m_root.Q<Button>(M_CLOSE_SETTINGS_PANEL_BUTTON_NAME);
+        m_openSettingsPanelButton = m_root.Q<Button>(K_OPEN_SETTINGS_PANEL_BUTTON_NAME);
+        m_closeSettingsPanelButton = m_root.Q<Button>(K_CLOSE_SETTINGS_PANEL_BUTTON_NAME);
 
-        m_restartGameButton = m_root.Q<Button>(M_RESTART_GAME_BUTTON_NAME);
-        m_quitGameButton = m_root.Q<Button>(M_QUIT_GAME_BUTTON_NAME);
+        m_restartGameButton = m_root.Q<Button>(K_RESTART_GAME_BUTTON_NAME);
+        m_quitGameButton = m_root.Q<Button>(K_QUIT_GAME_BUTTON_NAME);
 
-        m_nextHintButton = m_root.Q<Button>(M_NEXT_HINT_BUTTON_NAME);
-        m_nextQuestionButton = m_root.Q<Button>(M_NEXT_QUESTION_BUTTON_NAME);
+        m_nextHintButton = m_root.Q<Button>(K_NEXT_HINT_BUTTON_NAME);
+        m_nextQuestionButton = m_root.Q<Button>(K_NEXT_QUESTION_BUTTON_NAME);
     }
 
     private void GetSlidersReference()
     {
-        m_musicVolumeSlider = m_root.Q<Slider>(M_MUSIC_VOLUME_SLIDER_NAME);
-        m_sfxVolumeSlider = m_root.Q<Slider>(M_SFX_VOLUME_SLIDER_NAME);
+        m_musicVolumeSlider = m_root.Q<Slider>(K_MUSIC_VOLUME_SLIDER_NAME);
+        m_sfxVolumeSlider = m_root.Q<Slider>(K_SFX_VOLUME_SLIDER_NAME);
+    }
+
+    public void SetInitialVolume(ref float musicVolume, ref float sfxVolume)
+    {
+        m_musicVolumeSlider.value = musicVolume;
+        m_sfxVolumeSlider.value = sfxVolume;
     }
     #endregion
 
@@ -183,6 +190,8 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            // the use of Invoke() to delay the call to ShowSettingsPanel its to ensure that the m_panelsContainer
+            // has fully transitioned to DisplayStyle.Flex before starting the animation and avoid unexpected behaviors.
             m_panelsContainer.style.display = DisplayStyle.Flex;
             Invoke(nameof(ShowPausePanel), 0.05f);
             ChangeGameState(true);
@@ -199,6 +208,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            // Same situation above
             m_panelsContainer.style.display = DisplayStyle.Flex;
             Invoke(nameof(ShowSettingsPanel), 0.05f);
             ChangeGameState(true);
@@ -207,12 +217,12 @@ public class UIManager : MonoBehaviour
 
     private void ShowSettingsPanel()
     {
-        m_settingsPanel.AddToClassList("ShowPanelTransition");
+        m_settingsPanel.AddToClassList(K_CLASS_TO_SHOW_PANEL_NAME);
     }
     
     private void ShowPausePanel()
     {
-        m_pausePanel.AddToClassList("ShowPanelTransition");
+        m_pausePanel.AddToClassList(K_CLASS_TO_SHOW_PANEL_NAME);
     }
 
     private void ChangeGameState(bool isPaused)
@@ -222,7 +232,7 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator HidePanel(VisualElement panel)
     {
-        panel.RemoveFromClassList("ShowPanelTransition");
+        panel.RemoveFromClassList(K_CLASS_TO_SHOW_PANEL_NAME);
         yield return new WaitForSeconds(0.25f);
         panel.parent.style.display = DisplayStyle.None;
     }
@@ -243,8 +253,6 @@ public class UIManager : MonoBehaviour
     {
         m_musicVolumeSlider.RegisterValueChangedCallback(MusicSliderCallback);
         m_sfxVolumeSlider.RegisterValueChangedCallback(SfxSliderCallback);
-
-        //(float initialMusicVolume, float initialSfxVolume) = m_controller.
     }
 
     private void MusicSliderCallback(ChangeEvent<float> e)
@@ -305,7 +313,7 @@ public class UIManager : MonoBehaviour
         ChangeGameState(true);
 
         m_closePausePanelButton.style.display = DisplayStyle.None;
-        m_pauseLabel.text = M_GAME_FINISHED_TEXT;
+        m_pauseLabel.text = K_GAME_FINISHED_TEXT;
     }
 
     public void SetTimer(string seconds)
@@ -336,11 +344,5 @@ public class UIManager : MonoBehaviour
     public void SetHighScore(int highScore)
     {
         m_highScoreLabel.text = "Highscore: " + highScore.ToString();
-    }
-
-    public void SetInitialVolume(ref float musicVolume,ref float sfxVolume)
-    {
-        m_musicVolumeSlider.value = musicVolume;
-        m_sfxVolumeSlider.value = sfxVolume;
     }
 }

@@ -55,3 +55,25 @@
     transition-duration: 0.25s;
     position: absolute;
 }
+
+#unity-tracker {
+    background-color: rgb(0, 0, 0);
+}
+
+#unity-dragger {
+    background-image: url('project://database/Assets/FreeButtonSet/Textures/buttons/button_round_130.png?fileID=2800000&guid=0dcdf5b7debd4ba4492217e4975c965e&type=3#button_round_130');
+    -unity-background-scale-mode: stretch-to-fill;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center;
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    top: 10px;
+    cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/CursorRed.png?fileID=2800000&guid=a94a6bdb42066124ba34ac0a0ae1d0ef&type=3#CursorRed');
+}

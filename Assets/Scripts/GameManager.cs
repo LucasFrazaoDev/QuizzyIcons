@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public delegate void AllQuestionsAnswered(int score);
-    public event AllQuestionsAnswered FinishedAllQuestion;
+    public event AllQuestionsAnswered OnAllQuestionFinished;
 
     [SerializeField] private List<Question> m_questions = new List<Question>();
 
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         else
         {
             // Finished all the questions
-            FinishedAllQuestion?.Invoke(m_currentScore);
+            OnAllQuestionFinished?.Invoke(m_currentScore);
             // Display correct question number when game is finished
             m_questionIndex = 9;
         }
@@ -88,8 +88,5 @@ public class GameManager : MonoBehaviour
 
     public int GetCurrentScore() { return m_currentScore; }
 
-    private void SetCurrentScore(int score)
-    {
-        m_currentScore += score;
-    }
+    private void SetCurrentScore(int score) { m_currentScore += score; }
 }

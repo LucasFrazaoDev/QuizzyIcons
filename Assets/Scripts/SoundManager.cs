@@ -8,9 +8,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private UIManager m_uiManager;
     [SerializeField] private Controller m_controller;
 
-    [Header("Audio clips")]
+    [Header("Musics Audio clips")]
     [SerializeField] private AudioClip m_backgroundMusicClip;
     [SerializeField] private AudioClip m_finalMusicClip;
+
+    [Header("SFX Audio clips")]
     [SerializeField] private AudioClip m_correctAnswerClip;
     [SerializeField] private AudioClip m_incorrectAnswerClip;
 
@@ -27,7 +29,7 @@ public class SoundManager : MonoBehaviour
     {
         m_controller.OnQuestionAnswered += PlayAnswerSound;
         m_uiManager.OnMusicSliderChanged += ChangeMusicVolume;
-        m_uiManager.OnSFXSliderChanged += ChangeSFXVolume;
+        m_uiManager.OnSFXSliderChanged += ChangeSfxVolume;
         m_controller.OnPlayFinalMusic += ChangeBackgroundMusic;
     }
 
@@ -38,12 +40,20 @@ public class SoundManager : MonoBehaviour
         m_musicSource.Play();
     }
 
+    private void OnDisable()
+    {
+        m_controller.OnQuestionAnswered -= PlayAnswerSound;
+        m_uiManager.OnMusicSliderChanged -= ChangeMusicVolume;
+        m_uiManager.OnSFXSliderChanged -= ChangeSfxVolume;
+        m_controller.OnPlayFinalMusic -= ChangeBackgroundMusic;
+    }
+
     private void ChangeMusicVolume(float volume)
     {
         m_musicSource.volume = volume;
     }
 
-    private void ChangeSFXVolume(float volume)
+    private void ChangeSfxVolume(float volume)
     {
         m_sfxSource.volume = volume;
     }
@@ -52,14 +62,6 @@ public class SoundManager : MonoBehaviour
     {
         AudioClip clipToPlay = wasCorrect ? m_correctAnswerClip : m_incorrectAnswerClip;
         m_sfxSource.PlayOneShot(clipToPlay);
-    }
-
-    private void OnDisable()
-    {
-        m_controller.OnQuestionAnswered -= PlayAnswerSound;
-        m_uiManager.OnMusicSliderChanged -= ChangeMusicVolume;
-        m_uiManager.OnSFXSliderChanged -= ChangeSFXVolume;
-        m_controller.OnPlayFinalMusic -= ChangeBackgroundMusic;
     }
 
     public void ChangeBackgroundMusic()

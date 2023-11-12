@@ -5,19 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
-    private UIManager m_uiManager;
-
-    [SerializeField] private SaveManager m_saveManager;
-    [SerializeField] private GameManager m_gameManager;
-
-    private int m_currentCounter = 30;
-    private bool m_counterStopped;
-
     public delegate void AnswerAction(bool wasCorrect);
     public event AnswerAction OnQuestionAnswered;
 
     public delegate void PlayFinalMusic();
     public event PlayFinalMusic OnPlayFinalMusic;
+
+    private UIManager m_uiManager;
+    [SerializeField] private SaveManager m_saveManager;
+    [SerializeField] private GameManager m_gameManager;
+
+    private int m_currentCounter = 30;
+    private bool m_counterStopped;
 
     public int CurrentCounter
     {
@@ -43,10 +42,8 @@ public class Controller : MonoBehaviour
 
     private void OnEnable()
     {
-        m_gameManager.FinishedAllQuestion += AllQuestionsFinished;
+        m_gameManager.OnAllQuestionFinished += AllQuestionsFinished;
     }
-
-    
 
     private void Start()
     {
@@ -59,7 +56,7 @@ public class Controller : MonoBehaviour
     private void OnDisable()
     {
         CancelButtonsSignature();
-        m_gameManager.FinishedAllQuestion -= AllQuestionsFinished;
+        m_gameManager.OnAllQuestionFinished -= AllQuestionsFinished;
     }
 
     private void AllQuestionsFinished(int score)
