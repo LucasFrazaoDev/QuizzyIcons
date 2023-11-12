@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
     private Label m_currentScoreLabel;
     private Label m_highScoreLabel;
     private Label m_pauseLabel;
+    private Label m_showScoreFinalPanelLabel;
     private Label m_scoreFeedbackLabel;
 
     private Button m_openPausePanelButton;
@@ -61,6 +62,7 @@ public class UIManager : MonoBehaviour
     private const string K_CURRENT_SCORE_LABEL_NAME = "CurrentScoreLabel";
     private const string K_HIGHSCORE_LABEL_NAME = "HighScoreLabel";
     private const string K_PAUSE_LABEL_NAME = "PauseLabel";
+    private const string K_SHOW_FINAL_SCORE_LABEL_NAME = "ShowScoreFinalPanelLabel";
     private const string K_SCORE_FEEDBACK_LABEL_NAME = "ScoreFeedbackLabel";
 
     private const string K_OPEN_PAUSE_PANEL_BUTTON_NAME = "PauseButton";
@@ -125,6 +127,7 @@ public class UIManager : MonoBehaviour
         m_currentScoreLabel = m_root.Q<Label>(K_CURRENT_SCORE_LABEL_NAME);
         m_highScoreLabel = m_root.Q<Label>(K_HIGHSCORE_LABEL_NAME);
         m_pauseLabel = m_root.Q<Label>(K_PAUSE_LABEL_NAME);
+        m_showScoreFinalPanelLabel = m_root.Q<Label>(K_SHOW_FINAL_SCORE_LABEL_NAME);
         m_scoreFeedbackLabel = m_root.Q<Label>(K_SCORE_FEEDBACK_LABEL_NAME);
     }
 
@@ -207,16 +210,6 @@ public class UIManager : MonoBehaviour
             Invoke(nameof(ShowSettingsPanel), 0.05f);
             ChangeGameState(true);
         }
-    }
-
-    private void ShowSettingsPanel()
-    {
-        m_settingsPanel.AddToClassList(K_CLASS_TO_SHOW_PANEL_NAME);
-    }
-    
-    private void ShowPausePanel()
-    {
-        m_pausePanel.AddToClassList(K_CLASS_TO_SHOW_PANEL_NAME);
     }
 
     private void ChangeGameState(bool isPaused)
@@ -330,6 +323,16 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region VisualFeedbackMethods
+    private void ShowSettingsPanel()
+    {
+        m_settingsPanel.AddToClassList(K_CLASS_TO_SHOW_PANEL_NAME);
+    }
+
+    private void ShowPausePanel()
+    {
+        m_pausePanel.AddToClassList(K_CLASS_TO_SHOW_PANEL_NAME);
+    }
+
     public void GiveAnswerFeedback(bool correct)
     {
         m_answerIndicator.style.visibility = Visibility.Visible;
@@ -351,7 +354,7 @@ public class UIManager : MonoBehaviour
             m_dropBox.RemoveAt(0);
     }
 
-    public void AllQuestionsAnsweredFeedBack()
+    public void AllQuestionsAnsweredFeedBack(int finalScore)
     {
         // Reusing the pause panel to show finish game
         m_panelsContainer.style.display = DisplayStyle.Flex;
@@ -360,6 +363,9 @@ public class UIManager : MonoBehaviour
 
         m_closePausePanelButton.style.display = DisplayStyle.None;
         m_pauseLabel.text = K_GAME_FINISHED_TEXT;
+
+        ShowScoreInFinalPanel(finalScore);
+        m_showScoreFinalPanelLabel.style.display = DisplayStyle.Flex;
     }
     #endregion
 
@@ -392,6 +398,11 @@ public class UIManager : MonoBehaviour
     public void SetHighScore(int highScore)
     {
         m_highScoreLabel.text = "Highscore: " + highScore.ToString();
+    }
+
+    public void ShowScoreInFinalPanel(int finalScore)
+    {
+        m_showScoreFinalPanelLabel.text = "Your score: " + finalScore.ToString();
     }
     #endregion
 }

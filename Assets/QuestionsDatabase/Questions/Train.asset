@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answer: train
   hints:
-  - The first recorded use of this transportation method dates back to the early
-    19th century, revolutionizing travel and trade.
-  - Transport romanticized in literature, music, and film, often symbolizing journeys,
-    adventures, or significant life changes.
+  - The first recorded use of this transport dates back to the early 19th century,
+    revolutionizing travel and trade.
+  - Transport romanticized in literature, music, and film, often symbolizing adventurous.
   - This mode of transportation operates on tracks and is widely used for both passenger
-    and cargo services around the world.
+    and cargo services.

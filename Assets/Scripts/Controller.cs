@@ -66,7 +66,7 @@ public class Controller : MonoBehaviour
 
     private void AllQuestionsFinished(int score)
     {
-        m_uiManager.AllQuestionsAnsweredFeedBack();
+        m_uiManager.AllQuestionsAnsweredFeedBack(score);
         OnPlayFinalMusic?.Invoke();
         m_saveManager.SaveHighScore(score);
     }
@@ -96,7 +96,7 @@ public class Controller : MonoBehaviour
     public void Initialize()
     {
         m_gameManager.InitializeGame();
-        UpdateUI();
+        UpdateUI(true);
 
         ResetCounter();
         StartCoroutine(UpdateCounter());
@@ -105,14 +105,14 @@ public class Controller : MonoBehaviour
     public void NextHint()
     {
         m_gameManager.ShowNextHint();
-        UpdateUI(true);
+        UpdateUI();
         OnQuestionAnswered?.Invoke(false);
     }
 
     public void HandleWrongAnswer()
     {
         m_gameManager.HandleWrongtAnswer();
-        UpdateUI(true);
+        UpdateUI();
         ResetCounter();
         OnQuestionAnswered?.Invoke(false);
     }
@@ -137,14 +137,14 @@ public class Controller : MonoBehaviour
         m_uiManager.GiveAnswerFeedback(answerCorrect);
     }
 
-    public void UpdateUI(bool isButtonClicked = false)
+    public void UpdateUI(bool isStartingGame = false)
     {
         m_uiManager.SetHint(m_gameManager.GetCurrentHint());
         m_uiManager.SetHintNumber(m_gameManager.GetCurrentHintNum());
         m_uiManager.SetQuestionNumber(m_gameManager.GetCurrentQuestionNum());
         m_uiManager.SetCurrentScore(m_gameManager.GetCurrentScore());
 
-        if (isButtonClicked) m_uiManager.ToogleOnOffButtons();
+        if (!isStartingGame) m_uiManager.ToogleOnOffButtons();
     }
 
     public List<Question> GetAllQuestions()
