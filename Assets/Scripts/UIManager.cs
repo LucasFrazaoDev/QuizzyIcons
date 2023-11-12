@@ -102,18 +102,8 @@ public class UIManager : MonoBehaviour
 
     private void OnDisable()
     {
-        m_nextHintButton.clicked -= m_controller.NextHint;
-
-        m_openPausePanelButton.clicked -= TogglePausePanel;
-        m_closePausePanelButton.clicked -= TogglePausePanel;
-
-        m_openSettingsPanelButton.clicked -= ToggleSettingsPanel;
-        m_closeSettingsPanelButton.clicked -= ToggleSettingsPanel;
-
-        m_restartGameButton.clicked -= HandleRestartGameButton;
-
-        m_musicVolumeSlider.UnregisterValueChangedCallback(MusicSliderCallback);
-        m_sfxVolumeSlider.UnregisterValueChangedCallback(SfxSliderCallback);
+        ClearButtonsSignature();
+        ClearSlidersSignature();
     }
 
     #region GetReferences
@@ -250,6 +240,33 @@ public class UIManager : MonoBehaviour
     {
         OnQuitGameButtonClicked?.Invoke();
     }
+
+    public void ToogleOnOffButtons()
+    {
+        StartCoroutine(DisableEnableButtons());
+    }
+
+    private IEnumerator DisableEnableButtons()
+    {
+        m_nextHintButton.SetEnabled(false);
+        m_nextQuestionButton.SetEnabled(false);
+        yield return new WaitForSeconds(1.5f);
+        m_nextHintButton.SetEnabled(true);
+        m_nextQuestionButton.SetEnabled(true);
+    }
+
+    private void ClearButtonsSignature()
+    {
+        m_nextHintButton.clicked -= m_controller.NextHint;
+
+        m_openPausePanelButton.clicked -= TogglePausePanel;
+        m_closePausePanelButton.clicked -= TogglePausePanel;
+
+        m_openSettingsPanelButton.clicked -= ToggleSettingsPanel;
+        m_closeSettingsPanelButton.clicked -= ToggleSettingsPanel;
+
+        m_restartGameButton.clicked -= HandleRestartGameButton;
+    }
     #endregion
 
     #region SlidersMethods
@@ -268,36 +285,51 @@ public class UIManager : MonoBehaviour
     {
         OnSFXSliderChanged?.Invoke(e.newValue);
     }
+
+    private void ClearSlidersSignature()
+    {
+        m_musicVolumeSlider.UnregisterValueChangedCallback(MusicSliderCallback);
+        m_sfxVolumeSlider.UnregisterValueChangedCallback(SfxSliderCallback);
+    }
     #endregion
 
     #region LabelsMethods
     private void HideAnswerIndicator() => m_answerIndicator.style.visibility = Visibility.Hidden;
 
-    public void ShowPointsScored(int scoreToShow)
+    public void ShowPointsScored(int scoreToShow, bool changeScoreFeedback)
     {
-        /*
-        TODO
-            1 - Fix the bug when active a transition after a element is display.Flex
-            2 - Add the color variation according to wrong/right answer
-         */
-        Debug.Log(scoreToShow);
-        m_scoreFeedbackLabel.text = scoreToShow.ToString();
+        //m_scoreFeedbackLabel.text = scoreToShow.ToString();
+        m_scoreFeedbackLabel.text = (scoreToShow > 0) ? $"+{scoreToShow}" : scoreToShow.ToString();
+
+        StyleColor colorCorrect = new StyleColor(new Color32(0, 132, 19, 255));
+        StyleColor colorWrong = new StyleColor(new Color32(132, 0, 19, 255));
+        m_scoreFeedbackLabel.style.color = changeScoreFeedback ? colorCorrect : colorWrong;
+
         m_scoreFeedbackLabel.style.display = DisplayStyle.Flex;
 
+        StartCoroutine(ShowScoreFeedback());
+    }
 
-        float duration = 0.3f;
-        float currentTime = 0f;
+    private IEnumerator ShowScoreFeedback()
+    {
+        float transitionDuration = 0.05f;
+        float displayDuration = 1f;
 
-        while (currentTime <= duration)
-            currentTime += Time.deltaTime;
+        // Wait to fully transition to Flex state
+        yield return new WaitForSeconds(transitionDuration);
 
         m_scoreFeedbackLabel.AddToClassList(K_CLASS_TO_SCORE_FEEDBACK_NAME);
 
-        //m_scoreFeedbackLabel.style.display = DisplayStyle.None;
-        //m_scoreFeedbackLabel.RemoveFromClassList(K_CLASS_TO_SCORE_FEEDBACK_NAME);
+        // Exibition duration of the score
+        yield return new WaitForSeconds(displayDuration);
+
+        m_scoreFeedbackLabel.RemoveFromClassList(K_CLASS_TO_SCORE_FEEDBACK_NAME);
+        m_scoreFeedbackLabel.style.display = DisplayStyle.None;
     }
+
     #endregion
 
+    #region VisualFeedbackMethods
     public void GiveAnswerFeedback(bool correct)
     {
         m_answerIndicator.style.visibility = Visibility.Visible;
@@ -319,20 +351,6 @@ public class UIManager : MonoBehaviour
             m_dropBox.RemoveAt(0);
     }
 
-    public void ToogleOnOffButtons()
-    {
-        StartCoroutine(DisableEnableButtons());
-    }
-
-    private IEnumerator DisableEnableButtons()
-    {
-        m_nextHintButton.SetEnabled(false);
-        m_nextQuestionButton.SetEnabled(false);
-        yield return new WaitForSeconds(1.5f);
-        m_nextHintButton.SetEnabled(true);
-        m_nextQuestionButton.SetEnabled(true);
-    }
-
     public void AllQuestionsAnsweredFeedBack()
     {
         // Reusing the pause panel to show finish game
@@ -343,7 +361,9 @@ public class UIManager : MonoBehaviour
         m_closePausePanelButton.style.display = DisplayStyle.None;
         m_pauseLabel.text = K_GAME_FINISHED_TEXT;
     }
+    #endregion
 
+    #region StringTextsMethods
     public void SetTimer(string seconds)
     {
         m_timeLabel.text = "Time remaining: " + seconds + " seconds";
@@ -373,4 +393,5 @@ public class UIManager : MonoBehaviour
     {
         m_highScoreLabel.text = "Highscore: " + highScore.ToString();
     }
+    #endregion
 }

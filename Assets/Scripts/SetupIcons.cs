@@ -24,7 +24,7 @@ public class SetupIcons
 
         foreach (Question question in questions)
         {
-            VisualElement questionIcon = root.Query<VisualElement>("IconsBoard").Children<VisualElement>().AtIndex(currentIconIndex);
+            VisualElement questionIcon = root.Query<VisualElement>(K_ICONS_BOARD_NAME).Children<VisualElement>().AtIndex(currentIconIndex);
             questionIcon.style.backgroundImage = Resources.Load<Texture2D>("img/" + question.answer);
             questionIcon.userData = question;
 

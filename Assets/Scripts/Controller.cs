@@ -71,9 +71,9 @@ public class Controller : MonoBehaviour
         m_saveManager.SaveHighScore(score);
     }
 
-    private void ScoredPointsToShow(int scoreToShow)
+    private void ScoredPointsToShow(int scoreToShow, bool changeScoreFeedback)
     {
-        m_uiManager.ShowPointsScored(scoreToShow);
+        m_uiManager.ShowPointsScored(scoreToShow, changeScoreFeedback);
     }
 
     private void LoadHighScore()

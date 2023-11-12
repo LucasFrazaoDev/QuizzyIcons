@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     public delegate void AllQuestionsAnswered(int score);
     public event AllQuestionsAnswered OnAllQuestionFinished;
 
-    public delegate void VisualFeedbackScore(int scoreFeedback);
+    public delegate void VisualFeedbackScore(int scoreFeedback, bool changeScoreFeedback);
     public event VisualFeedbackScore OnVisualFeedbackScore;
 
     [SerializeField] private List<Question> m_questions = new List<Question>();
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private int m_hintPenaltyScore = -4;
     private int m_questionPenaltyScore = -5;
-    private int m_successScore = 15;
+    private int m_successScore = +15;
 
 
     public List<Question> Questions { get => m_questions; set => m_questions = value; }
@@ -39,14 +39,14 @@ public class GameManager : MonoBehaviour
     public void HandleCorrectAnswer()
     {
         SetCurrentScore(m_successScore);
-        OnVisualFeedbackScore?.Invoke(m_successScore);
+        OnVisualFeedbackScore?.Invoke(m_successScore, true);
         NextQuestion();
     }
 
     public void HandleWrongtAnswer()
     {
         SetCurrentScore(m_questionPenaltyScore);
-        OnVisualFeedbackScore?.Invoke(m_questionPenaltyScore);
+        OnVisualFeedbackScore?.Invoke(m_questionPenaltyScore, false);
         NextQuestion();
     }
 
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         {
             SetCurrentScore(m_hintPenaltyScore);
             m_currentHint = m_currentQuestion.GetHints()[++m_hintIndex];
-            OnVisualFeedbackScore?.Invoke(m_hintPenaltyScore);
+            OnVisualFeedbackScore?.Invoke(m_hintPenaltyScore, false);
         }
         else
             NextQuestion();
