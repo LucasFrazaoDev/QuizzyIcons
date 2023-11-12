@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
-  m_Name: 10_Question_EmpireState
+  m_Name: EgypthPiramids
   m_EditorClassIdentifier: 
-  answer: empireState
-  displayAnswer: 
+  answer: pyramid
   hints:
-  - The building's construction was completed during the Great Depression.
-  - It was once the tallest building in the world.
-  - It was prominently featured in the classic film "King Kong"!
+  - The exact method of how these massive structures were built is still a subject
+    of debate among archaeologists and historians.
+  - This buildings were meticulously aligned with constellations and cardinal points.
+  - These ancient structures are located along the Nile River.

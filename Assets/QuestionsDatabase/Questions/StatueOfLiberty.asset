@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
-  m_Name: 08_Question_Barcelona
+  m_Name: StatueOfLiberty
   m_EditorClassIdentifier: 
-  answer: barcelona
+  answer: statueOfLiberty
   displayAnswer: 
   hints:
-  - The city is known for its beautiful beaches and a lively Mediterranean coastline.
-  - It is famous for its unique and breathtaking architecture.
-  - This vibrant city is the capital of Catalonia.
+  - It is often associated with the welcoming of immigrants.
+  - This colossal sculpture was a gift from France to the United States.
+  - It stands on Liberty Island and is a symbol of freedom and democracy.

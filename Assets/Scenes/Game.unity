@@ -338,17 +338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0180e86ad4bd24698151c3f4b8629a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_questions:
-  - {fileID: 11400000, guid: dc87d18eba8f79f498379f46766f273d, type: 2}
-  - {fileID: 11400000, guid: 8c4f9d5bd6338d44ab5fd75e53c649f4, type: 2}
-  - {fileID: 11400000, guid: fbc34b96e5bb34c469c7b376b010120e, type: 2}
-  - {fileID: 11400000, guid: 8c112ba47ad22d14dba3287d6d207d3c, type: 2}
-  - {fileID: 11400000, guid: 88766a4e44c057a4fa06beaff6b855c9, type: 2}
-  - {fileID: 11400000, guid: 4cb880b2324a4cb46a6d97293f6a2a4c, type: 2}
-  - {fileID: 11400000, guid: e402eeb01fe53fe4d99e71798058f749, type: 2}
-  - {fileID: 11400000, guid: 87546eb103a55794eaff84a7edad3d27, type: 2}
-  - {fileID: 11400000, guid: 2af9f51e9a3cae948823213aa8860d77, type: 2}
-  - {fileID: 11400000, guid: 3721c74ffa59f6540aa20d493c686ff4, type: 2}
+  m_questionsDatabase: {fileID: 11400000, guid: 3009323ebda998a48bbb994424823a2d, type: 2}
+  m_quizQuestions: []
 --- !u!4 &1220991900
 Transform:
   m_ObjectHideFlags: 0

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
-  m_Name: 05_Question_Lightbulb
+  m_Name: Barcelona
   m_EditorClassIdentifier: 
-  answer: lightbulb
+  answer: barcelona
   displayAnswer: 
   hints:
-  - Used when you have a bright idea.
-  - Invention in the late 19th century.
-  - This invention revolutionized the way we illuminate our surroundings.
+  - The city is known for its beautiful beaches and a lively Mediterranean coastline.
+  - It is famous for its unique and breathtaking architecture.
+  - This vibrant city is the capital of Catalonia.

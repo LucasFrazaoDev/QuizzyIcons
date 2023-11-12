@@ -15,7 +15,7 @@ public class Controller : MonoBehaviour
     [SerializeField] private SaveManager m_saveManager;
     [SerializeField] private GameManager m_gameManager;
 
-    private int m_currentCounter = 30;
+    private int m_currentCounter = 25;
     private bool m_counterStopped;
 
     public int CurrentCounter

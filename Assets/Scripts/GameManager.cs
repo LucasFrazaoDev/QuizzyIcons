@@ -9,11 +9,13 @@ public class GameManager : MonoBehaviour
     public delegate void VisualFeedbackScore(int scoreFeedback, bool changeScoreFeedback);
     public event VisualFeedbackScore OnVisualFeedbackScore;
 
-    [SerializeField] private List<Question> m_questions = new List<Question>();
+    private int m_numberOfQuizQuestions = 10;
+    [SerializeField] private QuestionsDatabase m_questionsDatabase;
+    [SerializeField] private List<Question> m_quizQuestions = new List<Question>();
 
     private Question m_currentQuestion;
-    private string m_currentHint;
 
+    private string m_currentHint;
     private int m_questionIndex = 0;
     private int m_hintIndex = 0;
     private int m_currentScore = 0;
@@ -23,7 +25,27 @@ public class GameManager : MonoBehaviour
     private int m_successScore = +15;
 
 
-    public List<Question> Questions { get => m_questions; set => m_questions = value; }
+    public List<Question> Questions { get => m_quizQuestions; set => m_quizQuestions = value; }
+
+    private void OnEnable()
+    {
+        SelectRandomQuestions();
+    }
+
+    private void SelectRandomQuestions()
+    {
+        List<Question> availableQuestions = new List<Question>(m_questionsDatabase.questions);
+
+        for (int i = 0; i < m_numberOfQuizQuestions && availableQuestions.Count > 0; i++)
+        {
+            int randomIndex = Random.Range(0, availableQuestions.Count);
+            Question selectedQuestion = availableQuestions[randomIndex];
+            m_quizQuestions.Add(selectedQuestion);
+
+            // Remove the selected question to avoid repetition
+            availableQuestions.RemoveAt(randomIndex);
+        }
+    }
 
     public void InitializeGame()
     {

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
-  m_Name: 07_Question_StatueOfLiberty
+  m_Name: Disney
   m_EditorClassIdentifier: 
-  answer: statueOfLiberty
+  answer: disney
   displayAnswer: 
   hints:
-  - It is often associated with the welcoming of immigrants.
-  - This colossal sculpture was a gift from France to the United States.
-  - It stands on Liberty Island and is a symbol of freedom and democracy.
+  - Located in the US.
+  - It was founded by two brothers.
+  - '"The Happiest Place on Earth" is a common nickname!'
