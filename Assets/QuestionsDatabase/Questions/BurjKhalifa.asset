@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
+  m_Name: BurjKhalifa
+  m_EditorClassIdentifier: 
+  answer: burjKhalifa
+  hints:
+  - Designed by the renowned architect Adrian Smith, it stands as a symbol of modern
+    architecture and engineering innovation.
+  - It offers observation decks on higher floors, providing breathtaking panoramic
+    views of Dubai's skyline and the surrounding landscape.
+  - Located in Dubai, United Arab Emirates, is the world's tallest skyscraper, soaring
+    to an impressive height.

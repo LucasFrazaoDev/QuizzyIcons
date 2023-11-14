@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
-  m_Name: Lightbulb
+  m_Name: AngkorWat
   m_EditorClassIdentifier: 
-  answer: lightbulb
+  answer: angkorWat
   hints:
-  - Invention in the late 19th century.
-  - This invention revolutionized the way we illuminate our surroundings.
-  - Used when you have a bright idea.
+  - It is the largest religious monument in the world.
+  - The temple is renowned for its intricate carvings depicting Hindu epics, celestial
+    dancers, and other mythological scenes.
+  - It is admired for its architectural symmetry and harmonious design.

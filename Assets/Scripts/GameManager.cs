@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour
     private int m_hintIndex = 0;
     private int m_currentScore = 0;
 
-    private int m_hintPenaltyScore = -4;
-    private int m_questionPenaltyScore = -5;
-    private int m_successScore = +15;
+    private int m_hintPenaltyScore = -6;
+    private int m_failedPenaltyScore = -7;
+    private int m_successScore = 20;
 
 
     public List<Question> Questions { get => m_quizQuestions; set => m_quizQuestions = value; }
@@ -67,8 +67,8 @@ public class GameManager : MonoBehaviour
 
     public void HandleWrongtAnswer()
     {
-        SetCurrentScore(m_questionPenaltyScore);
-        OnVisualFeedbackScore?.Invoke(m_questionPenaltyScore, false);
+        SetCurrentScore(m_failedPenaltyScore);
+        OnVisualFeedbackScore?.Invoke(m_failedPenaltyScore, false);
         NextQuestion();
     }
 

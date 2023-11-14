@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
-  m_Name: Questions_Arc
+  m_Name: MountEverest
   m_EditorClassIdentifier: 
-  answer: arc
-  displayAnswer: 
+  answer: mountEverest
   hints:
-  - ' It''s situated in the city of love and is one of the most famous icons in its
-    urban landscape.'
-  - The monument honors the achievements of a famous French general who is widely
-    associated with this structure.
-  - This monument was built to commemorate military victories.
+  - Is a symbol of human determination and the desire to conquer seemingly insurmountable
+    challenges.
+  - Situated in the Himalayas on the border between Nepal and Tibet.
+  - Is the world's highest mountain.

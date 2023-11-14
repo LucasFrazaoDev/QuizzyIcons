@@ -97,6 +97,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        InitializeIcons();
         InitializeButtons();
         InitializeSliders();
         HideAnswerIndicator();
@@ -106,6 +107,12 @@ public class UIManager : MonoBehaviour
     {
         ClearButtonsSignature();
         ClearSlidersSignature();
+    }
+
+    private void InitializeIcons()
+    {
+        SetupIcons.InitializeDragDrop(m_root, m_controller);
+        SetupIcons.InitializeIcons(m_root, m_controller.GetAllQuestions());
     }
 
     #region GetReferences
@@ -162,9 +169,6 @@ public class UIManager : MonoBehaviour
     #region ButtonsMethods
     public void InitializeButtons()
     {
-        SetupIcons.InitializeDragDrop(m_root, m_controller);
-        SetupIcons.InitializeIcons(m_root, m_controller.GetAllQuestions());
-
         m_nextHintButton.clicked += m_controller.NextHint;
         m_nextQuestionButton.clicked += m_controller.HandleWrongAnswer;
 
@@ -291,7 +295,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowPointsScored(int scoreToShow, bool changeScoreFeedback)
     {
-        //m_scoreFeedbackLabel.text = scoreToShow.ToString();
         m_scoreFeedbackLabel.text = (scoreToShow > 0) ? $"+{scoreToShow}" : scoreToShow.ToString();
 
         StyleColor colorCorrect = new StyleColor(new Color32(0, 132, 19, 255));
@@ -402,7 +405,11 @@ public class UIManager : MonoBehaviour
 
     public void ShowScoreInFinalPanel(int finalScore)
     {
-        m_showScoreFinalPanelLabel.text = "Your score: " + finalScore.ToString();
+        if(finalScore < 200)
+            m_showScoreFinalPanelLabel.text = "Your score: " + finalScore.ToString();
+        else
+            m_showScoreFinalPanelLabel.text = $"Unbeatable!\nPerfect score: {finalScore}";
+
     }
     #endregion
 }

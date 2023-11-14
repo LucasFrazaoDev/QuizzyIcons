@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
-  m_Name: Ford
+  m_Name: Telephone
   m_EditorClassIdentifier: 
-  answer: ford
-  displayAnswer: A Ford Automobile
+  answer: telephone
   hints:
-  - It is changed the speed of life.
-  - It was a technical inovation.
-  - It was invented in the US.
+  - Over time, it has evolved significantly, transitioning from analog models to
+    digital ones.
+  - It was was invented by Alexander Graham Bell, a Scottish-American scientist and
+    inventor.
+  - enabled the transmission of voice over a distance, revolutionizing communications.

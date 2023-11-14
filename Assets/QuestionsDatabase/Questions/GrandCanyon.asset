@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
-  m_Name: Lightbulb
+  m_Name: GrandCanyon
   m_EditorClassIdentifier: 
-  answer: lightbulb
+  answer: grandCanyon
   hints:
-  - Invention in the late 19th century.
-  - This invention revolutionized the way we illuminate our surroundings.
-  - Used when you have a bright idea.
+  - It attracts millions of visitors annually, offering opportunities for hiking,
+    river rafting, and other outdoor activities.
+  - Carved by the Colorado River over millions of years.
+  - Is a breathtaking natural wonder located in the state of Arizona, USA.

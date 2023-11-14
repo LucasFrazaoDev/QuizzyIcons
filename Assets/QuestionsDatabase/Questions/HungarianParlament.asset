@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
-  m_Name: Lightbulb
+  m_Name: HungarianParlament
   m_EditorClassIdentifier: 
-  answer: lightbulb
+  answer: hungarianParlament
   hints:
-  - Invention in the late 19th century.
-  - This invention revolutionized the way we illuminate our surroundings.
-  - Used when you have a bright idea.
+  - Situated on the banks of the Danube River, the Parliament Building offers a picturesque
+    view, especially illuminated at night.
+  - "It features a symmetrical fa\xE7ade, a central dome, and intricate details throughout."
+  - Located in Budapest, is a magnificent example of Neo-Gothic architecture.

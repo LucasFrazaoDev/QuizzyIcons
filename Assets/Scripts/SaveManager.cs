@@ -19,7 +19,7 @@ public class SaveManager : MonoBehaviour
 
     public int LoadHighScore()
     {
-        // Verify if exists a previous highscore
+        // Verify if exists a previous highscore and return a value
         return PlayerPrefs.HasKey(K_HIGHSCORE) ? PlayerPrefs.GetInt(K_HIGHSCORE) : 0;
     }
 
