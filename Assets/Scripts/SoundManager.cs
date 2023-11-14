@@ -64,7 +64,7 @@ public class SoundManager : MonoBehaviour
         m_sfxSource.PlayOneShot(clipToPlay);
     }
 
-    public void ChangeBackgroundMusic()
+    private void ChangeBackgroundMusic()
     {
         StartCoroutine(FadeMusic());
     }

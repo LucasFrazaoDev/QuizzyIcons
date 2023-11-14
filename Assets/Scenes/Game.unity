@@ -294,6 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ddb98d349a253645a51e892cd62ceed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_controller: {fileID: 1266933827}
 --- !u!4 &1040337466
 Transform:
   m_ObjectHideFlags: 0
@@ -429,7 +430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11df8ed2716efe48835d067342b2446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_saveManager: {fileID: 1040337465}
   m_gameManager: {fileID: 1220991899}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

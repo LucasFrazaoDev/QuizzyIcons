@@ -11,8 +11,19 @@ public class Controller : MonoBehaviour
     public delegate void PlayFinalMusic();
     public event PlayFinalMusic OnPlayFinalMusic;
 
+    public delegate void SaveScore(int score);
+    public event SaveScore OnSaveScore;
+
+    public delegate int LoadHighScore();
+    public event LoadHighScore OnLoadHighScore;
+
+    public delegate void SaveVolume(float musicVolume, float sfxVolume);
+    public event SaveVolume OnSaveVolume;
+
+    public delegate (float, float) LoadVolume();
+    public event LoadVolume OnLoadVolume;
+
     private UIManager m_uiManager;
-    [SerializeField] private SaveManager m_saveManager;
     [SerializeField] private GameManager m_gameManager;
 
     private int m_currentCounter = 25;
@@ -52,7 +63,7 @@ public class Controller : MonoBehaviour
     {
         Initialize();
         IsGamePaused(false);
-        LoadHighScore();
+        CallLoadHighScore();
         LoadVolumeSettings();
     }
 
@@ -68,7 +79,7 @@ public class Controller : MonoBehaviour
     {
         m_uiManager.AllQuestionsAnsweredFeedBack(score);
         OnPlayFinalMusic?.Invoke();
-        m_saveManager.SaveHighScore(score);
+        OnSaveScore?.Invoke(score);
     }
 
     private void ScoredPointsToShow(int scoreToShow, bool changeScoreFeedback)
@@ -76,20 +87,20 @@ public class Controller : MonoBehaviour
         m_uiManager.ShowPointsScored(scoreToShow, changeScoreFeedback);
     }
 
-    private void LoadHighScore()
+    private void CallLoadHighScore()
     {
-        int highScore = m_saveManager.LoadHighScore();
+        int highScore = OnLoadHighScore?.Invoke() ?? 0;
         m_uiManager.SetHighScore(highScore);
     }
 
     public void SaveVolumeSettings(float musicVolume, float sfxVolume)
     {
-        m_saveManager.SaveVolumesPreferences(musicVolume, sfxVolume);
+        OnSaveVolume?.Invoke(musicVolume, sfxVolume);
     }
 
     public void LoadVolumeSettings()
     {
-        (float musicVolume, float sfxVolume) = m_saveManager.LoadVolumePreferences();
+        (float musicVolume, float sfxVolume) = OnLoadVolume?.Invoke() ?? (0.5f, 0.5f);
         m_uiManager.SetInitialVolume(ref musicVolume, ref sfxVolume);
     }
 
