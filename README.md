@@ -1,3 +1,38 @@
+# EN-US
+
+# Quizzy Icons
+
+## Description
+Welcome to Icon Quiz! This challenging game will test your knowledge where you will have to select and drag icons to a specific area. Will you get the perfect score?
+
+## Functionalities
+- Selection and dragging of icons to a designated area.
+- Immediate feedback to indicate whether the selection is correct or not.
+- Scoring system to track player performance.
+
+## How to play
+- Access and download the build for Windows [here](https://lordfrazao.itch.io/)!
+
+## Contribution
+Contributions are welcome! If you want to contribute improvements, bug fixes or new features, feel free to open an issue or send a pull request.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+Lucas Frazão
+
+## Thanks
+- To professor David Makowski for teaching the fundamentals of the UI Toolkit (Unity's interface system) and building the core of the game in his course  [Modern UI with UI Toolkit](https://www.udemy.com/course/modern-unity-ui-with-ui-toolkit/).
+
+## Credits to Icons
+- The icons used in this game were obtained from [Flaticon](https://www.flaticon.com/), an excellent resource for vector icons.
+
+
+**Have fun playing!** 🎮✨
+
+# PT-BR
+
 # Quizzy Icons
 
 ## Descrição
@@ -25,6 +60,6 @@ Lucas Frazão
 
 ## Créditos aos Ícones
 - Os ícones utilizados neste jogo foram obtidos no [Flaticon](https://www.flaticon.com/), um excelente recurso para ícones vetoriais.
----
+
 
 **Divirta-se jogando!** 🎮✨
