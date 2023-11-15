@@ -95,7 +95,7 @@ public class SoundManager : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             float t = currentTime / duration;
-            m_musicSource.volume = Mathf.Lerp(0, 1, t);
+            m_musicSource.volume = Mathf.Lerp(0, 0.7f, t);
 
             yield return null;
         }
