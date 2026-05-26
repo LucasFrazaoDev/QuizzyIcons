@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: MachuPicchu
   m_EditorClassIdentifier: 
-  answer: MachuPicchu
+  answer: machuPicchu
   hints:
   - Built in the 15th century, it is renowned for its sophisticated dry-stone construction
     and breathtaking panoramic views.

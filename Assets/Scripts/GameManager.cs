@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public delegate void VisualFeedbackScore(int scoreFeedback, bool changeScoreFeedback);
     public event VisualFeedbackScore OnVisualFeedbackScore;
 
-    private int m_numberOfQuizQuestions = 10;
+    [SerializeField] private int m_numberOfQuizQuestions = 10;
     [SerializeField] private QuestionsDatabase m_questionsDatabase;
     [SerializeField] private List<Question> m_quizQuestions = new List<Question>();
 
