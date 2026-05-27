@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
     private void InitializeIcons()
     {
         SetupIcons.InitializeDragDrop(m_root, m_controller);
-        SetupIcons.InitializeIcons(m_root, m_controller.GetAllQuestions());
+        SetupIcons.InitializeIcons(m_root, m_controller.GetQuestions());
     }
 
     #region GetReferences

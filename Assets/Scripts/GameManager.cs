@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -12,56 +11,44 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int m_numberOfQuizQuestions = 10;
     [SerializeField] private QuestionsDatabase m_questionsDatabase;
-    [SerializeField] private List<Question> m_quizQuestions = new List<Question>();
+
+    // Runtime questions (não altera o ScriptableObject original)
+    private Question[] m_runtimeQuestions;
 
     private Question m_currentQuestion;
 
     private string m_currentHint;
-    private int m_questionIndex = 0;
-    private int m_hintIndex = 0;
-    private int m_currentScore = 0;
+
+    private int m_questionIndex;
+    private int m_hintIndex;
+    private int m_currentScore;
 
     private int m_hintPenaltyScore = -6;
     private int m_failedPenaltyScore = -7;
     private int m_successScore = 20;
 
-
-    public List<Question> Questions { get => m_quizQuestions; set => m_quizQuestions = value; }
-
-    private void OnEnable()
+    private void CreateRuntimeQuestions()
     {
-        SelectRandomQuestions();
-    }
-
-    private void SelectRandomQuestions()
-    {
-        List<Question> shuffledQuestions = new List<Question>(m_questionsDatabase.questions);
-
-        // Embaralha a lista
-        shuffledQuestions = shuffledQuestions
+        m_runtimeQuestions = m_questionsDatabase.questions
             .OrderBy(q => Random.value)
-            .ToList();
-
-        // Pega apenas a quantidade necessária
-        for (int i = 0; i < m_numberOfQuizQuestions && i < shuffledQuestions.Count; i++)
-        {
-            m_quizQuestions.Add(shuffledQuestions[i]);
-        }
+            .Take(m_numberOfQuizQuestions)
+            .ToArray();
     }
 
     public void InitializeGame()
     {
-        // Embaralha e seleciona as perguntas do quiz
-        m_quizQuestions.Clear();
-        SelectRandomQuestions();
+        CreateRuntimeQuestions();
 
         m_questionIndex = 0;
         m_hintIndex = 0;
+        m_currentScore = 0;
 
-        if (m_quizQuestions.Count > 0)
+        if (m_runtimeQuestions.Length > 0)
         {
-            m_currentQuestion = m_quizQuestions[m_questionIndex];
-            m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
+            m_currentQuestion = m_runtimeQuestions[m_questionIndex];
+
+            if (m_currentQuestion.GetHints().Length > 0)
+                m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
         }
     }
 
@@ -73,6 +60,7 @@ public class GameManager : MonoBehaviour
     public void HandleCorrectAnswer()
     {
         SetCurrentScore(m_successScore);
+
         OnVisualFeedbackScore?.Invoke(m_successScore, true);
 
         NextQuestion();
@@ -81,6 +69,7 @@ public class GameManager : MonoBehaviour
     public void HandleWrongtAnswer()
     {
         SetCurrentScore(m_failedPenaltyScore);
+
         OnVisualFeedbackScore?.Invoke(m_failedPenaltyScore, false);
 
         NextQuestion();
@@ -88,7 +77,6 @@ public class GameManager : MonoBehaviour
 
     public void ShowNextHint()
     {
-        // Verifica se ainda existem dicas disponíveis
         if (m_hintIndex < m_currentQuestion.GetHints().Length - 1)
         {
             SetCurrentScore(m_hintPenaltyScore);
@@ -108,28 +96,31 @@ public class GameManager : MonoBehaviour
     {
         m_questionIndex++;
 
-        // Verifica se ainda existem perguntas
-        if (m_questionIndex < m_quizQuestions.Count)
+        if (m_questionIndex < m_runtimeQuestions.Length)
         {
-            m_currentQuestion = m_quizQuestions[m_questionIndex];
+            m_currentQuestion = m_runtimeQuestions[m_questionIndex];
 
-            // Reseta as dicas da nova pergunta
             m_hintIndex = 0;
-            m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
+
+            if (m_currentQuestion.GetHints().Length > 0)
+                m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
         }
         else
         {
-            // Quiz finalizado
             OnAllQuestionFinished?.Invoke(m_currentScore);
 
-            // Evita índice inválido
-            m_questionIndex = m_quizQuestions.Count - 1;
+            m_questionIndex = m_runtimeQuestions.Length - 1;
         }
     }
 
     public Question GetCurrentQuestion()
     {
         return m_currentQuestion;
+    }
+
+    public Question[] GetQuestions()
+    {
+        return m_runtimeQuestions;
     }
 
     public int GetCurrentQuestionNum()

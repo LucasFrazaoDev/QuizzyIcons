@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: EgypthPiramids
   m_EditorClassIdentifier: 
-  answer: pyramid
+  answer: EgypthPiramids
   hints:
   - This buildings were meticulously aligned with constellations and cardinal points.
   - The exact method of how these massive structures were built is still a subject

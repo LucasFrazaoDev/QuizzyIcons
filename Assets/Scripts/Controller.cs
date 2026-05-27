@@ -50,6 +50,8 @@ public class Controller : MonoBehaviour
     private void Awake()
     {
         m_uiManager = GetComponent<UIManager>();
+
+        Initialize();
     }
 
     private void OnEnable()
@@ -62,7 +64,6 @@ public class Controller : MonoBehaviour
 
     private void Start()
     {
-        Initialize();
         IsGamePaused(false);
         CallLoadHighScore();
         LoadVolumeSettings();
@@ -159,9 +160,9 @@ public class Controller : MonoBehaviour
         if (!isStartingGame) m_uiManager.ToogleOnOffButtons();
     }
 
-    public List<Question> GetAllQuestions()
+    public Question[] GetQuestions()
     {
-        return m_gameManager.Questions;
+        return m_gameManager.GetQuestions();
     }
 
     private void ResetCounter()

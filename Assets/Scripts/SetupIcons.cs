@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,23 +17,29 @@ public class SetupIcons
             });
     }
 
-    public static void InitializeIcons(VisualElement root, List<Question> questions)
+    public static void InitializeIcons(VisualElement root, Question[] questions)
     {
         int currentIconIndex = 0;
 
         foreach (Question question in questions)
         {
-            VisualElement questionIcon = root.Query<VisualElement>(K_ICONS_BOARD_NAME).Children<VisualElement>().AtIndex(currentIconIndex);
-            questionIcon.style.backgroundImage = Resources.Load<Texture2D>("img/" + question.answer);
+            VisualElement questionIcon = root
+                .Query<VisualElement>(K_ICONS_BOARD_NAME)
+                .Children<VisualElement>()
+                .AtIndex(currentIconIndex);
+
+            questionIcon.style.backgroundImage =
+                Resources.Load<Texture2D>("img/" + question.answer);
 
             questionIcon.userData = question;
 
             currentIconIndex++;
-            if(currentIconIndex >= 10)
+
+            if (currentIconIndex >= 10)
             {
-                Debug.LogWarning("Not enough icons for all questions. Some questions will not have icons.");
+                Debug.LogWarning("Not enough icons for all questions.");
                 break;
             }
-    }
+        }
     }
 }
