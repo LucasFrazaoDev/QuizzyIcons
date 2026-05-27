@@ -209,7 +209,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            // Same situation above
+            // Similar situation above
             m_panelsContainer.style.display = DisplayStyle.Flex;
             Invoke(nameof(ShowSettingsPanel), 0.05f);
             ChangeGameState(true);

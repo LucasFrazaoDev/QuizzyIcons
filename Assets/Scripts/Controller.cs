@@ -34,7 +34,8 @@ public class Controller : MonoBehaviour
         get { return m_currentCounter; }
         set
         {
-            if (m_counterStopped) return;
+            if (m_counterStopped)
+                return;
 
             if (value == 0)
             {

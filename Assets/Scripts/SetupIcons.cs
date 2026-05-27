@@ -26,9 +26,15 @@ public class SetupIcons
         {
             VisualElement questionIcon = root.Query<VisualElement>(K_ICONS_BOARD_NAME).Children<VisualElement>().AtIndex(currentIconIndex);
             questionIcon.style.backgroundImage = Resources.Load<Texture2D>("img/" + question.answer);
+
             questionIcon.userData = question;
 
             currentIconIndex++;
-        }
+            if(currentIconIndex >= 10)
+            {
+                Debug.LogWarning("Not enough icons for all questions. Some questions will not have icons.");
+                break;
+            }
+    }
     }
 }
