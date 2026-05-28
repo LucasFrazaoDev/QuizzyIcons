@@ -4,9 +4,7 @@ using UnityEngine;
 public class Question : ScriptableObject
 {
     public string answer;
-
     public string[] hints;
-
     public Texture2D icon;
 
     public string[] GetHints()
