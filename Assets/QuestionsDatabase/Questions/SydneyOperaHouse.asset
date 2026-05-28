@@ -19,3 +19,4 @@ MonoBehaviour:
   - This iconic structure is renowned for its distinctive sail-like design.
   - Situated on Bennelong Point in Sydney Harbor, it offers breathtaking views of
     the harbor.
+  icon: {fileID: 2800000, guid: 2f3b3fa2fc7f9f944bf485254f8fd2fe, type: 3}

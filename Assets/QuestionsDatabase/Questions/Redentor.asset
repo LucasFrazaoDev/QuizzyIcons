@@ -20,3 +20,4 @@ MonoBehaviour:
     recognized symbol of the country that hosts it.
   - Built in Brazil, this iconic monument was inaugurated in 1931 and represents
     a very important religious figure.
+  icon: {fileID: 2800000, guid: d95c2ff6b1918e84bb1cba3faab08b5f, type: 3}

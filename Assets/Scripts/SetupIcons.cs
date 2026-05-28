@@ -28,8 +28,7 @@ public class SetupIcons
                 .Children<VisualElement>()
                 .AtIndex(currentIconIndex);
 
-            questionIcon.style.backgroundImage =
-                Resources.Load<Texture2D>("img/" + question.answer);
+            questionIcon.style.backgroundImage = question.icon;
 
             questionIcon.userData = question;
 

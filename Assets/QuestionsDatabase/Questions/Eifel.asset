@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Eifel
   m_EditorClassIdentifier: 
   answer: eifel
-  displayAnswer: The Eifel Tower
   hints:
   - Its was a present.
   - It's the iconic symbol of a large city.
   - It is mostly made out of steel.
+  icon: {fileID: 2800000, guid: f3d3edaa9eb452249a7e1b417b4443db, type: 3}

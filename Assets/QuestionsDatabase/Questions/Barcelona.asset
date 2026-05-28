@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Barcelona
   m_EditorClassIdentifier: 
   answer: barcelona
-  displayAnswer: 
   hints:
   - The city is known for its beautiful beaches and a lively Mediterranean coastline.
   - It is famous for its unique and breathtaking architecture.
   - This vibrant city is the capital of Catalonia.
+  icon: {fileID: 2800000, guid: 6335e2abaf501b64ca831f3707f4cc04, type: 3}

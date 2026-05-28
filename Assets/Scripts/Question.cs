@@ -1,17 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Question", menuName = "Questions/Question SO")]
 public class Question : ScriptableObject
 {
     public string answer;
-    public string[] hints = new string[3];
+
+    public string[] hints;
+
+    public Texture2D icon;
 
     public string[] GetHints()
     {
-        if (hints.Length == 0)
-            Debug.Log("Hints not initialized!");
+        if (hints == null || hints.Length == 0)
+        {
+            Debug.LogWarning($"Hints not initialized in question: {name}");
+            return new string[0];
+        }
 
         return hints;
     }

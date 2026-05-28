@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Monalisa
   m_EditorClassIdentifier: 
   answer: monaLisa
-  displayAnswer: The Painting of Mona Lisa
   hints:
   - You can find it in France.
   - It was created in the 15 century.
   - It shows a woman!
+  icon: {fileID: 2800000, guid: e5445f4250fc5c24c8eaf520b66dee5c, type: 3}

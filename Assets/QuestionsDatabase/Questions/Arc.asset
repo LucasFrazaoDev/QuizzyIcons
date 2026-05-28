@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Arc
   m_EditorClassIdentifier: 
   answer: arc
-  displayAnswer: 
   hints:
   - ' It''s situated in the city of love and is one of the most famous icons in its
     urban landscape.'
   - The monument honors the achievements of a famous French general who is widely
     associated with this structure.
   - This monument was built to commemorate military victories.
+  icon: {fileID: 2800000, guid: d6eb448b021d01a44becf1eee4484275, type: 3}

@@ -187,7 +187,6 @@ public class UIManager : MonoBehaviour
         if (m_panelsContainer.style.display == DisplayStyle.Flex)
         {
             StartCoroutine(HidePanel(m_pausePanel));
-            ChangeGameState(false);
         }
         else
         {
@@ -204,7 +203,6 @@ public class UIManager : MonoBehaviour
         if (m_panelsContainer.style.display == DisplayStyle.Flex)
         {
             StartCoroutine(HidePanel(m_settingsPanel));
-            ChangeGameState(false);
             m_controller.SaveVolumeSettings(m_musicVolumeSlider.value, m_sfxVolumeSlider.value);
         }
         else
@@ -226,6 +224,7 @@ public class UIManager : MonoBehaviour
         panel.RemoveFromClassList(K_CLASS_TO_SHOW_PANEL_NAME);
         yield return new WaitForSeconds(0.25f);
         panel.parent.style.display = DisplayStyle.None;
+        ChangeGameState(false);
     }
 
     private void HandleRestartGameButton()

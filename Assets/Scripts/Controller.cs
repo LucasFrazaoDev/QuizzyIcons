@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,26 +23,37 @@ public class Controller : MonoBehaviour
     public event LoadVolume OnLoadVolume;
 
     private UIManager m_uiManager;
-    [SerializeField] private GameManager m_gameManager;
 
-    private int m_currentCounter = 25;
-    private bool m_counterStopped;
+    [SerializeField]
+    private GameManager m_gameManager;
+
+    private int m_currentCounter = 30;
+
+    private Coroutine m_counterCoroutine;
+
+    private bool m_isChangingQuestion;
+    private bool m_isPaused;
 
     public int CurrentCounter
     {
-        get { return m_currentCounter; }
+        get => m_currentCounter;
+
         set
         {
-            if (m_counterStopped)
-                return;
+            m_currentCounter = value;
 
-            if (value == 0)
+            if (m_currentCounter <= 0)
             {
+                m_currentCounter = 0;
+
+                m_uiManager.SetTimer("0");
+
                 HandleWrongAnswer();
+
                 return;
             }
-            m_uiManager.SetTimer(value.ToString());
-            m_currentCounter = value;
+
+            m_uiManager.SetTimer(m_currentCounter.ToString());
         }
     }
 
@@ -64,9 +74,10 @@ public class Controller : MonoBehaviour
 
     private void Start()
     {
-        IsGamePaused(false);
         CallLoadHighScore();
         LoadVolumeSettings();
+
+        StartCounter();
     }
 
     private void OnDisable()
@@ -75,11 +86,16 @@ public class Controller : MonoBehaviour
 
         m_gameManager.OnAllQuestionFinished -= AllQuestionsFinished;
         m_gameManager.OnVisualFeedbackScore -= ScoredPointsToShow;
+
+        StopCounter();
     }
 
     private void AllQuestionsFinished(int score)
     {
+        StopCounter();
+
         m_uiManager.AllQuestionsAnsweredFeedBack(score);
+
         OnPlayFinalMusic?.Invoke();
         OnSaveScore?.Invoke(score);
     }
@@ -92,6 +108,7 @@ public class Controller : MonoBehaviour
     private void CallLoadHighScore()
     {
         int highScore = OnLoadHighScore?.Invoke() ?? 0;
+
         m_uiManager.SetHighScore(highScore);
     }
 
@@ -102,46 +119,84 @@ public class Controller : MonoBehaviour
 
     public void LoadVolumeSettings()
     {
-        (float musicVolume, float sfxVolume) = OnLoadVolume?.Invoke() ?? (0.5f, 0.5f);
+        (float musicVolume, float sfxVolume) =
+            OnLoadVolume?.Invoke() ?? (0.5f, 0.5f);
+
         m_uiManager.SetInitialVolume(ref musicVolume, ref sfxVolume);
     }
 
     public void Initialize()
     {
         m_gameManager.InitializeGame();
+
         UpdateUI(true);
 
         ResetCounter();
-        StartCoroutine(UpdateCounter());
     }
 
     public void NextHint()
     {
         m_gameManager.ShowNextHint();
+
         UpdateUI();
+
         OnQuestionAnswered?.Invoke(false);
     }
 
     public void HandleWrongAnswer()
     {
+        if (m_isChangingQuestion)
+            return;
+
+        StartCoroutine(HandleWrongAnswerRoutine());
+    }
+
+    private IEnumerator HandleWrongAnswerRoutine()
+    {
+        m_isChangingQuestion = true;
+
         m_gameManager.HandleWrongtAnswer();
+
         UpdateUI();
+
         ResetCounter();
+
         OnQuestionAnswered?.Invoke(false);
+
+        yield return null;
+
+        m_isChangingQuestion = false;
     }
 
     public void HandleCorrectAnswer()
     {
+        if (m_isChangingQuestion)
+            return;
+
+        StartCoroutine(HandleCorrectAnswerRoutine());
+    }
+
+    private IEnumerator HandleCorrectAnswerRoutine()
+    {
+        m_isChangingQuestion = true;
+
         m_gameManager.HandleCorrectAnswer();
+
         UpdateUI();
+
         ResetCounter();
+
         OnQuestionAnswered?.Invoke(true);
+
+        yield return null;
+
+        m_isChangingQuestion = false;
     }
 
     public void CheckAnswer(string answer)
     {
         bool answerCorrect = m_gameManager.IsAnswerCorrect(answer);
-    
+
         if (answerCorrect)
             HandleCorrectAnswer();
         else
@@ -153,11 +208,15 @@ public class Controller : MonoBehaviour
     public void UpdateUI(bool isStartingGame = false)
     {
         m_uiManager.SetHint(m_gameManager.GetCurrentHint());
+
         m_uiManager.SetHintNumber(m_gameManager.GetCurrentHintNum());
+
         m_uiManager.SetQuestionNumber(m_gameManager.GetCurrentQuestionNum());
+
         m_uiManager.SetCurrentScore(m_gameManager.GetCurrentScore());
 
-        if (!isStartingGame) m_uiManager.ToogleOnOffButtons();
+        if (!isStartingGame)
+            m_uiManager.ToogleOnOffButtons();
     }
 
     public Question[] GetQuestions()
@@ -172,10 +231,36 @@ public class Controller : MonoBehaviour
 
     private IEnumerator UpdateCounter()
     {
-        yield return new WaitForSeconds(1f);
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(1f);
 
-        CurrentCounter--;
-        StartCoroutine(UpdateCounter());
+            if (!m_isPaused)
+                CurrentCounter--;
+        }
+    }
+
+    private void StartCounter()
+    {
+        if (m_counterCoroutine != null)
+            return;
+
+        m_counterCoroutine = StartCoroutine(UpdateCounter());
+    }
+
+    private void StopCounter()
+    {
+        if (m_counterCoroutine == null)
+            return;
+
+        StopCoroutine(m_counterCoroutine);
+
+        m_counterCoroutine = null;
+    }
+
+    public void IsGamePaused(bool isPaused)
+    {
+        m_isPaused = isPaused;
     }
 
     private void ButtonsSignature()
@@ -188,11 +273,6 @@ public class Controller : MonoBehaviour
     {
         m_uiManager.OnRestartGameButtonClicked -= RestartGame;
         m_uiManager.OnQuitGameButtonClicked -= QuitGame;
-    }
-
-    public void IsGamePaused(bool isPaused)
-    {
-        m_counterStopped = isPaused;
     }
 
     private void RestartGame()
