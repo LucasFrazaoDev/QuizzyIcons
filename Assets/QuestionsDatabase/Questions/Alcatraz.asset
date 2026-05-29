@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Alcatraz
   m_EditorClassIdentifier: 
   answer: alcatraz
+  answerPortuguese: Alcatraz
   hints:
   - This place was briefly occupied by Native American activists as part of a protest
     for their rights and recognition.

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: ForbiddenCity
   m_EditorClassIdentifier: 
-  answer: forbiddenCity
+  answer: forbidden city
+  answerPortuguese: forbidden city
   hints:
   - Built during the Ming Dynasty this building is known for its grand architecture.
   - Is a symbol of China's rich culture and history, representing imperial power

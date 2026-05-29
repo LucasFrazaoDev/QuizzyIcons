@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: SydneyOperaHouse
   m_EditorClassIdentifier: 
-  answer: sydneyOperaHouse
+  answer: sydney Opera House
+  answerPortuguese: "\xD3pera de Sydney"
   hints:
   - "Designed by the Danish architect J\xF8rn Utzon, this building is celebrated
     for its innovative and groundbreaking design."

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: Arc
   m_EditorClassIdentifier: 
-  answer: arc
+  answer: Arch of Triumph
+  answerPortuguese: Arco do Triunfo
   hints:
   - ' It''s situated in the city of love and is one of the most famous icons in its
     urban landscape.'

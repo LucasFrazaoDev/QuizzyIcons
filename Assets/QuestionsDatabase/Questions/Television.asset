@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Television
   m_EditorClassIdentifier: 
   answer: television
+  answerPortuguese: "Televis\xE3o"
   hints:
   - This invention involved contributions from inventors like Philo Farnsworth and
     Vladimir Zworykin in 1920s.

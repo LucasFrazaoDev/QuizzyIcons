@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: GreatWallOfChina
   m_EditorClassIdentifier: 
-  answer: greatWallOfChina
+  answer: great Wall Of China
+  answerPortuguese: grande muralha da china
   hints:
   - This colossal building was constructed over the centuries.
   - Originally built for defense against invasions.

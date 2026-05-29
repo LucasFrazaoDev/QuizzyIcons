@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: Eifel
   m_EditorClassIdentifier: 
-  answer: eifel
+  answer: eiffel tower
+  answerPortuguese: torre eiffel
   hints:
   - Its was a present.
   - It's the iconic symbol of a large european city.

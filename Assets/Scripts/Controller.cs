@@ -89,12 +89,12 @@ public class Controller : MonoBehaviour
         m_gameManager.OnAllQuestionFinished -= AllQuestionsFinished;
         m_gameManager.OnVisualFeedbackScore -= ScoredPointsToShow;
 
-        LocalizationManager.OnLanguageChanged -= OnLanguageChanged; // <- novo
+        LocalizationManager.OnLanguageChanged -= OnLanguageChanged;
 
         StopCounter();
     }
 
-    private void OnLanguageChanged() // <- novo
+    private void OnLanguageChanged()
     {
         m_gameManager.RefreshCurrentHint();
         UpdateUI(true);
@@ -209,7 +209,7 @@ public class Controller : MonoBehaviour
     {
         bool answerCorrect = m_gameManager.IsAnswerCorrect(answer);
 
-        string localizedAnswer = m_gameManager.GetCurrentQuestion().GetAnswer(); // <- move para cima
+        string localizedAnswer = m_gameManager.GetCurrentQuestion().GetAnswer();
 
         if (answerCorrect)
             HandleCorrectAnswer();

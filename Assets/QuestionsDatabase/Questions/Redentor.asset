@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Redentor
   m_EditorClassIdentifier: 
   answer: redentor
+  answerPortuguese: Cristo Redentor
   hints:
   - Often seen on postcards and in movies, this monument is a must-visit tourist
     attraction for those exploring the city.

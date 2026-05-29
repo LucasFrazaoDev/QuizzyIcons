@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: Lightbulb
   m_EditorClassIdentifier: 
-  answer: lightbulb
+  answer: light bulb
+  answerPortuguese: "l\xE2mpada"
   hints:
   - Invention in the late 19th century.
   - This invention revolutionized the way we illuminate our surroundings.

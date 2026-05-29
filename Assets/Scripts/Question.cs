@@ -3,11 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Question", menuName = "Questions/Question SO")]
 public class Question : ScriptableObject
 {
+    public Texture2D icon;
     public string answer;
-    public string answerPortuguese; // <- novo
+    public string answerPortuguese;
+
+    [Space(20)] // Adds 20 pixels of space
+    [Header("Hints")]
     public string[] hints;
     public string[] hintsPortuguese;
-    public Texture2D icon;
 
     public string GetAnswer()
     {

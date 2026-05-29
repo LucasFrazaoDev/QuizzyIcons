@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: Monalisa
   m_EditorClassIdentifier: 
-  answer: monaLisa
+  answer: monalisa
+  answerPortuguese: Monalisa
   hints:
   - You can find it in France.
   - It was created in the 15th century.

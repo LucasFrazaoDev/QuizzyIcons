@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Disney
   m_EditorClassIdentifier: 
   answer: disney
+  answerPortuguese: disney
   hints:
   - Located in the US.
   - It was founded by two brothers.

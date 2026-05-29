@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: HungarianParlament
   m_EditorClassIdentifier: 
-  answer: hungarianParlament
+  answer: hungarian Parlament
+  answerPortuguese: parlamento hungaro
   hints:
   - Situated on the banks of the Danube River, the Parliament Building offers a picturesque
     view, especially illuminated at night.

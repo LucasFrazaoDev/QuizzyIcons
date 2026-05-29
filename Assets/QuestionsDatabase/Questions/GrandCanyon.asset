@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: GrandCanyon
   m_EditorClassIdentifier: 
-  answer: grandCanyon
+  answer: grand Canyon
+  answerPortuguese: grand Canyon
   hints:
   - It attracts millions of visitors annually, offering opportunities for hiking,
     river rafting, and other outdoor activities.

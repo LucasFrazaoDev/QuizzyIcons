@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: TajMahal
   m_EditorClassIdentifier: 
-  answer: tajMahal
+  answer: taj Mahal
+  answerPortuguese: Taj mahal
   hints:
   - The complex includes stunning reflection pools and well-maintained gardens.
   - Built using white marble and adorned with precious gemstones, this construction

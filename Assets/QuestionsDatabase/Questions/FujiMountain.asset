@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: FujiMountain
   m_EditorClassIdentifier: 
-  answer: fujiMountain
+  answer: mount fuji
+  answerPortuguese: Monte fuji
   hints:
   - Considered a sacred symbol, it has been a source of artistic inspiration.
   - Located near Tokyo, it attracts millions of tourists and climbers annually.

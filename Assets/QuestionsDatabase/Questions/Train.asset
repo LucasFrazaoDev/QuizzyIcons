@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Train
   m_EditorClassIdentifier: 
   answer: train
+  answerPortuguese: Trem
   hints:
   - The first recorded use of this transport dates back to the early 19th century,
     revolutionizing travel and trade.

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Colosseum
   m_EditorClassIdentifier: 
   answer: colosseum
+  answerPortuguese: coliseu
   hints:
   - Despite centuries of wear and damage, ongoing restoration efforts have preserved
     this construction.

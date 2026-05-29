@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: EmpireState
   m_EditorClassIdentifier: 
-  answer: empireState
+  answer: empire state
+  answerPortuguese: empire state
   hints:
   - The building's construction was completed during the Great Depression.
   - It was once the tallest building in the world.

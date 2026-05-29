@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: StatueOfLiberty
   m_EditorClassIdentifier: 
-  answer: statueOfLiberty
+  answer: statue Of Liberty
+  answerPortuguese: Estatua da Liberdade
   hints:
   - It is often associated with the welcoming of immigrants.
   - This colossal sculpture was a gift from France to the United States.

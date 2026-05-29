@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: BigBen
   m_EditorClassIdentifier: 
-  answer: bigBen
+  answer: Big Ben
+  answerPortuguese: Big Ben
   hints:
   - The tower was completed in 1859 and has since become a symbol of his city.
   - Known for its remarkable accuracy, the clock mechanism was a marvel of Victorian

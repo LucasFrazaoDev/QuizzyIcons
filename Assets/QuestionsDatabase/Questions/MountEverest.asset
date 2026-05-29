@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: MountEverest
   m_EditorClassIdentifier: 
-  answer: mountEverest
+  answer: mount Everest
+  answerPortuguese: Monte Everest
   hints:
   - Is a symbol of human determination and the desire to conquer seemingly insurmountable
     challenges.

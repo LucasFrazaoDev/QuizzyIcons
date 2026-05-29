@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Telephone
   m_EditorClassIdentifier: 
   answer: telephone
+  answerPortuguese: Telefone
   hints:
   - Over time, it has evolved significantly, transitioning from analog models to
     digital ones.

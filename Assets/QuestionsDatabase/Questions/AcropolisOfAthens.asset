@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: AcropolisOfAthens
   m_EditorClassIdentifier: 
-  answer: acropolisOfAthens
+  answer: Acropolis Of Athens
+  answerPortuguese: "Acrop\xF3lis de Atenas"
   hints:
   - Home to several ancient buildings of great architectural and historic significance.
   - Represents the pinnacle of ancient Greek civilization and art.
