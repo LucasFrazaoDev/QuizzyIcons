@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     private Label m_pauseLabel;
     private Label m_showScoreFinalPanelLabel;
     private Label m_scoreFeedbackLabel;
+    private Label m_dragYourAnswerLabel;
 
     private Button m_openPausePanelButton;
     private Button m_closePausePanelButton;
@@ -44,8 +45,8 @@ public class UIManager : MonoBehaviour
     private Button m_nextHintButton;
     private Button m_nextQuestionButton;
     private Button m_quitGameButton;
-    private Button m_englishButton;     // <- novo
-    private Button m_portugueseButton;  // <- novo
+    private Button m_englishButton;
+    private Button m_portugueseButton;
 
     private Slider m_musicVolumeSlider;
     private Slider m_sfxVolumeSlider;
@@ -66,6 +67,7 @@ public class UIManager : MonoBehaviour
     private const string K_PAUSE_LABEL_NAME = "PauseLabel";
     private const string K_SHOW_FINAL_SCORE_LABEL_NAME = "ShowScoreFinalPanelLabel";
     private const string K_SCORE_FEEDBACK_LABEL_NAME = "ScoreFeedbackLabel";
+    private const string K_DRAG_YOUR_ANSWER_LABEL_NAME = "DragYourAnswerLabel";
 
     private const string K_OPEN_PAUSE_PANEL_BUTTON_NAME = "PauseButton";
     private const string K_CLOSE_PAUSE_PANEL_BUTTON_NAME = "ClosePausePanelButton";
@@ -75,8 +77,8 @@ public class UIManager : MonoBehaviour
     private const string K_NEXT_QUESTION_BUTTON_NAME = "NextQuestionButton";
     private const string K_RESTART_GAME_BUTTON_NAME = "RestartGameButton";
     private const string K_QUIT_GAME_BUTTON_NAME = "QuitGameButton";
-    private const string K_ENGLISH_BUTTON_NAME = "EnglishButton";      // <- novo
-    private const string K_PORTUGUESE_BUTTON_NAME = "PortugueseButton"; // <- novo
+    private const string K_ENGLISH_BUTTON_NAME = "EnglishButton";
+    private const string K_PORTUGUESE_BUTTON_NAME = "PortugueseButton";
 
     private const string K_MUSIC_VOLUME_SLIDER_NAME = "MusicVolumeSlider";
     private const string K_SFX_VOLUME_SLIDER_NAME = "SFXVolumeSlider";
@@ -108,6 +110,7 @@ public class UIManager : MonoBehaviour
         InitializeButtons();
         InitializeSliders();
         HideAnswerIndicator();
+        RefreshStaticLabels();
     }
 
     private void OnDisable()
@@ -143,6 +146,7 @@ public class UIManager : MonoBehaviour
         m_pauseLabel = m_root.Q<Label>(K_PAUSE_LABEL_NAME);
         m_showScoreFinalPanelLabel = m_root.Q<Label>(K_SHOW_FINAL_SCORE_LABEL_NAME);
         m_scoreFeedbackLabel = m_root.Q<Label>(K_SCORE_FEEDBACK_LABEL_NAME);
+        m_dragYourAnswerLabel = m_root.Q<Label>(K_DRAG_YOUR_ANSWER_LABEL_NAME);
     }
 
     private void GetButtonsReference()
@@ -231,7 +235,7 @@ public class UIManager : MonoBehaviour
         else
         {
             m_panelsContainer.style.display = DisplayStyle.Flex;
-            Invoke(nameof(ShowPausePanel), 0.05f);
+            StartCoroutine(ShowPanelDelayed(m_pausePanel)); // <- novo
             ChangeGameState(true);
         }
     }
@@ -246,9 +250,29 @@ public class UIManager : MonoBehaviour
         else
         {
             m_panelsContainer.style.display = DisplayStyle.Flex;
-            Invoke(nameof(ShowSettingsPanel), 0.05f);
+            StartCoroutine(ShowPanelDelayed(m_settingsPanel)); // <- novo
             ChangeGameState(true);
         }
+    }
+
+    public void AllQuestionsAnsweredFeedBack(int finalScore)
+    {
+        m_panelsContainer.style.display = DisplayStyle.Flex;
+        StartCoroutine(ShowPanelDelayed(m_pausePanel)); // <- novo
+        ChangeGameState(true);
+
+        m_closePausePanelButton.style.display = DisplayStyle.None;
+        m_pauseLabel.text = LocalizationManager.Get(K_GAME_FINISHED_TEXT_EN, K_GAME_FINISHED_TEXT_PT);
+
+        ShowScoreInFinalPanel(finalScore);
+        m_showScoreFinalPanelLabel.style.display = DisplayStyle.Flex;
+    }
+
+    // Substitui os dois ShowPausePanel e ShowSettingsPanel por esse método genérico
+    private IEnumerator ShowPanelDelayed(VisualElement panel)
+    {
+        yield return null; // espera um frame para o display flex ser aplicado
+        panel.AddToClassList(K_CLASS_TO_SHOW_PANEL_NAME);
     }
 
     private void ChangeGameState(bool isPaused)
@@ -359,16 +383,6 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region VisualFeedbackMethods
-    private void ShowSettingsPanel()
-    {
-        m_settingsPanel.AddToClassList(K_CLASS_TO_SHOW_PANEL_NAME);
-    }
-
-    private void ShowPausePanel()
-    {
-        m_pausePanel.AddToClassList(K_CLASS_TO_SHOW_PANEL_NAME);
-    }
-
     public void GiveAnswerFeedback(bool correct, string answerName)
     {
         m_answerIndicator.style.visibility = Visibility.Visible;
@@ -391,22 +405,19 @@ public class UIManager : MonoBehaviour
         if (m_dropBox.childCount > 0)
             m_dropBox.RemoveAt(0);
     }
-
-    public void AllQuestionsAnsweredFeedBack(int finalScore)
-    {
-        m_panelsContainer.style.display = DisplayStyle.Flex;
-        Invoke(nameof(ShowPausePanel), 0.05f);
-        ChangeGameState(true);
-
-        m_closePausePanelButton.style.display = DisplayStyle.None;
-        m_pauseLabel.text = LocalizationManager.Get(K_GAME_FINISHED_TEXT_EN, K_GAME_FINISHED_TEXT_PT);
-
-        ShowScoreInFinalPanel(finalScore);
-        m_showScoreFinalPanelLabel.style.display = DisplayStyle.Flex;
-    }
     #endregion
 
     #region StringTextsMethods
+    public void RefreshStaticLabels()
+    {
+        m_dragYourAnswerLabel.text = LocalizationManager.Get("Drag your answer here", "Arraste sua resposta aqui");
+        m_musicVolumeSlider.label = LocalizationManager.Get("Music", "Música");
+        m_nextHintButton.text = LocalizationManager.Get("Hint", "Dica");
+        m_nextQuestionButton.text = LocalizationManager.Get("Next Question", "Próxima Questão");
+        m_restartGameButton.text = LocalizationManager.Get("Restart", "Reiniciar");
+        m_quitGameButton.text = LocalizationManager.Get("Quit", "Sair");
+    }
+
     public void SetTimer(string seconds)
     {
         m_timeLabel.text = LocalizationManager.Get(

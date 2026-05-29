@@ -23,43 +23,17 @@ public class Controller : MonoBehaviour
     public event LoadVolume OnLoadVolume;
 
     private UIManager m_uiManager;
+    private TimerController m_timerController;
 
     [SerializeField]
     private GameManager m_gameManager;
 
-    private int m_currentCounter = 30;
-
-    private Coroutine m_counterCoroutine;
-
     private bool m_isChangingQuestion;
-    private bool m_isPaused;
-
-    public int CurrentCounter
-    {
-        get => m_currentCounter;
-
-        set
-        {
-            m_currentCounter = value;
-
-            if (m_currentCounter <= 0)
-            {
-                m_currentCounter = 0;
-
-                m_uiManager.SetTimer("0");
-
-                HandleWrongAnswer();
-
-                return;
-            }
-
-            m_uiManager.SetTimer(m_currentCounter.ToString());
-        }
-    }
 
     private void Awake()
     {
         m_uiManager = GetComponent<UIManager>();
+        m_timerController = GetComponent<TimerController>();
 
         Initialize();
     }
@@ -71,7 +45,10 @@ public class Controller : MonoBehaviour
         m_gameManager.OnAllQuestionFinished += AllQuestionsFinished;
         m_gameManager.OnVisualFeedbackScore += ScoredPointsToShow;
 
-        LocalizationManager.OnLanguageChanged += OnLanguageChanged; // <- novo
+        LocalizationManager.OnLanguageChanged += OnLanguageChanged;
+
+        m_timerController.OnTimerExpired += HandleWrongAnswer;
+        m_timerController.OnTimerTick += OnTimerTick;
     }
 
     private void Start()
@@ -79,7 +56,8 @@ public class Controller : MonoBehaviour
         CallLoadHighScore();
         LoadVolumeSettings();
 
-        StartCounter();
+        m_timerController.ResetTimer();
+        m_timerController.StartTimer();
     }
 
     private void OnDisable()
@@ -91,7 +69,15 @@ public class Controller : MonoBehaviour
 
         LocalizationManager.OnLanguageChanged -= OnLanguageChanged;
 
-        StopCounter();
+        m_timerController.OnTimerExpired -= HandleWrongAnswer;
+        m_timerController.OnTimerTick -= OnTimerTick;
+
+        m_timerController.StopTimer();
+    }
+
+    private void OnTimerTick(int currentValue)
+    {
+        m_uiManager.SetTimer(currentValue.ToString());
     }
 
     private void OnLanguageChanged()
@@ -99,12 +85,13 @@ public class Controller : MonoBehaviour
         m_gameManager.RefreshCurrentHint();
         UpdateUI(true);
         m_uiManager.SetHighScore(OnLoadHighScore?.Invoke() ?? 0);
-        m_uiManager.SetTimer(m_currentCounter.ToString());
+        m_uiManager.SetTimer(m_timerController.CurrentCounter.ToString());
+        m_uiManager.RefreshStaticLabels();
     }
 
     private void AllQuestionsFinished(int score)
     {
-        StopCounter();
+        m_timerController.StopTimer();
 
         m_uiManager.AllQuestionsAnsweredFeedBack(score);
 
@@ -120,7 +107,6 @@ public class Controller : MonoBehaviour
     private void CallLoadHighScore()
     {
         int highScore = OnLoadHighScore?.Invoke() ?? 0;
-
         m_uiManager.SetHighScore(highScore);
     }
 
@@ -142,8 +128,6 @@ public class Controller : MonoBehaviour
         m_gameManager.InitializeGame();
 
         UpdateUI(true);
-
-        ResetCounter();
     }
 
     public void NextHint()
@@ -171,7 +155,9 @@ public class Controller : MonoBehaviour
 
         UpdateUI();
 
-        ResetCounter();
+        m_timerController.StopTimer();
+        m_timerController.ResetTimer();
+        m_timerController.StartTimer();
 
         OnQuestionAnswered?.Invoke(false);
 
@@ -196,7 +182,9 @@ public class Controller : MonoBehaviour
 
         UpdateUI();
 
-        ResetCounter();
+        m_timerController.StopTimer();
+        m_timerController.ResetTimer();
+        m_timerController.StartTimer();
 
         OnQuestionAnswered?.Invoke(true);
 
@@ -238,43 +226,9 @@ public class Controller : MonoBehaviour
         return m_gameManager.GetQuestions();
     }
 
-    private void ResetCounter()
-    {
-        CurrentCounter = 30;
-    }
-
-    private IEnumerator UpdateCounter()
-    {
-        while (true)
-        {
-            yield return new WaitForSecondsRealtime(1f);
-
-            if (!m_isPaused)
-                CurrentCounter--;
-        }
-    }
-
-    private void StartCounter()
-    {
-        if (m_counterCoroutine != null)
-            return;
-
-        m_counterCoroutine = StartCoroutine(UpdateCounter());
-    }
-
-    private void StopCounter()
-    {
-        if (m_counterCoroutine == null)
-            return;
-
-        StopCoroutine(m_counterCoroutine);
-
-        m_counterCoroutine = null;
-    }
-
     public void IsGamePaused(bool isPaused)
     {
-        m_isPaused = isPaused;
+        m_timerController.SetPaused(isPaused);
     }
 
     private void ButtonsSignature()
