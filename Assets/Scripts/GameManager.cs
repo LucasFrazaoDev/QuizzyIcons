@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         if (m_runtimeQuestions.Length > 0)
         {
             m_currentQuestion = m_runtimeQuestions[m_questionIndex];
-            RefreshCurrentHint(); // <- troca aqui
+            RefreshCurrentHint();
         }
     }
 
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
             SetCurrentScore(m_hintPenaltyScore);
 
             m_hintIndex++;
-            RefreshCurrentHint(); // <- troca aqui
+            RefreshCurrentHint();
 
             OnVisualFeedbackScore?.Invoke(m_hintPenaltyScore, false);
         }
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         {
             m_currentQuestion = m_runtimeQuestions[m_questionIndex];
             m_hintIndex = 0;
-            RefreshCurrentHint(); // <- troca aqui
+            RefreshCurrentHint();
         }
         else
         {
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Método novo — sempre pega o hint do idioma atual
+    // Sempre pega o hint do idioma atual
     public void RefreshCurrentHint()
     {
         string[] hints = m_currentQuestion.GetHints();

@@ -163,8 +163,8 @@ public class UIManager : MonoBehaviour
         m_nextHintButton = m_root.Q<Button>(K_NEXT_HINT_BUTTON_NAME);
         m_nextQuestionButton = m_root.Q<Button>(K_NEXT_QUESTION_BUTTON_NAME);
 
-        m_englishButton = m_root.Q<Button>(K_ENGLISH_BUTTON_NAME);         // <- novo
-        m_portugueseButton = m_root.Q<Button>(K_PORTUGUESE_BUTTON_NAME);   // <- novo
+        m_englishButton = m_root.Q<Button>(K_ENGLISH_BUTTON_NAME);
+        m_portugueseButton = m_root.Q<Button>(K_PORTUGUESE_BUTTON_NAME);
     }
 
     private void GetSlidersReference()
@@ -207,7 +207,7 @@ public class UIManager : MonoBehaviour
             UpdateLanguageButtons();
         };
 
-        UpdateLanguageButtons(); // <- marca o idioma inicial
+        UpdateLanguageButtons();
     }
 
     private void UpdateLanguageButtons()
@@ -235,7 +235,7 @@ public class UIManager : MonoBehaviour
         else
         {
             m_panelsContainer.style.display = DisplayStyle.Flex;
-            StartCoroutine(ShowPanelDelayed(m_pausePanel)); // <- novo
+            StartCoroutine(ShowPanelDelayed(m_pausePanel));
             ChangeGameState(true);
         }
     }
@@ -250,7 +250,7 @@ public class UIManager : MonoBehaviour
         else
         {
             m_panelsContainer.style.display = DisplayStyle.Flex;
-            StartCoroutine(ShowPanelDelayed(m_settingsPanel)); // <- novo
+            StartCoroutine(ShowPanelDelayed(m_settingsPanel));
             ChangeGameState(true);
         }
     }
@@ -258,7 +258,7 @@ public class UIManager : MonoBehaviour
     public void AllQuestionsAnsweredFeedBack(int finalScore)
     {
         m_panelsContainer.style.display = DisplayStyle.Flex;
-        StartCoroutine(ShowPanelDelayed(m_pausePanel)); // <- novo
+        StartCoroutine(ShowPanelDelayed(m_pausePanel));
         ChangeGameState(true);
 
         m_closePausePanelButton.style.display = DisplayStyle.None;

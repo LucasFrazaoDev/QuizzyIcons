@@ -7,7 +7,7 @@ public class Question : ScriptableObject
     public string answer;
     public string answerPortuguese;
 
-    [Space(20)] // Adds 20 pixels of space
+    [Space(20)]
     [Header("Hints")]
     public string[] hints;
     public string[] hintsPortuguese;
