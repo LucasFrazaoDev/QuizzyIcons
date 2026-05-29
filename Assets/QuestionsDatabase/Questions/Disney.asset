@@ -17,4 +17,8 @@ MonoBehaviour:
   - Located in the US.
   - It was founded by two brothers.
   - '"The Happiest Place on Earth" is a common nickname!'
+  hintsPortuguese:
+  - Localizado nos EUA.
+  - "Foi fundada por dois irm\xE3os."
+  - "\"O lugar mais feliz da Terra\" \xE9 um apelido comum!"
   icon: {fileID: 2800000, guid: 01de1777cb6c52d448e0b840b7f0e17f, type: 3}

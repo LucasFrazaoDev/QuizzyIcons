@@ -17,4 +17,8 @@ MonoBehaviour:
   - Considered a sacred symbol, it has been a source of artistic inspiration.
   - Located near Tokyo, it attracts millions of tourists and climbers annually.
   - This iconic and majestic volcano is Japan's highest peak.
+  hintsPortuguese:
+  - "Considerado um s\xEDmbolo sagrado, tem sido fonte de inspira\xE7\xE3o art\xEDstica."
+  - "Localizada perto de T\xF3quio, atrai milh\xF5es de turistas e alpinistas anualmente."
+  - "Este vulc\xE3o ic\xF4nico e majestoso \xE9 o pico mais alto do Jap\xE3o."
   icon: {fileID: 2800000, guid: 95ca6a2910dce3a4891fd44907e8246a, type: 3}

@@ -19,4 +19,11 @@ MonoBehaviour:
   - Its show the advanced engineering and architectural skills of his civilization.
   - The site features impressive agricultural terraces, that shows the farming techniques
     in challenging mountainous terrain.
+  hintsPortuguese:
+  - "Constru\xEDda no s\xE9culo XV, \xE9 famosa por sua sofisticada constru\xE7\xE3o
+    em pedra seca e pelas vistas panor\xE2micas deslumbrantes."
+  - "Isso demonstra as habilidades avan\xE7adas de engenharia e arquitetura de sua
+    civiliza\xE7\xE3o."
+  - "O local apresenta impressionantes terra\xE7os agr\xEDcolas, que demonstram as
+    t\xE9cnicas de cultivo em terrenos montanhosos desafiadores."
   icon: {fileID: 2800000, guid: cf8f13a9c209deb4a9d8dc52d085ed5d, type: 3}

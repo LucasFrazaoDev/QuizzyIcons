@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   answer: car
   hints:
-  - It was a technical inovation.
+  - It was a technological innovation.
   - It was invented in the US.
   - It is changed the speed of life.
+  hintsPortuguese:
+  - "Foi uma inova\xE7\xE3o tecnol\xF3gica."
+  - Foi inventado nos EUA.
+  - Isso alterou o ritmo da vida.
   icon: {fileID: 2800000, guid: 089864d845d85ad4c8e6b6cf3380edd5, type: 3}

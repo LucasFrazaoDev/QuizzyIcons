@@ -17,4 +17,8 @@ MonoBehaviour:
   - The building's construction was completed during the Great Depression.
   - It was once the tallest building in the world.
   - It was prominently featured in the classic film "King Kong"!
+  hintsPortuguese:
+  - "A constru\xE7\xE3o do edif\xEDcio foi conclu\xEDda durante a Grande Depress\xE3o."
+  - "Em tempos, foi o edif\xEDcio mais alto do mundo."
+  - "Teve um papel de destaque no cl\xE1ssico filme \"King Kong\"!"
   icon: {fileID: 2800000, guid: 4ca9192fd880d5b439442bc8ae006e67, type: 3}

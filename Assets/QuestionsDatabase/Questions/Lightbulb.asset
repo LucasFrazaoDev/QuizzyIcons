@@ -17,4 +17,9 @@ MonoBehaviour:
   - Invention in the late 19th century.
   - This invention revolutionized the way we illuminate our surroundings.
   - Used when you have a bright idea.
+  hintsPortuguese:
+  - "Inven\xE7\xE3o do final do s\xE9culo XIX."
+  - "Essa inven\xE7\xE3o revolucionou a forma como iluminamos o ambiente ao nosso
+    redor."
+  - "Usado quando voc\xEA tem uma ideia brilhante."
   icon: {fileID: 2800000, guid: fe29db7469dff70428302281f908bd34, type: 3}

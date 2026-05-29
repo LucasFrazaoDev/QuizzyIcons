@@ -18,4 +18,10 @@ MonoBehaviour:
     Vladimir Zworykin in 1920s.
   - It introduced a new era of broadcasting.
   - The remote control allowed users to control it without leaving their seats.
+  hintsPortuguese:
+  - "Essa inven\xE7\xE3o contou com a contribui\xE7\xE3o de inventores como Philo
+    Farnsworth e Vladimir Zworykin na d\xE9cada de 1920."
+  - "Isso inaugurou uma nova era na radiodifus\xE3o."
+  - "O controle remoto permitia que os usu\xE1rios o controlassem sem sair de seus
+    assentos."
   icon: {fileID: 2800000, guid: 73db0981970c63340a4e15e2a3b209fe, type: 3}

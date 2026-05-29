@@ -18,4 +18,10 @@ MonoBehaviour:
   - The exact method of how these massive structures were built is still a subject
     of debate among archaeologists and historians.
   - These ancient structures are located along the Nile River.
+  hintsPortuguese:
+  - "Esses edif\xEDcios foram meticulosamente alinhados com constela\xE7\xF5es e
+    pontos cardeais."
+  - "O m\xE9todo exato de constru\xE7\xE3o dessas estruturas maci\xE7as ainda \xE9
+    tema de debate entre arque\xF3logos e historiadores."
+  - "Essas estruturas antigas est\xE3o localizadas ao longo do rio Nilo."
   icon: {fileID: 2800000, guid: 535e436fa51a869409c1e851c4f7e18a, type: 3}

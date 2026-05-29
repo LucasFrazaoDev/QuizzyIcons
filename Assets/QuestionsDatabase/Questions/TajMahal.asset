@@ -18,4 +18,10 @@ MonoBehaviour:
   - Built using white marble and adorned with precious gemstones, this construction
     involved skilled artisans and craftsmen.
   - Commissioned by Emperor Shah Jahan in memory of his beloved wife Mumtaz Mahal.
+  hintsPortuguese:
+  - "O complexo inclui espelhos d'\xE1gua deslumbrantes e jardins bem cuidados."
+  - "Constru\xEDda em m\xE1rmore branco e adornada com pedras preciosas, esta obra
+    envolveu artes\xE3os e oper\xE1rios habilidosos."
+  - "Encomendado pelo Imperador Shah Jahan em mem\xF3ria de sua amada esposa Mumtaz
+    Mahal."
   icon: {fileID: 2800000, guid: 1185fa9ca21d63b409d386d183e160fa, type: 3}

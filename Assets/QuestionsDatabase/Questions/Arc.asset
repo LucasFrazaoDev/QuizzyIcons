@@ -19,4 +19,10 @@ MonoBehaviour:
   - The monument honors the achievements of a famous French general who is widely
     associated with this structure.
   - This monument was built to commemorate military victories.
+  hintsPortuguese:
+  - "Est\xE1 localizada na cidade do amor e \xE9 um dos \xEDcones mais famosos de
+    sua paisagem urbana."
+  - "O monumento homenageia as conquistas de um famoso general franc\xEAs, amplamente
+    associado a esta estrutura."
+  - "Este monumento foi constru\xEDdo para comemorar vit\xF3rias militares."
   icon: {fileID: 2800000, guid: d6eb448b021d01a44becf1eee4484275, type: 3}

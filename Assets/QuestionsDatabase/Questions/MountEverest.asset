@@ -18,4 +18,9 @@ MonoBehaviour:
     challenges.
   - Situated in the Himalayas on the border between Nepal and Tibet.
   - Is the world's highest mountain.
+  hintsPortuguese:
+  - "\xC9 um s\xEDmbolo da determina\xE7\xE3o humana e do desejo de superar desafios
+    aparentemente insuper\xE1veis."
+  - Situada nos Himalaias, na fronteira entre o Nepal e o Tibete.
+  - "\xC9 a montanha mais alta do mundo."
   icon: {fileID: 2800000, guid: 940a4e8e376249b4682eb9f0f3651195, type: 3}

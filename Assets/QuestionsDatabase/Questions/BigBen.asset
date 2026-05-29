@@ -18,4 +18,10 @@ MonoBehaviour:
   - Known for its remarkable accuracy, the clock mechanism was a marvel of Victorian
     engineering during its time.
   - Situated in the heart of London.
+  hintsPortuguese:
+  - "A torre foi conclu\xEDda em 1859 e desde ent\xE3o se tornou um s\xEDmbolo da
+    cidade."
+  - "Conhecido por sua not\xE1vel precis\xE3o, o mecanismo do rel\xF3gio foi uma
+    maravilha da engenharia vitoriana em sua \xE9poca."
+  - "Situado no cora\xE7\xE3o de Londres."
   icon: {fileID: 2800000, guid: d5a09ef4622e6eb47bafe5379e664076, type: 3}

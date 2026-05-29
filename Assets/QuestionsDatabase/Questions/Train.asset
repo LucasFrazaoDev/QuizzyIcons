@@ -19,4 +19,11 @@ MonoBehaviour:
   - Transport romanticized in literature, music, and film, often symbolizing adventurous.
   - This mode of transportation operates on tracks and is widely used for both passenger
     and cargo services.
+  hintsPortuguese:
+  - "O primeiro registro do uso desse meio de transporte data do in\xEDcio do s\xE9culo
+    XIX, revolucionando as viagens e o com\xE9rcio."
+  - "O transporte \xE9 romantizado na literatura, na m\xFAsica e no cinema, sendo
+    frequentemente associado \xE0 aventura."
+  - "Esse meio de transporte opera sobre trilhos e \xE9 amplamente utilizado tanto
+    para servi\xE7os de passageiros quanto de carga."
   icon: {fileID: 2800000, guid: d0ea6067633fde649ac4707a53fe443d, type: 3}

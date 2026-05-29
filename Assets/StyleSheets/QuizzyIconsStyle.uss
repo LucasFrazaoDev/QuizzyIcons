@@ -1,5 +1,5 @@
 .CursorPointerButtons {
-    cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/CursorRed.png?fileID=2800000&guid=a94a6bdb42066124ba34ac0a0ae1d0ef&type=3#CursorRed');
+    cursor: url("project://database/Assets/FreeButtonSet/Textures/icons/CursorRed.png?fileID=2800000&guid=a94a6bdb42066124ba34ac0a0ae1d0ef&type=3#CursorRed");
 }
 
 .CursorPointerButtons:hover {
@@ -7,7 +7,7 @@
 }
 
 .CursorPointerIcons {
-    cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/CursorGreen.png?fileID=2800000&guid=0bd650ec33f18644b99ef481167abdc7&type=3#CursorGreen');
+    cursor: url("project://database/Assets/FreeButtonSet/Textures/icons/CursorGreen.png?fileID=2800000&guid=0bd650ec33f18644b99ef481167abdc7&type=3#CursorGreen");
 }
 
 .SettingsPanel {
@@ -61,7 +61,7 @@
 }
 
 #unity-dragger {
-    background-image: url('project://database/Assets/FreeButtonSet/Textures/buttons/button_round_130.png?fileID=2800000&guid=0dcdf5b7debd4ba4492217e4975c965e&type=3#button_round_130');
+    background-image: url("project://database/Assets/FreeButtonSet/Textures/buttons/button_round_130.png?fileID=2800000&guid=0dcdf5b7debd4ba4492217e4975c965e&type=3#button_round_130");
     -unity-background-scale-mode: stretch-to-fill;
     width: 32px;
     height: 32px;
@@ -75,7 +75,7 @@
     border-bottom-width: 0;
     border-left-width: 0;
     top: 10px;
-    cursor: url('project://database/Assets/FreeButtonSet/Textures/icons/CursorRed.png?fileID=2800000&guid=a94a6bdb42066124ba34ac0a0ae1d0ef&type=3#CursorRed');
+    cursor: url("project://database/Assets/FreeButtonSet/Textures/icons/CursorRed.png?fileID=2800000&guid=a94a6bdb42066124ba34ac0a0ae1d0ef&type=3#CursorRed");
 }
 
 .RiseUpScoreFeedback {
@@ -84,4 +84,19 @@
     transition-duration: 1s;
     transition-timing-function: ease-out-elastic;
     opacity: 0;
+}
+
+.language-button-active {
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-top-color: rgb(255, 200, 0);
+    border-right-color: rgb(255, 200, 0);
+    border-bottom-color: rgb(255, 200, 0);
+    border-left-color: rgb(255, 200, 0);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
 }

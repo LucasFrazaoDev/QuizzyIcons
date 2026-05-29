@@ -17,7 +17,14 @@ MonoBehaviour:
   - Designed by the renowned architect Adrian Smith, it stands as a symbol of modern
     architecture and engineering innovation.
   - It offers observation decks on higher floors, providing breathtaking panoramic
-    views of Dubai's skyline and the surrounding landscape.
+    views of Dubai's skyline.
   - Located in Dubai, United Arab Emirates, is the world's tallest skyscraper, soaring
     to an impressive height.
+  hintsPortuguese:
+  - "Projetado pelo renomado arquiteto Adrian Smith, ele se destaca como um s\xEDmbolo
+    da arquitetura moderna e da inova\xE7\xE3o em engenharia."
+  - "Oferece mirantes nos andares superiores, proporcionando vistas panor\xE2micas
+    deslumbrantes do horizonte de Dubai."
+  - "Localizado em Dubai, nos Emirados \xC1rabes Unidos, est\xE1 o arranha-c\xE9u
+    mais alto do mundo, elevando-se a uma altura impressionante."
   icon: {fileID: 2800000, guid: df0f12d7a957f234e9d2de8352a10653, type: 3}

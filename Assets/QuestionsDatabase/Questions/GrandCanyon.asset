@@ -18,4 +18,10 @@ MonoBehaviour:
     river rafting, and other outdoor activities.
   - Carved by the Colorado River over millions of years.
   - Is a breathtaking natural wonder located in the state of Arizona, USA.
+  hintsPortuguese:
+  - "Atrai milh\xF5es de visitantes anualmente, oferecendo oportunidades para caminhadas,
+    rafting e outras atividades ao ar livre."
+  - "Esculpido pelo rio Colorado ao longo de milh\xF5es de anos."
+  - "\xC9 uma maravilha natural de tirar o f\xF4lego, localizada no estado do Arizona,
+    EUA."
   icon: {fileID: 2800000, guid: a2754876f169d7a4399cd34d3a3bf58f, type: 3}

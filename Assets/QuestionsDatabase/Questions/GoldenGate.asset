@@ -17,4 +17,9 @@ MonoBehaviour:
   - It's a popular tourist attraction and a symbol of the city it serves.
   - This iconic bridge is often described as the "Gateway to the Pacific."
   - It is one of the most recognizable and photographed bridges in the world.
+  hintsPortuguese:
+  - "\xC9 uma atra\xE7\xE3o tur\xEDstica popular e um s\xEDmbolo da cidade que serve."
+  - "Essa ponte ic\xF4nica \xE9 frequentemente descrita como a \"Porta de Entrada
+    para o Pac\xEDfico\"."
+  - "\xC9 uma das pontes mais reconhecidas e fotografadas do mundo."
   icon: {fileID: 2800000, guid: aac27b9610115db45917491d298e88dc, type: 3}

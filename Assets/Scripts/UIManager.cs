@@ -44,6 +44,8 @@ public class UIManager : MonoBehaviour
     private Button m_nextHintButton;
     private Button m_nextQuestionButton;
     private Button m_quitGameButton;
+    private Button m_englishButton;     // <- novo
+    private Button m_portugueseButton;  // <- novo
 
     private Slider m_musicVolumeSlider;
     private Slider m_sfxVolumeSlider;
@@ -73,13 +75,18 @@ public class UIManager : MonoBehaviour
     private const string K_NEXT_QUESTION_BUTTON_NAME = "NextQuestionButton";
     private const string K_RESTART_GAME_BUTTON_NAME = "RestartGameButton";
     private const string K_QUIT_GAME_BUTTON_NAME = "QuitGameButton";
+    private const string K_ENGLISH_BUTTON_NAME = "EnglishButton";      // <- novo
+    private const string K_PORTUGUESE_BUTTON_NAME = "PortugueseButton"; // <- novo
 
     private const string K_MUSIC_VOLUME_SLIDER_NAME = "MusicVolumeSlider";
     private const string K_SFX_VOLUME_SLIDER_NAME = "SFXVolumeSlider";
 
-    private const string K_GAME_FINISHED_TEXT = "GAME FINISHED!";
+    private const string K_GAME_FINISHED_TEXT_EN = "GAME FINISHED!";
+    private const string K_GAME_FINISHED_TEXT_PT = "FIM DE JOGO!";
     private const string K_CLASS_TO_SHOW_PANEL_NAME = "ShowPanelTransition";
     private const string K_CLASS_TO_SCORE_FEEDBACK_NAME = "RiseUpScoreFeedback";
+
+    private const string K_LANGUAGE_BUTTON_ACTIVE_CLASS = "language-button-active";
 
     private void Awake()
     {
@@ -151,6 +158,9 @@ public class UIManager : MonoBehaviour
 
         m_nextHintButton = m_root.Q<Button>(K_NEXT_HINT_BUTTON_NAME);
         m_nextQuestionButton = m_root.Q<Button>(K_NEXT_QUESTION_BUTTON_NAME);
+
+        m_englishButton = m_root.Q<Button>(K_ENGLISH_BUTTON_NAME);         // <- novo
+        m_portugueseButton = m_root.Q<Button>(K_PORTUGUESE_BUTTON_NAME);   // <- novo
     }
 
     private void GetSlidersReference()
@@ -180,6 +190,36 @@ public class UIManager : MonoBehaviour
 
         m_restartGameButton.clicked += HandleRestartGameButton;
         m_quitGameButton.clicked += HandleQuitGameButton;
+
+        m_englishButton.clicked += () =>
+        {
+            LocalizationManager.SetLanguage(Language.English);
+            UpdateLanguageButtons();
+        };
+
+        m_portugueseButton.clicked += () =>
+        {
+            LocalizationManager.SetLanguage(Language.Portuguese);
+            UpdateLanguageButtons();
+        };
+
+        UpdateLanguageButtons(); // <- marca o idioma inicial
+    }
+
+    private void UpdateLanguageButtons()
+    {
+        bool isEnglish = LocalizationManager.CurrentLanguage == Language.English;
+
+        if (isEnglish)
+        {
+            m_englishButton.AddToClassList(K_LANGUAGE_BUTTON_ACTIVE_CLASS);
+            m_portugueseButton.RemoveFromClassList(K_LANGUAGE_BUTTON_ACTIVE_CLASS);
+        }
+        else
+        {
+            m_portugueseButton.AddToClassList(K_LANGUAGE_BUTTON_ACTIVE_CLASS);
+            m_englishButton.RemoveFromClassList(K_LANGUAGE_BUTTON_ACTIVE_CLASS);
+        }
     }
 
     private void TogglePausePanel()
@@ -190,8 +230,6 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            // the use of Invoke() to delay the call to ShowSettingsPanel its to ensure that the m_panelsContainer
-            // has fully transitioned to DisplayStyle.Flex before starting the animation and avoid unexpected behaviors.
             m_panelsContainer.style.display = DisplayStyle.Flex;
             Invoke(nameof(ShowPausePanel), 0.05f);
             ChangeGameState(true);
@@ -207,7 +245,6 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            // Similar situation above
             m_panelsContainer.style.display = DisplayStyle.Flex;
             Invoke(nameof(ShowSettingsPanel), 0.05f);
             ChangeGameState(true);
@@ -310,18 +347,15 @@ public class UIManager : MonoBehaviour
         float transitionDuration = 0.05f;
         float displayDuration = 1f;
 
-        // Wait to fully transition to Flex state
         yield return new WaitForSeconds(transitionDuration);
 
         m_scoreFeedbackLabel.AddToClassList(K_CLASS_TO_SCORE_FEEDBACK_NAME);
 
-        // Exibition duration of the score
         yield return new WaitForSeconds(displayDuration);
 
         m_scoreFeedbackLabel.RemoveFromClassList(K_CLASS_TO_SCORE_FEEDBACK_NAME);
         m_scoreFeedbackLabel.style.display = DisplayStyle.None;
     }
-
     #endregion
 
     #region VisualFeedbackMethods
@@ -338,7 +372,9 @@ public class UIManager : MonoBehaviour
     public void GiveAnswerFeedback(bool correct)
     {
         m_answerIndicator.style.visibility = Visibility.Visible;
-        m_answerIndicator.text = correct ? "Your answer was correct!" : "Your answer was wrong!";
+        m_answerIndicator.text = correct
+            ? LocalizationManager.Get("Your answer was correct!", "Resposta correta!")
+            : LocalizationManager.Get("Your answer was wrong!", "Resposta errada!");
 
         StyleColor colorCorrect = new StyleColor(new Color32(0, 132, 19, 255));
         StyleColor colorWrong = new StyleColor(new Color32(132, 0, 19, 255));
@@ -358,13 +394,12 @@ public class UIManager : MonoBehaviour
 
     public void AllQuestionsAnsweredFeedBack(int finalScore)
     {
-        // Reusing the pause panel to show finish game
         m_panelsContainer.style.display = DisplayStyle.Flex;
         Invoke(nameof(ShowPausePanel), 0.05f);
         ChangeGameState(true);
 
         m_closePausePanelButton.style.display = DisplayStyle.None;
-        m_pauseLabel.text = K_GAME_FINISHED_TEXT;
+        m_pauseLabel.text = LocalizationManager.Get(K_GAME_FINISHED_TEXT_EN, K_GAME_FINISHED_TEXT_PT);
 
         ShowScoreInFinalPanel(finalScore);
         m_showScoreFinalPanelLabel.style.display = DisplayStyle.Flex;
@@ -374,7 +409,10 @@ public class UIManager : MonoBehaviour
     #region StringTextsMethods
     public void SetTimer(string seconds)
     {
-        m_timeLabel.text = "Time remaining: " + seconds + " seconds";
+        m_timeLabel.text = LocalizationManager.Get(
+            $"Time remaining: {seconds} seconds",
+            $"Tempo restante: {seconds} segundos"
+        );
     }
 
     public void SetHint(string hintText)
@@ -384,31 +422,48 @@ public class UIManager : MonoBehaviour
 
     public void SetHintNumber(int hintNumber)
     {
-        m_hintNumberLabel.text = "Hint " + hintNumber.ToString() + ": ";
+        m_hintNumberLabel.text = LocalizationManager.Get(
+            $"Hint {hintNumber}: ",
+            $"Dica {hintNumber}: "
+        );
     }
 
     public void SetQuestionNumber(int questionNum)
     {
-        m_questionNumLabel.text = "Question " + questionNum.ToString();
+        m_questionNumLabel.text = LocalizationManager.Get(
+            $"Question {questionNum}",
+            $"Pergunta {questionNum}"
+        );
     }
 
     public void SetCurrentScore(int currentScore)
     {
-        m_currentScoreLabel.text = "Score: " + currentScore.ToString();
+        m_currentScoreLabel.text = LocalizationManager.Get(
+            $"Score: {currentScore}",
+            $"Pontuação: {currentScore}"
+        );
     }
 
     public void SetHighScore(int highScore)
     {
-        m_highScoreLabel.text = "Highscore: " + highScore.ToString();
+        m_highScoreLabel.text = LocalizationManager.Get(
+            $"Highscore: {highScore}",
+            $"Recorde: {highScore}"
+        );
     }
 
     public void ShowScoreInFinalPanel(int finalScore)
     {
-        if(finalScore < 200)
-            m_showScoreFinalPanelLabel.text = "Your score: " + finalScore.ToString();
+        if (finalScore < 200)
+            m_showScoreFinalPanelLabel.text = LocalizationManager.Get(
+                $"Your score: {finalScore}",
+                $"Sua pontuação: {finalScore}"
+            );
         else
-            m_showScoreFinalPanelLabel.text = $"Unbeatable!\nPerfect score: {finalScore}";
-
+            m_showScoreFinalPanelLabel.text = LocalizationManager.Get(
+                $"Unbeatable!\nPerfect score: {finalScore}",
+                $"Imbatível!\nPontuação perfeita: {finalScore}"
+            );
     }
     #endregion
 }

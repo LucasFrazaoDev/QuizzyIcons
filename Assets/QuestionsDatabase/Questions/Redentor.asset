@@ -20,4 +20,11 @@ MonoBehaviour:
     recognized symbol of the country that hosts it.
   - Built in Brazil, this iconic monument was inaugurated in 1931 and represents
     a very important religious figure.
+  hintsPortuguese:
+  - "Frequentemente visto em cart\xF5es-postais e filmes, este monumento \xE9 uma
+    atra\xE7\xE3o tur\xEDstica imperd\xEDvel para quem explora a cidade."
+  - "Considerada uma das Novas Sete Maravilhas do Mundo, \xE9 um s\xEDmbolo internacionalmente
+    reconhecido do pa\xEDs que a abriga."
+  - "Constru\xEDdo no Brasil, este monumento ic\xF4nico foi inaugurado em 1931 e
+    representa uma figura religiosa muito importante."
   icon: {fileID: 2800000, guid: d95c2ff6b1918e84bb1cba3faab08b5f, type: 3}

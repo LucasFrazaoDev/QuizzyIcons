@@ -17,4 +17,9 @@ MonoBehaviour:
   - The city is known for its beautiful beaches and a lively Mediterranean coastline.
   - It is famous for its unique and breathtaking architecture.
   - This vibrant city is the capital of Catalonia.
+  hintsPortuguese:
+  - "A cidade \xE9 conhecida por suas belas praias e por seu litoral mediterr\xE2neo
+    vibrante."
+  - "\xC9 famosa por sua arquitetura \xFAnica e deslumbrante."
+  - "Esta cidade vibrante \xE9 a capital da Catalunha."
   icon: {fileID: 2800000, guid: 6335e2abaf501b64ca831f3707f4cc04, type: 3}

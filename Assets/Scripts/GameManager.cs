@@ -46,10 +46,56 @@ public class GameManager : MonoBehaviour
         if (m_runtimeQuestions.Length > 0)
         {
             m_currentQuestion = m_runtimeQuestions[m_questionIndex];
-
-            if (m_currentQuestion.GetHints().Length > 0)
-                m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
+            RefreshCurrentHint(); // <- troca aqui
         }
+    }
+
+    public void ShowNextHint()
+    {
+        if (m_hintIndex < m_currentQuestion.GetHints().Length - 1)
+        {
+            SetCurrentScore(m_hintPenaltyScore);
+
+            m_hintIndex++;
+            RefreshCurrentHint(); // <- troca aqui
+
+            OnVisualFeedbackScore?.Invoke(m_hintPenaltyScore, false);
+        }
+        else
+        {
+            NextQuestion();
+        }
+    }
+
+    public void NextQuestion()
+    {
+        m_questionIndex++;
+
+        if (m_questionIndex < m_runtimeQuestions.Length)
+        {
+            m_currentQuestion = m_runtimeQuestions[m_questionIndex];
+            m_hintIndex = 0;
+            RefreshCurrentHint(); // <- troca aqui
+        }
+        else
+        {
+            OnAllQuestionFinished?.Invoke(m_currentScore);
+            m_questionIndex = m_runtimeQuestions.Length - 1;
+        }
+    }
+
+    // Método novo — sempre pega o hint do idioma atual
+    public void RefreshCurrentHint()
+    {
+        string[] hints = m_currentQuestion.GetHints();
+
+        if (hints.Length > 0)
+            m_currentHint = hints[m_hintIndex];
+    }
+
+    public string GetCurrentHint()
+    {
+        return m_currentHint;
     }
 
     public bool IsAnswerCorrect(string answer)
@@ -75,44 +121,6 @@ public class GameManager : MonoBehaviour
         NextQuestion();
     }
 
-    public void ShowNextHint()
-    {
-        if (m_hintIndex < m_currentQuestion.GetHints().Length - 1)
-        {
-            SetCurrentScore(m_hintPenaltyScore);
-
-            m_hintIndex++;
-            m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
-
-            OnVisualFeedbackScore?.Invoke(m_hintPenaltyScore, false);
-        }
-        else
-        {
-            NextQuestion();
-        }
-    }
-
-    public void NextQuestion()
-    {
-        m_questionIndex++;
-
-        if (m_questionIndex < m_runtimeQuestions.Length)
-        {
-            m_currentQuestion = m_runtimeQuestions[m_questionIndex];
-
-            m_hintIndex = 0;
-
-            if (m_currentQuestion.GetHints().Length > 0)
-                m_currentHint = m_currentQuestion.GetHints()[m_hintIndex];
-        }
-        else
-        {
-            OnAllQuestionFinished?.Invoke(m_currentScore);
-
-            m_questionIndex = m_runtimeQuestions.Length - 1;
-        }
-    }
-
     public Question GetCurrentQuestion()
     {
         return m_currentQuestion;
@@ -128,10 +136,6 @@ public class GameManager : MonoBehaviour
         return m_questionIndex + 1;
     }
 
-    public string GetCurrentHint()
-    {
-        return m_currentHint;
-    }
 
     public int GetCurrentHintNum()
     {

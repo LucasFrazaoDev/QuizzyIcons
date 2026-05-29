@@ -17,4 +17,10 @@ MonoBehaviour:
   - Home to several ancient buildings of great architectural and historic significance.
   - Represents the pinnacle of ancient Greek civilization and art.
   - Is an ancient citadel located on a rocky outcrop above the city of Athens, Greece.
+  hintsPortuguese:
+  - "Abriga diversos edif\xEDcios antigos de grande import\xE2ncia arquitet\xF4nica
+    e hist\xF3rica."
+  - "Representa o auge da civiliza\xE7\xE3o e da arte da Gr\xE9cia Antiga."
+  - "\xC9 uma antiga cidadela localizada em um afloramento rochoso acima da cidade
+    de Atenas, na Gr\xE9cia."
   icon: {fileID: 2800000, guid: acef8422f9f0d5346861f849ca98182d, type: 3}

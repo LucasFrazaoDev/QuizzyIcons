@@ -18,4 +18,10 @@ MonoBehaviour:
     for their rights and recognition.
   - Is a popular tourist attraction and a symbol of America's criminal justice history.
   - It is an island located in San Francisco Bay, California.
+  hintsPortuguese:
+  - Este local foi brevemente ocupado por ativistas nativos americanos como parte
+    de um protesto por seus direitos e reconhecimento.
+  - "\xC9 uma atra\xE7\xE3o tur\xEDstica popular e um s\xEDmbolo da hist\xF3ria da
+    justi\xE7a criminal dos Estados Unidos."
+  - "\xC9 uma ilha localizada na Ba\xEDa de S\xE3o Francisco, na Calif\xF3rnia."
   icon: {fileID: 2800000, guid: 6a38e69b87032994abbcbde2c10beada, type: 3}

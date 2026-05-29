@@ -70,6 +70,8 @@ public class Controller : MonoBehaviour
 
         m_gameManager.OnAllQuestionFinished += AllQuestionsFinished;
         m_gameManager.OnVisualFeedbackScore += ScoredPointsToShow;
+
+        LocalizationManager.OnLanguageChanged += OnLanguageChanged; // <- novo
     }
 
     private void Start()
@@ -87,7 +89,17 @@ public class Controller : MonoBehaviour
         m_gameManager.OnAllQuestionFinished -= AllQuestionsFinished;
         m_gameManager.OnVisualFeedbackScore -= ScoredPointsToShow;
 
+        LocalizationManager.OnLanguageChanged -= OnLanguageChanged; // <- novo
+
         StopCounter();
+    }
+
+    private void OnLanguageChanged() // <- novo
+    {
+        m_gameManager.RefreshCurrentHint();
+        UpdateUI(true);
+        m_uiManager.SetHighScore(OnLoadHighScore?.Invoke() ?? 0);
+        m_uiManager.SetTimer(m_currentCounter.ToString());
     }
 
     private void AllQuestionsFinished(int score)

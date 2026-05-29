@@ -15,6 +15,10 @@ MonoBehaviour:
   answer: monaLisa
   hints:
   - You can find it in France.
-  - It was created in the 15 century.
+  - It was created in the 15th century.
   - It shows a woman!
+  hintsPortuguese:
+  - "Voc\xEA pode encontr\xE1-lo na Fran\xE7a."
+  - "Foi criado no s\xE9culo XV."
+  - Mostra uma mulher!
   icon: {fileID: 2800000, guid: e5445f4250fc5c24c8eaf520b66dee5c, type: 3}
