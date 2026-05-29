@@ -4,9 +4,19 @@ using UnityEngine;
 public class Question : ScriptableObject
 {
     public string answer;
+    public string answerPortuguese; // <- novo
     public string[] hints;
     public string[] hintsPortuguese;
     public Texture2D icon;
+
+    public string GetAnswer()
+    {
+        if (LocalizationManager.CurrentLanguage == Language.Portuguese
+            && !string.IsNullOrEmpty(answerPortuguese))
+            return answerPortuguese;
+
+        return answer;
+    }
 
     public string[] GetHints()
     {

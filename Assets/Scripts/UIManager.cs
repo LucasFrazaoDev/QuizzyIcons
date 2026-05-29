@@ -369,12 +369,12 @@ public class UIManager : MonoBehaviour
         m_pausePanel.AddToClassList(K_CLASS_TO_SHOW_PANEL_NAME);
     }
 
-    public void GiveAnswerFeedback(bool correct)
+    public void GiveAnswerFeedback(bool correct, string answerName)
     {
         m_answerIndicator.style.visibility = Visibility.Visible;
         m_answerIndicator.text = correct
-            ? LocalizationManager.Get("Your answer was correct!", "Resposta correta!")
-            : LocalizationManager.Get("Your answer was wrong!", "Resposta errada!");
+            ? $"{answerName} — {LocalizationManager.Get("Correct!", "Correto!")}"
+            : $"{answerName} — {LocalizationManager.Get("Wrong!", "Errado!")}";
 
         StyleColor colorCorrect = new StyleColor(new Color32(0, 132, 19, 255));
         StyleColor colorWrong = new StyleColor(new Color32(132, 0, 19, 255));

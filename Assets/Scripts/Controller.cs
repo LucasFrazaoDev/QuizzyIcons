@@ -209,12 +209,14 @@ public class Controller : MonoBehaviour
     {
         bool answerCorrect = m_gameManager.IsAnswerCorrect(answer);
 
+        string localizedAnswer = m_gameManager.GetCurrentQuestion().GetAnswer(); // <- move para cima
+
         if (answerCorrect)
             HandleCorrectAnswer();
         else
             HandleWrongAnswer();
 
-        m_uiManager.GiveAnswerFeedback(answerCorrect);
+        m_uiManager.GiveAnswerFeedback(answerCorrect, localizedAnswer);
     }
 
     public void UpdateUI(bool isStartingGame = false)
