@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51665dd5b705d2a40b1874b89ae69c35, type: 3}
   m_Name: HungarianParlament
   m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: abf3c0ec326712949aa2e4d27d4a5bbc, type: 3}
   answer: hungarian Parlament
   answerPortuguese: parlamento hungaro
   hints:
   - Situated on the banks of the Danube River, the Parliament Building offers a picturesque
     view, especially illuminated at night.
-  - "It features a symmetrical fa\xE7ade, a central dome, and intricate details throughout."
   - Located in Budapest, is a magnificent example of Neo-Gothic architecture.
+  - "It features a symmetrical fa\xE7ade, a central dome, and intricate details throughout."
   hintsPortuguese:
   - "Situado \xE0s margens do rio Dan\xFAbio, o edif\xEDcio do Parlamento oferece
     uma vista pitoresca, especialmente iluminada \xE0 noite."
+  - "Localizado em Budapeste, \xE9 um magn\xEDfico exemplo da arquitetura neog\xF3tica."
   - "Apresenta uma fachada sim\xE9trica, uma c\xFApula central e detalhes intrincados
     por toda parte."
-  - "Localizado em Budapeste, \xE9 um magn\xEDfico exemplo da arquitetura neog\xF3tica."
-  icon: {fileID: 2800000, guid: abf3c0ec326712949aa2e4d27d4a5bbc, type: 3}

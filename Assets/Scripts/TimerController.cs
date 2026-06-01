@@ -9,7 +9,7 @@ public class TimerController : MonoBehaviour
     public delegate void TimerTick(int currentValue);
     public event TimerTick OnTimerTick;
 
-    private const int K_TIMER_DURATION = 30;
+    private const int K_TIMER_DURATION = 40;
 
     private Coroutine m_counterCoroutine;
     private bool m_isPaused;

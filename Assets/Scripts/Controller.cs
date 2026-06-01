@@ -57,7 +57,6 @@ public class Controller : MonoBehaviour
         LoadVolumeSettings();
 
         m_timerController.ResetTimer();
-        m_timerController.StartTimer();
     }
 
     private void OnDisable()
@@ -73,6 +72,11 @@ public class Controller : MonoBehaviour
         m_timerController.OnTimerTick -= OnTimerTick;
 
         m_timerController.StopTimer();
+    }
+
+    public void StartGame()
+    {
+        m_timerController.StartTimer();
     }
 
     private void OnTimerTick(int currentValue)
@@ -92,6 +96,9 @@ public class Controller : MonoBehaviour
     private void AllQuestionsFinished(int score)
     {
         m_timerController.StopTimer();
+
+        string playerName = PlayerPrefs.GetString("PlayerName", "Anonymous");
+        LeaderboardManager.SaveScore(playerName, score);
 
         m_uiManager.AllQuestionsAnsweredFeedBack(score);
 

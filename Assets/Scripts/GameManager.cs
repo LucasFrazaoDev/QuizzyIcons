@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour
     private int m_hintIndex;
     private int m_currentScore;
 
-    private int m_hintPenaltyScore = -6;
-    private int m_failedPenaltyScore = -7;
+    private int m_hintPenaltyScore = -5;
+    private int m_failedPenaltyScore = -8;
     private int m_successScore = 20;
 
     private void CreateRuntimeQuestions()
