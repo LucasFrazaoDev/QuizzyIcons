@@ -85,6 +85,9 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:VisualElement name="TooltipContainer" style="flex-grow: 1; display: none; position: absolute;">
+        <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TooltipLabel" class="tooltip" style="-unity-text-align: middle-center;" />
+    </ui:VisualElement>
     <ui:VisualElement name="PanelsContainer" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.59); align-items: center; justify-content: center; display: none; opacity: 1; visibility: visible;">
         <ui:VisualElement name="SettingsPanel" class="HidePanelTransition SettingsPanel" style="display: flex; position: absolute; top: auto; background-image: url(&quot;project://database/Assets/Images/Icons/background.jpg?fileID=2800000&amp;guid=0d50d7b0f82f6474893554d555969736&amp;type=3#background&quot;); justify-content: space-between;">
             <ui:Button text="X" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CloseSettingsPanelButton" style="position: relative; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; font-size: 60px; color: rgb(255, 4, 4); -unity-font-style: bold; top: 0; left: 0; align-self: flex-end; justify-content: center; align-items: center; bottom: 0; cursor: url(&quot;project://database/Assets/FreeButtonSet/Textures/icons/CursorRed.png?fileID=2800000&amp;guid=a94a6bdb42066124ba34ac0a0ae1d0ef&amp;type=3#CursorRed&quot;);" />

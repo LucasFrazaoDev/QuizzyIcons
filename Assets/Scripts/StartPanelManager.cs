@@ -277,22 +277,6 @@ public class StartPanelManager : MonoBehaviour
             "Enter your name:",
             "Digite seu nome:"
         );
-
-        // Atualiza os tooltips dos botões
-        m_startGameButton.tooltip = LocalizationManager.Get(
-            "Start game",
-            "Iniciar jogo"
-        );
-
-        m_instructionsButton.tooltip = LocalizationManager.Get(
-            "How to play",
-            "Como jogar"
-        );
-
-        m_startSceneQuitButton.tooltip = LocalizationManager.Get(
-            "Quit game",
-            "Sair do jogo"
-        );
     }
 
     private void OnLanguageChanged()
