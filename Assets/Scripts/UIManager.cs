@@ -414,8 +414,6 @@ public class UIManager : MonoBehaviour
         m_musicVolumeSlider.label = LocalizationManager.Get("Music", "Música");
         m_nextHintButton.text = LocalizationManager.Get("Hint", "Dica");
         m_nextQuestionButton.text = LocalizationManager.Get("Next Question", "Próxima Questão");
-        m_restartGameButton.text = LocalizationManager.Get("Restart", "Reiniciar");
-        m_quitGameButton.text = LocalizationManager.Get("Quit", "Sair");
     }
 
     public void SetTimer(string seconds)
