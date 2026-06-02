@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 public class StartPanelManager : MonoBehaviour
 {
     private Controller m_controller;
-    //private UIManager m_uiManager;
 
     private VisualElement m_root;
     private VisualElement m_startPanelOverlay;
@@ -216,6 +215,8 @@ public class StartPanelManager : MonoBehaviour
                 "No scores yet. Be the first!",
                 "Nenhuma pontuação ainda. Seja o primeiro!"));
             emptyLabel.name = "EmptyLeaderboardLabel";
+            emptyLabel.style.fontSize = 36;
+
             m_leaderboardContainer.Add(emptyLabel);
             return;
         }
@@ -275,6 +276,22 @@ public class StartPanelManager : MonoBehaviour
         m_playerNameTextField.label = LocalizationManager.Get(
             "Enter your name:",
             "Digite seu nome:"
+        );
+
+        // Atualiza os tooltips dos botões
+        m_startGameButton.tooltip = LocalizationManager.Get(
+            "Start game",
+            "Iniciar jogo"
+        );
+
+        m_instructionsButton.tooltip = LocalizationManager.Get(
+            "How to play",
+            "Como jogar"
+        );
+
+        m_startSceneQuitButton.tooltip = LocalizationManager.Get(
+            "Quit game",
+            "Sair do jogo"
         );
     }
 
