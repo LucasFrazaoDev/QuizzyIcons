@@ -10,6 +10,19 @@
     cursor: url("project://database/Assets/FreeButtonSet/Textures/icons/CursorGreen.png?fileID=2800000&guid=0bd650ec33f18644b99ef481167abdc7&type=3#CursorGreen");
 }
 
+.icon-button {
+    cursor: url("project://database/Assets/FreeButtonSet/Textures/icons/CursorRed.png?fileID=2800000&guid=a94a6bdb42066124ba34ac0a0ae1d0ef&type=3#CursorRed");
+    transition-duration: 0.15s;
+    transition-property: scale;
+    transition-timing-function: ease-out;
+    transform-origin: center;
+}
+
+.icon-button:hover {
+    -unity-background-image-tint-color: rgb(192, 250, 157);
+    scale: 1.15;
+}
+
 .SettingsPanel {
     flex-grow: 0;
     display: flex;

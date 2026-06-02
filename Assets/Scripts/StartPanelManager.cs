@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -5,12 +6,13 @@ using UnityEngine.UIElements;
 public class StartPanelManager : MonoBehaviour
 {
     private Controller m_controller;
-    private UIManager m_uiManager;
+    //private UIManager m_uiManager;
 
     private VisualElement m_root;
-    private VisualElement m_startPanel;
+    private VisualElement m_startPanelOverlay;
     private VisualElement m_leaderboardContainer;
-    private VisualElement m_howToPlayPanel;
+    private VisualElement m_howToPlayOverlay;
+    private VisualElement m_startPanel;
 
     private Label m_languageLabel;
     private Label m_instructionsLabel;
@@ -24,9 +26,10 @@ public class StartPanelManager : MonoBehaviour
     private Button m_startSceneQuitButton;
     private Button m_closeInstructionsButton;
 
+    private const string K_START_PANEL_OVERLAY_NAME = "StartPanelOverlay";
     private const string K_START_PANEL_NAME = "StartPanel";
     private const string K_LEADERBOARD_CONTAINER_NAME = "LeaderboardContainer";
-    private const string K_HOW_TO_PLAY_PANEL_NAME = "HowToPlayPanel";
+    private const string K_HOW_TO_PLAY_OVERLAY_NAME = "HowToPlayOverlay";
 
     private const string K_LANGUAGE_LABEL_NAME = "LanguageLabel";
     private const string K_INSTRUCTIONS_LABEL_NAME = "InstructionsLabel";
@@ -42,13 +45,14 @@ public class StartPanelManager : MonoBehaviour
 
     private const string K_LANGUAGE_BUTTON_ACTIVE_CLASS = "language-button-active";
     private const int K_MIN_NAME_LENGTH = 3;
-    private const int K_MAX_NAME_LENGTH = 30;
+    private const int K_MAX_NAME_LENGTH = 50;
+
+    private const string K_CLASS_TO_HIDE_PANEL_NAME = "HidePanelTransition";
 
     private void Awake()
     {
         m_root = GetComponent<UIDocument>().rootVisualElement;
         m_controller = GetComponent<Controller>();
-        m_uiManager = GetComponent<UIManager>();
     }
 
     private void OnEnable()
@@ -69,7 +73,7 @@ public class StartPanelManager : MonoBehaviour
 
     private void Start()
     {
-        m_howToPlayPanel.style.display = DisplayStyle.None;
+        m_howToPlayOverlay.style.display = DisplayStyle.None;
         RefreshTexts();
         PopulateLeaderboard();
         UpdateLanguageButtons();
@@ -77,9 +81,10 @@ public class StartPanelManager : MonoBehaviour
 
     private void GetReferences()
     {
+        m_startPanelOverlay = m_root.Q(K_START_PANEL_OVERLAY_NAME);
         m_startPanel = m_root.Q(K_START_PANEL_NAME);
         m_leaderboardContainer = m_root.Q(K_LEADERBOARD_CONTAINER_NAME);
-        m_howToPlayPanel = m_root.Q(K_HOW_TO_PLAY_PANEL_NAME);
+        m_howToPlayOverlay = m_root.Q(K_HOW_TO_PLAY_OVERLAY_NAME);
 
         m_languageLabel = m_root.Q<Label>(K_LANGUAGE_LABEL_NAME);
         m_instructionsLabel = m_root.Q<Label>(K_INSTRUCTIONS_LABEL_NAME);
@@ -141,23 +146,31 @@ public class StartPanelManager : MonoBehaviour
         PlayerPrefs.SetString("PlayerName", playerName);
         PlayerPrefs.Save();
 
-        m_startPanel.style.display = DisplayStyle.None;
+        StartCoroutine(HideStartPanel());
+    }
+
+    private IEnumerator HideStartPanel()
+    {
+        m_startPanel.AddToClassList(K_CLASS_TO_HIDE_PANEL_NAME);
+        yield return new WaitForSeconds(0.25f);
+        m_startPanelOverlay.style.display = DisplayStyle.None;
         m_controller.StartGame();
     }
 
     private void OpenHowToPlay()
     {
-        m_howToPlayPanel.style.display = DisplayStyle.Flex;
+        m_howToPlayOverlay.style.display = DisplayStyle.Flex;
     }
 
     private void CloseHowToPlay()
     {
-        m_howToPlayPanel.style.display = DisplayStyle.None;
+        m_howToPlayOverlay.style.display = DisplayStyle.None;
     }
 
     public void ShowStartPanel()
     {
-        m_startPanel.style.display = DisplayStyle.Flex;
+        m_startPanelOverlay.style.display = DisplayStyle.Flex;
+        m_howToPlayOverlay.style.display = DisplayStyle.None;
         PopulateLeaderboard();
         m_playerNameTextField.value = PlayerPrefs.GetString("PlayerName", "");
     }
@@ -166,24 +179,24 @@ public class StartPanelManager : MonoBehaviour
     {
         m_leaderboardContainer.Clear();
 
-        // Cabeçalho
         VisualElement header = new VisualElement();
         header.AddToClassList("leaderboard-entry");
 
+        // Criando os cabeçalhos das colunas com base na linguagem atual
         Label rankHeader = new Label(LocalizationManager.Get("Pos.", "Pos."));
         Label nameHeader = new Label(LocalizationManager.Get("Player", "Jogador"));
         Label scoreHeader = new Label(LocalizationManager.Get("Score", "Pontuação"));
 
-        rankHeader.style.minWidth = 30;
-        rankHeader.style.fontSize = 16;
+        rankHeader.style.width = 60;
+        rankHeader.style.fontSize = 24;
         rankHeader.style.unityFontStyleAndWeight = FontStyle.Bold;
 
         nameHeader.style.flexGrow = 1;
-        nameHeader.style.fontSize = 16;
+        nameHeader.style.fontSize = 24;
         nameHeader.style.unityFontStyleAndWeight = FontStyle.Bold;
 
         scoreHeader.style.minWidth = 60;
-        scoreHeader.style.fontSize = 16;
+        scoreHeader.style.fontSize = 24;
         scoreHeader.style.unityFontStyleAndWeight = FontStyle.Bold;
         scoreHeader.style.unityTextAlign = TextAnchor.MiddleRight;
 
@@ -191,9 +204,10 @@ public class StartPanelManager : MonoBehaviour
         header.Add(nameHeader);
         header.Add(scoreHeader);
 
+        // Adiciona o cabeçalho à tabela
         m_leaderboardContainer.Add(header);
 
-        // Entradas
+        // Carrega as entradas do leaderboard
         List<LeaderboardEntry> entries = LeaderboardManager.LoadEntries();
 
         if (entries.Count == 0)
@@ -215,7 +229,7 @@ public class StartPanelManager : MonoBehaviour
             Label nameLabel = new Label(entries[i].playerName);
             Label scoreLabel = new Label(entries[i].score.ToString());
 
-            rankLabel.style.minWidth = 30;
+            rankLabel.style.width = 60;
             rankLabel.style.fontSize = 24;
 
             nameLabel.style.flexGrow = 1;
@@ -251,21 +265,17 @@ public class StartPanelManager : MonoBehaviour
 
     private void RefreshTexts()
     {
-        m_languageLabel.text = LocalizationManager.Get("Language", "Idioma");
+        m_languageLabel.text = LocalizationManager.Get("Language:", "Idioma:");
 
         m_instructionsLabel.text = LocalizationManager.Get(
-            "Hint -5 points\nNext question/Wrong answer -8 points\nCorrect answer +20 points\nAttention!! If you answer with the wrong icon you may lose the chance to get it right.",
-            "Dica -5 pontos\nPróxima pergunta/Resposta errada -8 pontos\nResposta correta +20 pontos\nAtenção!! Se responder com o ícone errado você pode perder a chance de acertar."
+            "Drag the icon corresponding to the hint to the indicated location.\n\nExtra Hint: -5 points\nNext question/Wrong answer: -8 points\nCorrect answer: +20 points\n\nAttention!! If you answer with the wrong icon you may lose the chance later.",
+            "Arraste o ícone correspondente à dica para o local indicado.\n\nDica extra: -5 pontos\nPróxima pergunta/Resposta errada: -8 pontos\nResposta correta: +20 pontos\n\nAtenção!! Se responder com o ícone errado você pode perder a chance posteriormente."
         );
 
         m_playerNameTextField.label = LocalizationManager.Get(
-            "Enter your name",
-            "Digite seu nome"
+            "Enter your name:",
+            "Digite seu nome:"
         );
-
-        //m_startGameButton.text = LocalizationManager.Get("Start Game", "Iniciar Jogo");
-        //m_instructionsButton.text = LocalizationManager.Get("How to Play", "Como Jogar");
-        //m_startSceneQuitButton.text = LocalizationManager.Get("Quit", "Sair");
     }
 
     private void OnLanguageChanged()
