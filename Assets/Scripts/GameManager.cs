@@ -12,11 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int m_numberOfQuizQuestions = 10;
     [SerializeField] private QuestionsDatabase m_questionsDatabase;
 
-    // Runtime questions (não altera o ScriptableObject original)
     private Question[] m_runtimeQuestions;
-
     private Question m_currentQuestion;
-
     private string m_currentHint;
 
     private int m_questionIndex;
@@ -84,7 +81,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Sempre pega o hint do idioma atual
+    // Remove a pergunta da fila pelo answer do ícone usado errado
+    public void RemoveQuestionByAnswer(string answer)
+    {
+        m_runtimeQuestions = m_runtimeQuestions
+            .Where(q => q.answer != answer)
+            .ToArray();
+    }
+
     public void RefreshCurrentHint()
     {
         string[] hints = m_currentQuestion.GetHints();
@@ -93,10 +97,7 @@ public class GameManager : MonoBehaviour
             m_currentHint = hints[m_hintIndex];
     }
 
-    public string GetCurrentHint()
-    {
-        return m_currentHint;
-    }
+    public string GetCurrentHint() => m_currentHint;
 
     public bool IsAnswerCorrect(string answer)
     {
@@ -106,46 +107,26 @@ public class GameManager : MonoBehaviour
     public void HandleCorrectAnswer()
     {
         SetCurrentScore(m_successScore);
-
         OnVisualFeedbackScore?.Invoke(m_successScore, true);
-
         NextQuestion();
     }
 
     public void HandleWrongtAnswer()
     {
         SetCurrentScore(m_failedPenaltyScore);
-
         OnVisualFeedbackScore?.Invoke(m_failedPenaltyScore, false);
-
         NextQuestion();
     }
 
-    public Question GetCurrentQuestion()
-    {
-        return m_currentQuestion;
-    }
+    public Question GetCurrentQuestion() => m_currentQuestion;
 
-    public Question[] GetQuestions()
-    {
-        return m_runtimeQuestions;
-    }
+    public Question[] GetQuestions() => m_runtimeQuestions;
 
-    public int GetCurrentQuestionNum()
-    {
-        return m_questionIndex + 1;
-    }
+    public int GetCurrentQuestionNum() => m_questionIndex + 1;
 
+    public int GetCurrentHintNum() => m_hintIndex + 1;
 
-    public int GetCurrentHintNum()
-    {
-        return m_hintIndex + 1;
-    }
-
-    public int GetCurrentScore()
-    {
-        return m_currentScore;
-    }
+    public int GetCurrentScore() => m_currentScore;
 
     private void SetCurrentScore(int score)
     {

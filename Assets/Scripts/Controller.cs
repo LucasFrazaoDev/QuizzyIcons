@@ -47,7 +47,7 @@ public class Controller : MonoBehaviour
 
         LocalizationManager.OnLanguageChanged += OnLanguageChanged;
 
-        m_timerController.OnTimerExpired += HandleWrongAnswer;
+        m_timerController.OnTimerExpired += OnTimerExpired;
         m_timerController.OnTimerTick += OnTimerTick;
     }
 
@@ -68,7 +68,7 @@ public class Controller : MonoBehaviour
 
         LocalizationManager.OnLanguageChanged -= OnLanguageChanged;
 
-        m_timerController.OnTimerExpired -= HandleWrongAnswer;
+        m_timerController.OnTimerExpired -= OnTimerExpired;
         m_timerController.OnTimerTick -= OnTimerTick;
 
         m_timerController.StopTimer();
@@ -139,6 +139,19 @@ public class Controller : MonoBehaviour
 
     public void NextHint()
     {
+        bool isLastHint = m_gameManager.GetCurrentHintNum() >= m_gameManager.GetCurrentQuestion().GetHints().Length;
+
+        if (isLastHint)
+        {
+            string localizedAnswer = m_gameManager.GetCurrentQuestion().GetAnswer();
+            m_uiManager.RemoveIconByAnswer(m_gameManager.GetCurrentQuestion().answer);
+            m_uiManager.GiveAnswerFeedback(false, localizedAnswer);
+
+            m_timerController.StopTimer(); 
+            m_timerController.ResetTimer();
+            m_timerController.StartTimer();
+        }
+
         m_gameManager.ShowNextHint();
 
         UpdateUI();
@@ -146,17 +159,24 @@ public class Controller : MonoBehaviour
         OnQuestionAnswered?.Invoke(false);
     }
 
-    public void HandleWrongAnswer()
+    public void HandleWrongAnswer(bool removeCurrentIcon = false)
     {
         if (m_isChangingQuestion)
             return;
 
-        StartCoroutine(HandleWrongAnswerRoutine());
+        StartCoroutine(HandleWrongAnswerRoutine(removeCurrentIcon));
     }
 
-    private IEnumerator HandleWrongAnswerRoutine()
+    private IEnumerator HandleWrongAnswerRoutine(bool removeCurrentIcon = false)
     {
         m_isChangingQuestion = true;
+
+        if (removeCurrentIcon)
+        {
+            string localizedAnswer = m_gameManager.GetCurrentQuestion().GetAnswer();
+            m_uiManager.RemoveIconByAnswer(m_gameManager.GetCurrentQuestion().answer);
+            m_uiManager.GiveAnswerFeedback(false, localizedAnswer); // <- novo
+        }
 
         m_gameManager.HandleWrongtAnswer();
 
@@ -205,11 +225,22 @@ public class Controller : MonoBehaviour
         bool answerCorrect = m_gameManager.IsAnswerCorrect(answer);
 
         string localizedAnswer = m_gameManager.GetCurrentQuestion().GetAnswer();
+        string currentQuestionAnswer = m_gameManager.GetCurrentQuestion().answer;
 
         if (answerCorrect)
+        {
             HandleCorrectAnswer();
+        }
         else
+        {
+            // Remove o ícone da pergunta atual (Torre Eiffel no exemplo)
+            m_uiManager.RemoveIconByAnswer(currentQuestionAnswer);
+
+            // Remove a pergunta do ícone usado errado (Coliseu no exemplo)
+            m_gameManager.RemoveQuestionByAnswer(answer);
+
             HandleWrongAnswer();
+        }
 
         m_uiManager.GiveAnswerFeedback(answerCorrect, localizedAnswer);
     }
@@ -226,6 +257,11 @@ public class Controller : MonoBehaviour
 
         if (!isStartingGame)
             m_uiManager.ToogleOnOffButtons();
+    }
+
+    private void OnTimerExpired()
+    {
+        HandleWrongAnswer(removeCurrentIcon: true);
     }
 
     public Question[] GetQuestions()

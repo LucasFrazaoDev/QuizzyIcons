@@ -168,7 +168,8 @@ public class UIManager : MonoBehaviour
     public void InitializeButtons()
     {
         m_nextHintButton.clicked += m_controller.NextHint;
-        m_nextQuestionButton.clicked += m_controller.HandleWrongAnswer;
+        m_nextQuestionButton.clicked += HandleNextQuestionButton;
+
 
         m_openPausePanelButton.clicked += TogglePausePanel;
         m_closePausePanelButton.clicked += TogglePausePanel;
@@ -276,6 +277,11 @@ public class UIManager : MonoBehaviour
         OnRestartGameButtonClicked?.Invoke();
     }
 
+    private void HandleNextQuestionButton()
+    {
+        m_controller.HandleWrongAnswer(true);
+    }
+
     private void HandleQuitGameButton()
     {
         OnQuitGameButtonClicked?.Invoke();
@@ -298,6 +304,7 @@ public class UIManager : MonoBehaviour
     private void ClearButtonsSignature()
     {
         m_nextHintButton.clicked -= m_controller.NextHint;
+        m_nextQuestionButton.clicked -= HandleNextQuestionButton;
         m_openPausePanelButton.clicked -= TogglePausePanel;
         m_closePausePanelButton.clicked -= TogglePausePanel;
         m_openSettingsPanelButton.clicked -= ToggleSettingsPanel;
@@ -406,6 +413,19 @@ public class UIManager : MonoBehaviour
     public void ShowPointsScored(int scoreToShow, bool changeScoreFeedback)
     {
         m_feedbackManager.ShowPointsScored(scoreToShow, changeScoreFeedback);
+    }
+
+    public void RemoveIconByAnswer(string answer)
+    {
+        const string K_ICONS_BOARD_NAME = "IconsBoard";
+
+        m_root.Query<VisualElement>(K_ICONS_BOARD_NAME)
+            .Children<VisualElement>()
+            .ForEach(icon =>
+            {
+                if (icon.userData is Question question && question.answer == answer)
+                    icon.RemoveFromHierarchy();
+            });
     }
     #endregion
 }

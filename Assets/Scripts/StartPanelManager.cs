@@ -269,8 +269,8 @@ public class StartPanelManager : MonoBehaviour
         m_languageLabel.text = LocalizationManager.Get("Language:", "Idioma:");
 
         m_instructionsLabel.text = LocalizationManager.Get(
-            "Drag the icon corresponding to the hint to the indicated location, each question has 3 hints.\n\nExtra Hint: -5 points\nNext question/Wrong answer: -8 points\nCorrect answer: +20 points\n\nAttention!! If you answer with the wrong icon you may lose the chance later.",
-            "Arraste o ícone correspondente à dica para o local indicado, cada questão tem 3 dicas.\n\nDica extra: -5 pontos\nPróxima pergunta/Resposta errada: -8 pontos\nResposta correta: +20 pontos\n\nAtenção!! Se responder com o ícone errado você pode perder a chance posteriormente."
+            "Drag the icon corresponding to the hint to the indicated location, each question (maximum of 10) has 3 hints.\n\nExtra Hint: -5 points\nNext question/Wrong answer: -8 points\nCorrect answer: +20 points\n\nAttention!! If you answer with the wrong icon you lose the chance to answer another question.",
+            "Arraste o ícone correspondente à dica para o local indicado, cada questão (máximo de 10) tem 3 dicas.\n\nDica extra: -5 pontos\nPróxima pergunta/Resposta errada: -8 pontos\nResposta correta: +20 pontos\n\nAtenção!! Se responder com o ícone errado você pode perder a chance de responder outra questão"
         );
 
         m_playerNameTextField.label = LocalizationManager.Get(
